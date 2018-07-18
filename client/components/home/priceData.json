@@ -1,0 +1,54 @@
+{
+	"features": [
+		{
+			"key": "pinkFilter",
+			"name": "Розовый фильтр"
+		},
+		{
+			"key": "emoji",
+			"name": "Смайлики"
+		},
+		{
+			"key": "comments",
+			"name": "Комментарии"
+		}
+	],
+	"tarifs": [
+		{
+			"id": 0,
+			"name": "База",
+			"price": "1,99",
+			"currency": "USD",
+			"features": {
+				"pinkFilter": true,
+				"emoji": false,
+				"comments": false
+			},
+			"label": false
+		},
+		{
+			"id": 1,
+			"name": "Стандарт",
+			"price": "3,99",
+			"currency": "USD",
+			"features": {
+				"pinkFilter": true,
+				"emoji": true,
+				"comments": false
+			},
+			"label": "Хит"
+		},
+		{
+			"id": 2,
+			"name": "Анлим",
+			"price": "9,99",
+			"currency": "USD",
+			"features": {
+				"pinkFilter": true,
+				"emoji": true,
+				"comments": true
+			},
+			"label": false
+		}
+	]
+}

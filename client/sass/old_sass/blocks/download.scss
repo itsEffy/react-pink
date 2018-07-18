@@ -1,0 +1,208 @@
+//за ширину отвечает promo__download
+
+// Идентичный набор ссылок
+
+.download__market-list {
+  display: block;
+  text-align: center;
+}
+
+.download__market {
+  display: inline-block;
+  margin-right: 35px;
+  height: 60px;
+  
+  font-size: 0;  
+  color: #fff;
+  
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+@media ($mobile-version) {
+  .download {
+    padding: 28px 20px 29px; //нижнее неточно!
+
+    text-align: center;
+    color: #fff;
+  }
+
+  .download__slogan {
+    position: absolute;
+    top: 85px;
+    left: 50%;
+    width: 300px;
+    text-align: center;
+
+    display: inline-block;
+    color: #fff;
+
+    //visibility: hidden;
+    margin: 0 0 0 -150px; // width/2
+    padding: 0;
+
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  .download__button {
+    display: block;
+    width: 281px;
+    margin: 0 auto 0px;
+
+    font-weight: bold;
+    
+    &:hover {
+      background-color: #fff;
+      color: $pink;
+    }
+  }
+
+  .download__market-list {
+    display: block;
+    padding-top: 30px;
+    padding-bottom: 25px;
+}
+  
+  .download__availability-note {
+    display: block;
+    margin: 0;
+
+    line-height: 24px;
+    font-size: 14px;
+  }
+
+}
+
+
+@media ($tablet-version) {
+  .download {
+    padding: 0 0 29px; //нижнее неточно!
+
+    text-align: center;
+    color: #fff;
+  }
+
+  .download__slogan {
+    display: inline-block;
+    margin: 0 20px 3px;
+    padding: 0 0 28px;
+
+    text-align: center;
+
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #fff;
+
+  }
+
+  .download__button {
+    display: block;
+    width: 100%;
+    margin: 0 auto 45px;
+
+    font-weight: bold;
+    
+    &:hover {
+      background-color: #fff;
+      color: $pink;
+    }
+  }
+
+  .download__market-list {
+    margin-bottom: 31px;
+  }
+
+  .download__availability-note {
+    display: block;
+    margin: 0;
+  }
+
+}
+
+
+@media ($desktop-version) {
+  .download {
+    padding: 0 0 29px; //нижнее неточно!
+
+    text-align: center;
+    color: #fff;
+  }
+
+  .download__slogan {
+    display: inline-block;
+    margin: 0 0 50px;
+    padding: 0;
+
+    text-align: center;
+
+    font-size: 2.8rem;//50px;
+    line-height: 3.36rem;//60px;
+
+    color: #fff;
+  }
+
+  .download__button {
+    display: block;
+    width: 300px;
+    margin: 0 auto 67px;
+
+    font-weight: bold;
+
+    &:hover {
+      background-color: #fff;
+      color: $pink;
+    }
+  }
+
+  .download__market {
+    margin: 0 3%;
+  }
+  
+  .download__market-list {
+    margin-bottom: 50px;
+  }
+
+  .download__availability-note {
+    display: block;
+    margin: 0;
+
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+}
+
+//Увеличение шрифта
+
+@media ($big-desktop-version) {
+  .download__slogan {
+    font-size: calc( 0.6rem + 3vw );//4.2vw;
+    line-height: calc( 1.1rem + 3vw );//5vw;
+  }
+
+  .download__availability-note {
+    font-size: calc( 0.5rem + 0.84vw );//1.5vw;
+    line-height: calc(1.5rem + 1vw ); //2.3vw;
+  }
+
+  .download__market {
+  }
+}
+
+@media ($max-desktop-version) {
+  .download__slogan {
+    font-size: 67.2px;
+    line-height: 75.2px;
+  }
+
+  .download__availability-note {
+    font-size: 24.13px;
+    line-height: 43.2px;
+  }
+
+  .download__market {
+  }
+}

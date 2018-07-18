@@ -1,0 +1,67 @@
+// Переписанные стили Slick-theme. Это ж надо так писать
+
+// Точки
+
+// не работает
+:global .slick-dots {
+    bottom: -40px;
+}
+
+:global .slick-dots li button:before {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    content: "";
+    padding: 4px;
+
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.25);
+    background-clip: padding-box;
+    border: 3px solid transparent;
+}
+
+:global .slick-dots li.slick-active button:before {
+    opacity: 1;
+    background-color: transparent;
+    border: 3px solid black;
+}
+
+// Стрелки
+// width и height не правятся стилями, а устанавливаются из кода slick в зависимости от размера шрифта
+
+:global .slick-prev,
+:global .slick-next {
+    z-index: 10;
+    outline: none;
+
+    // Скорее определяет область нажатия. Должно быть больше, чем размер шрифта, иначе вызывает непонятный баг на планшете
+    width: 40px;
+    height: 40px;
+}
+
+:global .slick-prev {
+    left: 0px;
+    transform: rotate(-45deg);
+}
+
+:global .slick-next {
+    right: 0px;
+    transform: rotate(135deg);
+}
+
+:global .slick-prev:hover,
+:global .slick-next:hover {
+    outline: none;
+}
+
+:global .slick-prev:before,
+:global .slick-next:before {
+    // Отвечает за размер стрелки
+    font-size: 30px;
+
+    color: transparent;
+    border-top: 3px solid rgba(0, 0, 0, 0.5);
+    border-left: 3px solid rgba(0, 0, 0, 0.5);
+}

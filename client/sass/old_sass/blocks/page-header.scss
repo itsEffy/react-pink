@@ -1,0 +1,94 @@
+//    HEADER + inner
+//
+// Breakpoints    margin    width
+//  small           0      100%  экономия места, навигация занимает все. На мобильной и планшетной версии.
+//  narrow-desk    auto     fix   фиксированный центрующийся макет на определенной ширине
+//  wide-desk       %        %    на широких экранах шапка резиновая
+
+$header-small: "max-width: " + $tablet-desktop-breakpoint;  //"max-width: 980px";
+$header-narrow-desk: "min-width: " + $tablet-desktop-breakpoint + ") and (max-width: " + $big-desktop-breakpoint;
+$header-wide-desk: $big-desktop-version;
+
+
+
+/* Маленькая шапка */
+
+@media ($header-small) {
+
+  .page-header {
+    position: fixed;
+    z-index: 500;
+    width: 100%;
+
+    background-color: $header-color;
+
+    // По умолчанию не мешает просмотру контента; только для сокращенной версии меню
+    &--no-js {
+        @media (max-width: ( $tablet-desktop-breakpoint--nav - 1 ) ) {
+        position: relative;
+        }
+      }
+  }
+
+  .page-header__inner {
+    width: 100%;
+    margin: 0;
+  }
+
+
+}
+
+
+
+
+/* Центрующаяся десктопная шапка */
+
+@media ($header-narrow-desk) {
+
+  .page-header {
+    position: absolute;
+
+    z-index: 500;
+    width: 100%;
+
+    background-color: $header-color;
+  }
+
+  .page-header__inner {
+    //Без ломаных переходов
+    width: $tablet-desktop-breakpoint;
+    margin: 0 auto;
+  }
+
+}
+
+
+/* Резиновая десктопная шапка */
+
+@media ($header-wide-desk) {
+
+  .page-header {
+    position: absolute;
+    z-index: 500;
+    width: 100%;
+
+    background-color: $header-color;
+  }
+
+  .page-header__inner {
+    margin: 0 #{$stretch-margin};
+    width: auto;
+  }
+
+}
+
+/* Вновь центрующаяся версия при достижении критического разрешения */
+
+@media ($max-desktop-version) {
+
+  .page-header__inner {
+    width: $max-inner-width;
+    margin: 0 auto;
+  }
+
+}

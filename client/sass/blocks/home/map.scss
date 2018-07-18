@@ -1,0 +1,36 @@
+@import "../../variables.scss";
+
+// Карта добавлена только в мобильной версии
+@media ($mobile-version) {
+	.map__container {
+		height: 300px;
+		background-color: violet;
+		background-image: url("/img/index/map-mobile.png");
+
+		text-align: center;
+
+		// С этим надо разобраться
+		@media (min-device-pixel-ratio: 1.25) {
+			background-image: none;
+			background-color: green;
+		}
+	}
+}
+
+@media ($tablet-version) {
+	.map__container {
+		height: 375px;
+	}
+}
+
+@media ($desktop-version) {
+	.map__container {
+		height: 500px;
+	}
+}
+
+@media ($big-desktop-version) {
+	.map__container {
+		height: 600px;
+	}
+}

@@ -1,0 +1,97 @@
+@import "../variables.scss";
+
+// для всех
+.parallax__group {
+  background-color: #fff;
+}
+
+// Только для устройств с мышью
+:global .hasHover {
+  @media ($desktop-version) {
+    :local .parallax-page {
+      position: relative;
+      perspective: 300px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      margin: 0;
+      padding: 0;
+
+      height: 100vh;
+
+      // Не совместим с параллакс
+      //-webkit-overflow-scrolling: touch;
+    }
+
+    :local .parallax__group {
+      position: relative;
+      transform-style: preserve-3d;
+      margin: 0;
+      padding: 0;
+
+      z-index: 2;
+
+      background-color: #fff;
+
+      // включает обзор
+      //transform: translate3d(700px, 0, -800px) rotateY(30deg);
+
+      // Дочерний элемент имеет абсолютное позиционирование. желаемую ширину нужно задать явно
+      &--active {
+        &--full {
+          height: 100vh;
+          min-height: 833px;
+
+          z-index: 0;
+          background-color: transparent;
+        }
+        // число здесь - количество строк в заголовке блока page-title
+
+        &--lines-1,
+        &--lines-2 {
+          // 110 - вынести в константу. высота хедера
+          height: ($page-title-desktop-height + 110px);
+          //min-height: 833px;
+
+          z-index: 0;
+          background-color: transparent;
+        }
+
+        &--lines-3,
+        &--lines-4 {
+          // 110 - вынести в константу. высота хедера
+          height: ($page-title-desktop-height + 110px);
+          //min-height: 833px;
+
+          z-index: 0;
+          background-color: transparent;
+        }
+      }
+    }
+
+    :local .parallax__layer {
+      position: absolute;
+      top: 0;
+      left: -6px;
+      right: -6px;
+      bottom: 0;
+
+      margin: 0;
+      padding: 0;
+
+      /* &--base {
+
+      } */
+
+      &--back {
+        transform: translateZ(-600px) scale(3);
+
+        background-color: $background-color;
+        background-image: url("/img/index/bg-back-desktop.jpg");
+        background-position: center 0;
+        background-size: cover;
+
+        min-height: 833px;
+      }
+    }
+  }
+}

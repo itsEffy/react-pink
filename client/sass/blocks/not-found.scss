@@ -1,0 +1,68 @@
+@import "../fonts.scss", "../variables.scss";
+
+.not-found {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	width: 100%;
+	margin: 0;
+	padding: 0;
+
+	height: 100vh;
+
+	background-color: $dark-blue;
+
+	background-image: url("/img/index/50-bg-back-mobile@1x.jpg");
+	background-position: 45% 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.not-found__inner {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+
+	width: 100%;
+	margin: 0;
+	padding: 150px 30px;
+
+	text-align: center;
+
+	color: #fff;
+
+	transition: transform 0.3s ease;
+
+	@media ($tablet-version) {
+		transform: translateY(50px) scale(1.2);
+	}
+
+	@media ($desktop-version) {
+		transform: translateY(100px) scale(1.2);
+	}
+
+	@media ($big-desktop-version) {
+		transform: translateY(150px) scale(1.5);
+	}
+}
+
+.not-found__number {
+	margin: 0 auto 25px;
+
+	color: #fff;
+	font-size: 60px;
+	line-height: 60px;
+	font-weight: 400;
+}
+
+.not-found__description {
+	margin: 0 auto;
+
+	color: #fff;
+	font-size: 30px;
+	line-height: 40px;
+	font-weight: 400;
+
+	width: 350px;
+}

@@ -1,0 +1,87 @@
+@import "../../variables.scss";
+
+.filter {
+	width: 100%;
+	background-color: $light-gray;
+}
+
+.filter__inner {
+	display: flex;
+	justify-content: center;
+
+	margin: 0 20px;
+	padding: 57px 0;
+}
+
+.filter__image-container {
+	width: 300px;
+
+	flex-grow: 1;
+	flex-shrink: 0;
+	overflow: hidden;
+}
+
+.filter__panel {
+	width: 280px;
+	flex-grow: 0.3;
+	margin-left: 45px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.filter__range-box {
+	padding: 20px 18px 20px 0;
+	display: flex;
+	flex-derection: row;
+	align-items: center;
+
+	border-bottom: 1px solid $middle-gray;
+}
+
+.filter__range-icon {
+	display: flex;
+	width: 30px;
+	height: 30px;
+
+	align-items: center;
+	justify-content: center;
+
+	margin-right: 30px;
+
+	svg {
+		fill: $pink;
+	}
+}
+
+.filter__btn {
+	min-width: 280px;
+	margin: 40px auto 0;
+}
+
+@media ($mobile-version) {
+	.filter__inner {
+		flex-wrap: wrap;
+	}
+
+	.filter__panel {
+		flex-grow: 1;
+		margin: 20px;
+	}
+}
+
+@media ($desktop-version) {
+	.filter {
+		background-color: #fff;
+		padding: 0 20px;
+	}
+
+	.filter__inner {
+		max-width: $big-desktop-breakpoint;
+		margin: 0 auto;
+		background-color: $light-gray;
+		padding-left: 80px;
+		padding-right: 80px;
+	}
+}

@@ -1,0 +1,25 @@
+@import "../../variables.scss";
+
+.form-page {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+
+	background-color: #fff;
+}
+
+.form-page__inner {
+	margin: 0;
+	position: relative;
+}
+
+@media ($desktop-version) {
+	.form-page {
+		padding: 0 20px;
+	}
+
+	.form-page__inner {
+		max-width: $big-desktop-breakpoint;
+		margin: 0 auto;
+	}
+}

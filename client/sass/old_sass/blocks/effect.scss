@@ -1,0 +1,78 @@
+// За ширины отвечает селектор features__effect
+// Водопадное переопределение из-за минимальных различий
+
+.effect {
+  position: relative;
+  display: block;
+  min-height: 380px;
+  padding: 95px 0 80px 310px;
+  
+  text-align: left;
+
+  background-image: url("../img/svg/clock.svg");
+  background-position: 0 60px;
+  background-repeat: no-repeat;
+  background-size: 240px;
+}
+
+.effect__title {
+  display: block;
+  margin: 0 20px 10px 0;
+  padding-right: 100px;
+
+  text-align: left;
+
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700px;
+}
+
+.effect__description {
+  display: block;
+  margin: 10px 20px 10px 0;
+
+  text-align: left;
+
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.effect__link {
+  display: block;
+  margin: 10px 20px 10px 0;
+
+  font-size: 14px;
+  line-height: 24px;
+
+  color: $pink;
+  text-decoration: underline;
+  
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+
+// Разные отступы и размер часов
+
+@media ($desktop-version) {
+  .effect {
+    padding: 95px calc( (100vw - #{$tablet-desktop-breakpoint} ) * 0.3 ) 80px 35%;
+    
+    
+    background-color: #f2f2f2;
+    background-size: 300px;
+    background-position: calc( (100vw - #{$tablet-desktop-breakpoint} ) * 0.3 )
+  }
+  
+  .effect__description {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+    font-size: 16px;
+    line-height: 28px;
+  }
+}
+
+
+// Отмена растягивания отступов на очень больших экранах

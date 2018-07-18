@@ -1,0 +1,293 @@
+@import "../../variables.scss";
+
+// Одинаковая таблица, с небольшими переопределениями
+
+// Чтобы выровнять таблицу с первой колонкой, потребуется фиксированная высота
+$table-header-height: 100px;
+$tablet-table-header-height: 80px;
+
+$table-cell-height: 60px;
+$tablet-table-cell-height: 50px;
+
+// существует только вне слайдера
+.price__table {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  border-right: 1px solid #e5e5e5;
+}
+
+.price__item {
+  padding: 0;
+  margin: 0;
+
+  // Отталкиваем точки
+  margin-bottom: 20px;
+
+  text-align: center;
+
+  // Для ярлычка
+  position: relative;
+  overflow: hidden;
+
+  // Растягивающиеся флекс-элементы вне слайдера
+  @media ($tablet-version), ($desktop-version) {
+    flex-grow: 1;
+    margin-bottom: 0;
+  }
+}
+
+.price__item-header {
+  height: $table-header-height;
+
+  margin: 0;
+  padding: 20px 30px;
+
+  border: 1px solid #e5e5e5; // константа!
+
+  background-color: $dark-blue;
+  color: #fff;
+
+  @media ($tablet-version) {
+    height: $tablet-table-header-height;
+    padding: 13px 25px 15px;
+  }
+}
+
+.price__item-label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  transform: translate(-25px, 10px) rotate(-45deg);
+
+  margin: 0;
+  padding: 5px 0 7px;
+  width: 100px;
+
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 400;
+
+  background-color: $pink;
+  box-shadow: 0 0 2px #222;
+
+  @media ($tablet-version) {
+    padding: 2px 0 3px;
+    font-size: 14px;
+  }
+}
+
+.price__item-name {
+  display: block;
+
+  margin: 0 0 5px;
+  padding: 0;
+
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+
+  @media ($tablet-version) {
+    margin: 0px;
+    font-size: 16px;
+  }
+}
+
+.price__item-price {
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 300;
+
+  @media ($tablet-version) {
+    font-size: 18px;
+  }
+}
+
+.price__value {
+  display: inline-block;
+}
+
+.price__currency {
+  display: inline-block;
+
+  // искусственный пробел
+  margin-left: 4px;
+}
+
+.price__item-feature {
+  margin: 0;
+  padding: 20px 20px 20px;
+
+  height: $table-cell-height;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #fff;
+
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 2px solid #e5e5e5;
+
+  @media ($tablet-version), ($desktop-version) {
+    justify-content: center;
+  }
+
+  @media ($tablet-version) {
+    height: $tablet-table-cell-height;
+  }
+}
+
+.price__item-feature-name {
+  font-size: 14px;
+  line-height: 26px;
+  font-weight: 400;
+
+  @media ($tablet-version), ($desktop-version) {
+    display: none;
+  }
+}
+
+.price__sign {
+  font-size: 0;
+  color: transparent;
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Существуют только вне слайдера
+.price__options {
+  flex-grow: 1;
+
+  border: 1px solid #e5e5e5;
+
+  // 2px - ширина рамки
+  @media ($tablet-version) {
+    margin-top: ($tablet-table-header-height - 2px);
+  }
+
+  @media ($desktop-version) {
+    margin-top: ($table-header-height - 2px);
+  }
+}
+
+// только вне слайдера (десктоп и планшет)
+.price__option {
+  display: flex;
+  align-items: center;
+
+  padding: 15px 20px;
+
+  height: $table-cell-height;
+
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-right-style: none;
+
+  @media ($tablet-version) {
+    height: $tablet-table-cell-height;
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
+// Сетка и позиционирование.
+
+// В мобильной версии - сладер, "выходящий за границы"
+@media ($mobile-version) {
+  .price {
+    background-color: $light-gray;
+    padding: 30px 0 100px;
+    margin: 0 0 40px;
+  }
+
+  .price__inner {
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+@media ($tablet-version) {
+  .price {
+    background-color: $light-gray;
+    padding: 50px 0 105px;
+    margin: 0 0 40px;
+  }
+
+  .price__inner {
+    padding: 0 20px;
+    width: 100%;
+  }
+}
+
+@media ($desktop-version) {
+  .price {
+    background-color: $light-gray;
+    padding: 70px 20px 95px;
+    margin: 0 0 55px;
+  }
+
+  .price__inner {
+    margin: 0 auto;
+    padding: 0 45px;
+    width: ($tablet-desktop-breakpoint - (20 * 2));
+  }
+}
+
+@media ($big-desktop-version) {
+  // Для снижения количества перерасчетов оставлены 3 размера: базовый и 2 брейкпоинта
+
+  @media ($big-desktop-1) {
+    /* .price {
+      padding-top: 110px;
+    }
+*/
+    .price__inner {
+      /*
+      transform: scale(1.1);
+      transform-origin: center bottom;
+      */
+
+      zoom: 1.1;
+      -moz-transform: scale(1.1);
+    }
+  }
+
+  @media ($big-desktop-2) {
+    /*
+    .price {
+      padding-top: 150px;
+    }
+    */
+
+    .price__inner {
+      /*
+      transform: scale(1.25);
+      transform-origin: center bottom;
+
+      */
+      zoom: 1.25;
+
+      // для мозиллы
+      -moz-transform: scale(1.25);
+    }
+  }
+}

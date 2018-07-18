@@ -1,0 +1,51 @@
+html {
+	margin: 0;
+	padding: 0;
+
+	// Запрет горизонтальной прокрутки, особенно для тач-устройств
+	overflow-x: hidden;
+}
+
+body {
+	min-width: 320px;
+	line-height: 27px;
+	font-family: "Open Sans", "Arial", sans-serif;
+	font-weight: 300;
+	color: #000;
+	font-style: normal;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+
+	// Запрет горизонтальной прокрутки
+	overflow: hidden;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+main {
+	padding: 0;
+	margin: 0;
+}
+
+:global .visually-hidden {
+	display: none;
+}
+
+:global .error-block {
+	color: $pink;
+	text-align: center;
+	padding: 10px;
+}

@@ -1,0 +1,65 @@
+@import "../../variables.scss";
+
+.panoram {
+	width: 100%;
+	margin-bottom: 20px;
+
+	@media ($tablet-version), ($desktop-version) {
+		margin-bottom: 50px;
+	}
+}
+
+.panoram__container {
+	position: relative;
+
+	& img {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+// только внешняя часть стилей
+.panoram__about {
+	margin: 0 20px;
+}
+
+.panoram__label {
+	position: absolute;
+	top: 55px;
+	right: 20px;
+
+	margin: 0;
+	padding: 10px 20px;
+
+	background-color: $pink;
+	color: #fff;
+
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 20px;
+
+	@media ($mobile-version) {
+		top: 0;
+	}
+}
+
+// упрощенно
+@media ($desktop-version) {
+	.panoram__inner {
+		max-width: $big-desktop-breakpoint;
+		margin: 0 auto;
+	}
+}
+
+@media ($big-desktop-version) {
+	.panoram__picture-inner {
+		position: absolute;
+		left: 50%;
+		top: 0;
+		bottom: 0;
+
+		width: $big-desktop-breakpoint;
+		margin-left: -($big-desktop-breakpoint / 2);
+	}
+}

@@ -1,0 +1,80 @@
+@import "../variables.scss";
+
+.form-btn {
+	display: block;
+	outline: none;
+	border: 1px solid transparent;
+	border-radius: 3px;
+
+	cursor: pointer;
+
+	padding: 20px 60px;
+	width: auto;
+
+	text-align: center;
+
+	text-transform: uppercase;
+	font-family: "Open Sans", "Arial", sans-serif;
+	font-size: 18px;
+	line-height: 20px;
+	font-weight: bold;
+	font-weight: 700;
+	text-decoration: none;
+
+	-webkit-appearance: none;
+
+	color: #fff;
+	background-color: $green;
+
+	&:disabled {
+		background-color: #e5e5e5;
+		cursor: auto;
+	}
+
+	&--light {
+		padding: 13px 20px 14px;
+
+		font-size: $basic-font-size;
+		line-height: $basic-font-size + 4;
+		color: $pink;
+
+		border: 3px solid $pink;
+		border-radius: 27px / 50%;
+		background-color: transparent;
+
+		text-transform: none;
+	}
+}
+
+// только для курсорных, ховер-состояние
+:global .hasHover :local .form-btn {
+	&:hover {
+		background-color: $green-dark;
+	}
+
+	&:active {
+		color: $white-muted;
+	}
+
+	&:disabled {
+		background-color: #e5e5e5;
+		cursor: auto;
+		color: #fff;
+	}
+}
+
+:global .hasHover :local .form-btn--light {
+	&:hover {
+		color: #fff;
+		background-color: $pink;
+	}
+
+	&:active {
+		color: $white-muted;
+	}
+
+	&:disabled {
+		cursor: auto;
+		color: #fff;
+	}
+}

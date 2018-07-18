@@ -1,0 +1,60 @@
+@media ($desktop-version) and (hover) {
+  .parallax {
+    position: relative;
+    perspective: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+
+    height: 100vh;
+    //-webkit-overflow-scrolling: touch;
+  }
+
+  .parallax__group {
+    position: relative;
+    transform-style: preserve-3d;
+    margin: 0;
+    padding: 0;
+
+    z-index: 2;
+        
+    //transform: translate3d(700px, 0, -800px) rotateY(30deg);
+
+
+    &--active {
+      height: 100vh;
+      min-height: 833px;
+
+      z-index: 1;
+
+    }
+  }
+
+  .parallax__layer {
+
+    position: absolute;
+    top: 0;
+    left: -6;
+    right: -6;
+    bottom: 0;
+
+    margin: 0;
+    padding: 0;
+
+    &--base {
+
+    }
+
+    &--back {
+      transform: translateZ(-600px) scale(3);
+
+      background-color: $background-color;
+      background-image: url("../img/index/bg-back-desktop.jpg");
+      background-position: center 0;
+      background-size: cover;
+
+      min-height: 833px;
+    }
+  }
+}

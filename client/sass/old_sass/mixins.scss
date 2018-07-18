@@ -1,0 +1,10 @@
+@mixin border-box {
+  box-sizing: border-box;
+}
+
+@mixin ul-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+

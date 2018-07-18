@@ -1,0 +1,202 @@
+//Планшетная и десктопная версии практически идентичны
+
+@media ($mobile-version) {
+  .contacts {
+    display: block;
+    width: 100%;
+    padding: 40px 0 0; //!Отступ сверху сделать маргином вышестоящего блока
+  }
+
+  .contacts__title {
+    display: block;
+    margin: 0 auto 35px;
+
+    text-align: center;
+
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .contacts__inner {
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 30px;
+  }
+
+  .contacts__item {
+    display: block;
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .contacts__item-header {
+    display: block;
+    margin: 5px 0;
+    padding: 0;
+
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .contacts__item-text {
+    display: block;
+    margin: 5px 0;
+    padding: 0;
+
+    text-align: center;
+    font-size: 24px;
+    font-weight: 300;
+
+    color: $pink;
+    text-decoration: none;
+  }
+
+  .contacts__map {
+    width: 100%;
+    height: 220px;
+    background-color: green;
+    &::before {
+      content: "";
+
+    }
+  }
+}
+
+// TABLET
+
+@media ($tablet-version) {
+  .contacts {
+    display: block;
+    width: 100%;
+    padding: 40px 20px 0; //!Отступ сверху сделать маргином вышестоящего блока
+  }
+
+  .contacts__title {
+    display: block;
+    margin: 0 auto 40px;
+
+    text-align: center;
+
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .contacts__inner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .contacts__item {
+    display: block;
+    flex-shrink: 0;
+    width: 300px;
+    margin: 0 auto 30px;
+  }
+
+  .contacts__item-header {
+    display: block;
+    margin: 5px 0;
+    padding: 0;
+
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .contacts__item-text {
+    display: block;
+    margin: 5px 0;
+    padding: 0;
+
+    text-align: center;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 300;
+
+    color: $pink;
+    text-decoration: none;
+  }
+
+}
+
+@media ($desktop-version) {
+  .contacts {
+    display: block;
+    width: 100%;
+    padding: 40px 0 0; //!Отступ сверху сделать маргином вышестоящего блока
+  }
+
+  .contacts__title {
+    display: block;
+    margin: 0 auto 40px;
+
+    text-align: center;
+
+    font-size: 50px;
+    line-height: 60px;
+  }
+
+  .contacts__inner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: $tablet-desktop-breakpoint;
+    margin: 0 auto 30px;
+  }
+
+  .contacts__item {
+    display: block;
+    flex-shrink: 0;
+    width: 300px;
+    margin: 0 auto 30px;
+  }
+
+  .contacts__item-header {
+    display: block;
+    margin: 15px 0;
+    padding: 0;
+
+    text-align: center;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .contacts__item-text {
+    display: block;
+    margin: 10px 0;
+    padding: 0;
+
+    text-align: center;
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 300;
+
+    color: $pink;
+    text-decoration: none;
+  }
+
+}
+
+// Резиновая сетка и увеличенный контент
+
+@media ($big-desktop-version) {
+  .contscts {
+    padding: 40px 0 0;
+  }
+
+  .contacts__inner {
+    width: auto;
+    margin: 0 #{$stretch-margin} 30px;
+  }
+
+
+
+}

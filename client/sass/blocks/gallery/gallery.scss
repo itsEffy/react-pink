@@ -1,0 +1,44 @@
+@import "../../variables.scss";
+
+.gallery {
+	width: 100%;
+}
+
+.gallery__inner {
+	margin: 0;
+}
+
+.gallery__photos {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: stretch;
+	flex-wrap: wrap;
+
+	margin-bottom: 30px;
+
+	padding: 0 10px;
+}
+
+.gallery__photo-item {
+	flex-shrink: 0;
+	flex-grow: 1;
+
+	width: 280px;
+	margin: 0 10px 20px;
+}
+
+.gallery__footer {
+	padding-bottom: 10px;
+}
+
+.gallery__btn {
+	margin: 0 auto 20px;
+}
+
+@media ($desktop-version) {
+	.gallery__inner {
+		max-width: $big-desktop-breakpoint;
+		margin: 0 auto;
+	}
+}

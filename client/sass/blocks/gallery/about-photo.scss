@@ -1,0 +1,104 @@
+@import "../../variables.scss";
+
+.about-photo {
+	padding: 20px;
+	background-color: $light-gray;
+
+	@media ($tablet-version), ($desktop-version) {
+		padding: 25px 30px;
+	}
+}
+
+.about-photo__inner {
+	position: relative;
+}
+
+.about-photo__header {
+	display: block;
+	margin: 0 0 10px;
+	padding: 0;
+
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: 300;
+	color: $gray-text;
+}
+
+.about-photo__author {
+	color: #000;
+	font-weight: 700;
+}
+
+.about-photo__description {
+	display: block;
+	margin: 0;
+	padding: 0;
+
+	font-size: 14px;
+	line-height: 22px;
+	font-weight: 400;
+
+	min-height: 50px;
+}
+
+.about-photo__likes {
+	/*
+	position: absolute;
+	left: 0;
+	bottom: 0;
+*/
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+
+	padding: 15px 0 0;
+
+	outline: none;
+	border: none;
+
+	-webkit-appearance: none;
+
+	background-color: transparent;
+
+	color: $pink;
+	font-family: "Open Sans", "Arial", sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	font-weight: 400;
+
+	& svg {
+		margin-right: 20px;
+
+		stroke: $pink;
+		fill: $pink;
+
+		transition: fill-opacity 200ms;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+// картинка с другой стороны
+@media ($tablet-version), ($desktop-version) {
+	.about-photo__likes {
+		flex-direction: row-reverse;
+
+		& svg {
+			margin-right: 0;
+			margin-left: 15px;
+		}
+
+		// в широкоформатном коментарии блок лайка вверху справа (но только в больших версиях)
+		&--wide {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+
+			padding-top: 0;
+		}
+	}
+}

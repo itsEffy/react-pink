@@ -1,0 +1,64 @@
+@import "../../variables.scss";
+
+$about-height: 158px;
+
+.photo-item {
+	position: relative;
+	padding-bottom: $about-height;
+}
+
+.photo-item__about {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	z-index: 2;
+	min-height: $about-height;
+}
+
+.photo-item__container {
+	overflow: hidden;
+	position: relative;
+
+	& img {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+
+	&:hover .photo-item__copyright {
+		opacity: 1;
+	}
+}
+
+.photo-item__copyright {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+
+	padding: 5px;
+	background-color: rgba(100, 100, 100, 0.4);
+	color: #eee;
+
+	border: 1px solid transparent;
+	border-radius: 5px;
+
+	font-size: 12px;
+	line-height: 16px;
+
+	opacity: 0;
+}
+
+@media ($mobile-version) {
+	.photo-item {
+		padding-bottom: 0;
+	}
+
+	.photo-item__about {
+		position: relative;
+
+		z-index: 2;
+		min-height: $about-height;
+	}
+}

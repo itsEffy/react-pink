@@ -1,0 +1,143 @@
+@import "../variables.scss";
+
+@media ($mobile-version) {
+  .page-title {
+    display: block;
+    margin: 0;
+    padding: 70px 0 0;
+    width: 100%;
+
+    color: red;
+
+    background-color: $background-color;
+    background-image: url("/img/index/50-bg-back-mobile@1x.jpg");
+    background-position: 45% 35%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .page-title__inner {
+    margin: 0 20px;
+    padding: 35px 20px 35px;
+    // Высота зафиксирована, чтобы на любых страницах промо был
+    // одинаковых размеров, но с защитой от переполнения
+    min-height: 135px;
+  }
+
+  .page-title__text {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+
+    max-width: 400px;
+
+    text-align: center;
+
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 300;
+
+    color: #fff;
+  }
+}
+
+@media ($tablet-version) {
+  .page-title {
+    display: block;
+    margin: 0;
+    padding: 120px 0 0;
+    width: 100%;
+
+    color: red;
+
+    background-color: $background-color;
+    background-image: url("/img/index/bg-back-tablet@1x.jpg");
+    background-position: 45% 0;
+    // Чтобы фон не прыгал при смене страницы, он должен быть идентичным блоку promo
+    background-size: auto $promo-tablet-height;
+    background-repeat: no-repeat;
+  }
+
+  .page-title__inner {
+    margin: 0 20px;
+    padding: 45px 20px 60px;
+    // Высота зафиксирована, чтобы на любых страницах промо был
+    // одинаковых размеров, но с защитой от переполнения
+    height: 300px;
+  }
+
+  .page-title__text {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+
+    max-width: 650px;
+
+    text-align: center;
+
+    font-size: 50px;
+    line-height: 64px;
+    font-weight: 300;
+
+    color: #fff;
+  }
+}
+
+@media ($desktop-version) {
+  .page-title {
+    display: block;
+    margin: 0;
+    padding: 120px 0 0;
+    width: 100%;
+
+    color: red;
+
+    background-color: $background-color;
+
+    // ! временный костыль - подкладка под параллакс-фон из-за бага при смене страницы
+    background-position: 49.7% 0;
+    background-image: url("/img/index/bg-back-desktop.jpg");
+    background-size: auto 886px;
+    background-repeat: no-repeat;
+  }
+
+  :global .noHover :local .page-title {
+    background-image: url("/img/index/bg-back-desktop.jpg");
+    background-position: center 0;
+    background-size: cover;
+  }
+
+  .page-title__inner {
+    // чтобы поставить его перед слоем параллакса
+    position: relative;
+    z-index: 3;
+
+    margin: 0 20px;
+    padding: 45px 20px 60px;
+    // Высота зафиксирована, чтобы на любых страницах промо был
+    // одинаковых размеров, но с защитой от переполнения
+    height: $page-title-desktop-height;
+  }
+
+  .page-title__text {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+
+    max-width: 70%;
+
+    text-align: center;
+
+    font-size: 50px;
+    line-height: 64px;
+    font-weight: 300;
+
+    color: #fff;
+  }
+}
+
+@media ($big-desktop-version) {
+  .page-title__text {
+    max-width: 900px;
+  }
+}
