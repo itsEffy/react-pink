@@ -16,15 +16,11 @@ app.use(express.static('client/public'));
 app.get('*', (req, res) => {
 	console.log('запрос ресурса ', req.url);
 
-	const context = {};
-
 	const store = createStore(req);
 
 	// вызываем функцию, проверяющую список нужных компонентов до вызова рендеринга. Извлекаем свойство route у каждого такого объекта, если оно есть. Возвращаем массив промизов- диспетчингов хранилища
 	const promises = matchRoutes(Routes, req.path)
-		.map(({ route }) => {
-			return route.loadData ? route.loadData(store) : null;
-		})
+		.map(({ route }) => (route.loadData ? route.loadData(store) : null))
 		.map(promise => {
 			if (promise) {
 				return new Promise((resolve, reject) => {

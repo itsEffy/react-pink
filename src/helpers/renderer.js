@@ -31,7 +31,7 @@ export default (req, store, context) => {
     <head>
     ${helmet.title.toString()}
     ${helmet.meta.toString()}
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+      <link rel="stylesheet" href="main.css">
       <link rel="shortcut icon" href="/favicon-96x96.png">
     </head>
     <body className="noHover">

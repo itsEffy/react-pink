@@ -1,15 +1,14 @@
-// @flow
+// x@flow
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
 // import Header from '../header/Header';
 // import Footer from '../footer/Footer';
+// import styles from '../../sass/blocks/not-found.scss';
 
 const Header = () => <h3>header</h3>;
 const Footer = () => <h3>footer</h3>;
-
-import styles from '../../sass/blocks/not-found.scss';
 
 const NotFoundPage = ({ staticContext = {} }) => {
 	staticContext.notFound = true;

@@ -25,6 +25,54 @@ module.exports = {
             ]
           ]
         }
+      },
+      {
+        test: /\.(css|scss)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: './public'
+            }
+          },
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 2,
+              modules: true,
+              sourceMap: true,
+              localIdentName: '[local]__[hash:3]'
+            }
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              // Necessary for external CSS imports to work
+              // https://github.com/facebookincubator/create-react-app/issues/2677
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-flexbugs-fixes'), // eslint-disable-line global-require
+                autoprefixer({
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 11'
+                  ],
+                  flexbox: 'no-2009'
+                })
+              ]
+            }
+          },
+          {
+            loader: require.resolve('sass-loader'),
+            options: {
+              sourceMap: false
+            }
+          }
+        ]
       }
     ]
   }

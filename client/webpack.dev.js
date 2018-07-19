@@ -1,5 +1,6 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   // входная точка клиентского приложения
@@ -12,6 +13,12 @@ const config = {
     path: path.resolve(__dirname, 'public')
   },
   devtool: 'cheap-eval-source-map',
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    })
+  ],
   module: {
     rules: [
       {
@@ -40,7 +47,14 @@ const config = {
       {
         test: /\.(css|scss)$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: './public'
+            }
+          },
           {
             loader: require.resolve('css-loader'),
             options: {
