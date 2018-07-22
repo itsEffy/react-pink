@@ -62,14 +62,14 @@
 
 // active для touch, hover для mouse
 
-:global .noHover :local .effect__link:active,
-:global .hasHover :local .effect__link:hover {
+.noHover .effect__link:active,
+.hasHover .effect__link:hover {
   text-decoration: none;
 }
 
 // тольок active для mouse
 
-:global .hasHover :local .effect__link:active {
+.hasHover .effect__link:active {
   color: $dark-gray;
 }
 

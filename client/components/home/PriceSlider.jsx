@@ -1,8 +1,10 @@
 // @flow
 
 import React from 'react';
-import PriceSlick from './PriceSlick';
+import PriceSlick from './PriceSlick.jsx';
 
-const PriceSlider = (props: { data: Object }) => <PriceSlick data={props.data} />;
+const PriceSlider = (props: { data: Object }) => (
+	<PriceSlick data={props.data} />
+);
 
 export default PriceSlider;

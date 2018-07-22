@@ -2,21 +2,22 @@
 
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import { URL } from "../extra/constants";
 
-import PhotoItem from "./PhotoItem";
-import Spinner from "../extra/Spinner";
-import Button from "../form/Button";
-import { ArrayFromArrayLike } from "../utils/utils";
+import axios from "axios";
+import { URL } from "../other/constants";
+
+import PhotoItem from "./PhotoItem.jsx";
+import Spinner from "../other/Spinner.jsx";
+import Button from "../form/Button.jsx";
+// import { ArrayFromArrayLike } from "../../utils/utils.jsx";
 
 import {
 	loadGalleryData,
 	likePhoto,
 	addGalleryData
-} from "../actions/galleryActionCreators";
+} from "../../actions/galleryActionCreators";
 
-import styles from "../sass/blocks/gallery/gallery.scss";
+// import styles from '../sass/blocks/gallery/gallery.scss';
 
 type Props = {
 	storeGallery: Array<AboutPhotoData>,
@@ -143,7 +144,7 @@ class Gallery extends PureComponent<Props, State> {
 				break;
 			case "failed":
 				loadingTemplate = (
-					<div className={styles["gallery__loading-failed"]}>
+					<div className="gallery__loading-failed">
 						<span>
 							Не удалось загрузить фотографии. Проверьте
 							соединение
@@ -155,26 +156,24 @@ class Gallery extends PureComponent<Props, State> {
 				loadingTemplate = null;
 		}
 		return (
-			<section className={styles["gallery"]}>
+			<section className="gallery">
 				<h2 className="visually-hidden">Галерея фотографий</h2>
-				<div className={styles["gallery__inner"]}>
-					<section className={styles["gallery__photos"]}>
+				<div className="gallery__inner">
+					<section className="gallery__photos">
 						{photos.map(photo => (
 							<PhotoItem
 								data={photo}
 								key={photo.id}
 								onLikeHandler={this.onLikeHandler}
-								containerClassName={
-									styles["gallery__photo-item"]
-								}
+								containerClassName="gallery__photo-item"
 							/>
 						))}
 					</section>
-					<section className={styles["gallery__footer"]}>
+					<section className="gallery__footer">
 						<Button
 							label="Загрузить еще"
 							onClick={this.showMorePhotos}
-							specStyles={styles["gallery__btn"]}
+							specStyles="gallery__btn"
 							disabled={loadingStatus === "loading"}
 						/>
 						{loadingTemplate}
@@ -185,11 +184,11 @@ class Gallery extends PureComponent<Props, State> {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => ({
-	storeGallery: state.gallery
+const mapStateToProps = ({ gallery }) => ({
+	storeGallery: gallery
 });
 
-const mapDispatchToProps = (dispatch: Function, ownProps) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
 	saveGallery(photos: Array<AboutPhotoData>) {
 		dispatch(addGalleryData(photos));
 	},
@@ -199,4 +198,7 @@ const mapDispatchToProps = (dispatch: Function, ownProps) => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Gallery);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Gallery);

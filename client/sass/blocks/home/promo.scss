@@ -124,18 +124,18 @@
     padding-top: 220px; //208px;
 
     background-color: transparent;
-    background-color: $background-color;
+    // background-color: $background-color;
     //background-image: url("/img/index/bg-back-desktop.jpg");
     background-position: center 0;
     background-size: cover;
   }
 
   // Подключаем фон для устройств без параллакс-эффекта
-
-  :global .noHover :local .promo {
+  /*
+  .noHover .promo {
     background-image: url("/img/index/bg-back-desktop.jpg");
   }
-
+*/
   .promo__inner {
     position: relative;
     display: flex;

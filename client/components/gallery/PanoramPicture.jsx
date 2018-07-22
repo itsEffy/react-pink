@@ -2,13 +2,13 @@
 
 import React, { PureComponent } from "react";
 
-import styles from "../sass/blocks/gallery/daily-panoram.scss";
+// import styles from "../sass/blocks/gallery/daily-panoram.scss";
 
 const label = "Панорама дня";
 
 // намеренно отображается самая качественная картинка
 const PanoramPicture = (props: {}) => (
-	<div className={styles["panoram__container"]}>
+	<div className="panoram__container">
 		<picture>
 			<source
 				media="(min-width: 980px)"
@@ -23,8 +23,8 @@ const PanoramPicture = (props: {}) => (
 				alt="Панорама дня"
 			/>
 		</picture>
-		<div className={styles["panoram__picture-inner"]}>
-			<h2 className={styles["panoram__label"]}>
+		<div className="panoram__picture-inner">
+			<h2 className="panoram__label">
 				<span>{label.toUpperCase()}</span>
 			</h2>
 		</div>

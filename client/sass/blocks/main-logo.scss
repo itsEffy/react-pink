@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@import '../variables.scss';
 // Здесь размещены стили, относящиеся к стилизации svg-логотипа
 
 // Логотип на меню, светлый (для темного фона)
@@ -21,7 +21,7 @@
   }
 }
 
-:global .hasHover :local .white-logo {
+.hasHover .white-logo {
   &:hover svg {
     fill: $pink;
 
@@ -65,7 +65,7 @@
   }
 }
 
-:global .hasHover :local .black-logo {
+.hasHover .black-logo {
   &:hover svg {
     & .glasses {
       fill: #000;

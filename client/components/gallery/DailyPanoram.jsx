@@ -3,12 +3,15 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 
-import PanoramPicture from "./PanoramPicture";
-import AboutPhoto from "./AboutPhoto";
-import { URL } from "../extra/constants";
-import { loadPanoramData, likePanoram } from "../actions/galleryActionCreators";
+import PanoramPicture from "./PanoramPicture.jsx";
+import AboutPhoto from "./AboutPhoto.jsx";
+import { URL } from "../other/constants";
+import {
+	loadPanoramData,
+	likePanoram
+} from "../../actions/galleryActionCreators";
 
-import styles from "../sass/blocks/gallery/daily-panoram.scss";
+// import styles from "../sass/blocks/gallery/daily-panoram.scss";
 
 type Props = {
 	aboutData: AboutPhotoData,
@@ -42,12 +45,12 @@ class DailyPanoram extends PureComponent<Props, State> {
 	render() {
 		console.log(this.props.aboutData);
 		return (
-			<section className={styles["panoram"]}>
+			<section className="panoram">
 				<PanoramPicture />
-				<div className={styles["panoram__inner"]}>
+				<div className="panoram__inner">
 					<AboutPhoto
 						data={this.props.aboutData}
-						containerClassName={styles["panoram__about"]}
+						containerClassName="panoram__about"
 						onLikeHandler={this.onLikeHandler}
 						wide
 					/>
@@ -57,7 +60,7 @@ class DailyPanoram extends PureComponent<Props, State> {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
 	aboutData: state.panoram
 });
 
@@ -71,4 +74,7 @@ const mapDispatchToProps = (dispatch: Function, ownProps) => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DailyPanoram);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(DailyPanoram);

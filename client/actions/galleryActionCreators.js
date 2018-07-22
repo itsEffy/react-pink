@@ -1,6 +1,6 @@
 // @flow
 import axios from "axios";
-import { URL } from "../extra/constants";
+import { URL } from "../components/other/constants";
 
 import * as A from "./actions";
 
@@ -95,3 +95,12 @@ export function likePanoram(liked: boolean) {
 			});
 	};
 }
+
+export const fetchPanoram = () => async (dispatch, getState, api) => {
+	const res = await api.get("/panoram");
+
+	return dispatch({
+		type: A.FETCH_PANORAM,
+		payload: res.data
+	});
+};

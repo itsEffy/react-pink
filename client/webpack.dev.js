@@ -1,14 +1,15 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = {
   // входная точка клиентского приложения
-  entry: './index.js',
+  entry: './client.js',
 
   // куда поместить выходной файл
   output: {
-    filename: '.client-bundle.js',
+    filename: 'client-bundle.js',
     // помещаем в директорию сборки. dirname - текущая директория
     path: path.resolve(__dirname, 'public')
   },
@@ -17,6 +18,12 @@ const config = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /o.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { safe: true, discardComments: { removeAll: true } },
+      canPrint: true
     })
   ],
   module: {
@@ -26,23 +33,7 @@ const config = {
         // лодер-модуль для вебпака, запускающий бабель
         loader: 'babel-loader',
         // исключаем файлы в определенной директории, понятное дело - сторонние модули (это RegExp)
-        exclude: /node_modules/,
-        // опции для ббель-лодера
-        options: {
-          // какие пресеты мы хотим использовать: react - для JSX, stage-0 - для async-code
-          presets: [
-            'react',
-            'stage-0',
-            [
-              'env',
-              {
-                targets: {
-                  browsers: ['last 2 versions', 'not ie < 11']
-                }
-              }
-            ]
-          ]
-        }
+        exclude: /node_modules/
       },
       {
         test: /\.(css|scss)$/,
@@ -59,7 +50,7 @@ const config = {
             loader: require.resolve('css-loader'),
             options: {
               importLoaders: 2,
-              modules: true,
+              modules: false,
               sourceMap: true,
               localIdentName: '[local]__[hash:3]'
             }

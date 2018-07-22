@@ -3,18 +3,18 @@
 import React, { Component, PureComponent } from "react";
 import { connect } from "react-redux";
 
-import { Label, ValidationMessage } from "./FormTemplates";
-import { setEmotions } from "../actions/formActionCreators";
+import { Label, ValidationMessage } from "./FormTemplates.jsx";
+import { setEmotions } from "../../actions/formActionCreators";
 
-import transformValue from "../utils/transformValue";
+import transformValue from "../../utils/transformValue";
 
-import { setValidationStateOfField } from "../utils/checkFormValidity";
+import { setValidationStateOfField } from "../../utils/checkFormValidity";
 import {
 	formValidationDelay as validDelay,
 	formSavingDelay as saveDelay
-} from "../extra/constants";
+} from "../other/constants";
 
-import styles from "../sass/blocks/form-templates.scss";
+// import styles from "../sass/blocks/form-templates.scss";
 
 // Практически повторяет поведение input type=text
 
@@ -36,6 +36,16 @@ type TextAreaState = {
 };
 
 class TextArea extends PureComponent<TextAreaProps, TextAreaState> {
+	defaultProps = {
+		settings: {
+			label: "",
+			placeholder: "",
+			validation: { required: false }
+		},
+
+		specStyles: ""
+	};
+
 	state = {
 		isTouched: false,
 		showMessage: false,
@@ -173,42 +183,34 @@ class TextArea extends PureComponent<TextAreaProps, TextAreaState> {
 		} = this.state;
 
 		return (
-			<div className={`${styles["textarea"]} ${specStyles}`}>
+			<div className={`textarea ${specStyles}`}>
 				{label ? (
 					<Label
 						label={label.toUpperCase()}
 						id={name}
-						className={`${styles["textarea__label"]} label`}
+						className="textarea__label label"
 						required={required}
 					/>
 				) : null}
 				<textarea
 					placeholder={placeholder}
 					name={name}
-					className={`${styles["textarea__element"]} element`}
+					className="textarea__element element"
 					value={value}
 					onChange={this.handleValueChange}
+					required={required}
+					id={name}
 				/>
 				<ValidationMessage
 					valid={valid}
 					validationMessage={validationMessage}
-					className={`${styles["textarea__message"]} message`}
+					className="textarea__message message"
 					showMessage={isTouched ? showMessage : false}
 				/>
 			</div>
 		);
 	}
 }
-
-TextArea.defaultProps = {
-	settings: {
-		label: "",
-		placeholder: "",
-		validation: { required: false }
-	},
-
-	specStyles: ""
-};
 
 const mapStateToProps = (state, ownProps) => ({
 	savedValue: state[ownProps.settings.name],
@@ -221,4 +223,7 @@ const mapDispatchToProps = (dispatch: Function, ownProps) => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextArea);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(TextArea);

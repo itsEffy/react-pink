@@ -1,0 +1,19 @@
+{
+	"presets": [
+		"react",
+    "stage-0",
+		["env", {
+			"targets": {
+				"browsers": ["last 2 versions", "not ie < 11"]
+			},
+			"loose": true,
+			"modules": false
+		}]
+	],
+  "plugins": [
+    "babel-plugin-syntax-dynamic-import",
+    "babel-plugin-dynamic-import-webpack",
+    "babel-plugin-transform-class-properties",
+    "babel-plugin-transform-object-rest-spread"
+  ]
+}

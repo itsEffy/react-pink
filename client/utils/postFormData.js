@@ -1,6 +1,6 @@
 // @flow
 import axios from "axios";
-import { URL } from "../extra/constants";
+import { URL } from "../components/other/constants";
 
 // Данная функция преобразовывает данные формы в формат multipart/form-data
 const getMultipartFormData = (form: HTMLFormElement) => {

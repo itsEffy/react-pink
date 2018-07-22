@@ -5,17 +5,15 @@ import type { Node } from 'react';
 
 import { Helmet } from 'react-helmet';
 
-// import Header from '../header/Header';
-import PageTitle from '../other/PageTitle';
-// import Promo from '../home/Promo';
+import Header from '../header/Header.jsx';
+import PageTitle from '../other/PageTitle.jsx';
+import Promo from '../home/Promo.jsx';
 // import Footer from '../footer/Footer';
 
-import ParallaxS from '../sass/blocks/parallax.scss';
-import { ParallaxActive, ParallaxStatic } from '../extra/Parallax';
+// import ParallaxS from '../sass/blocks/parallax.scss';
+import { ParallaxActive, ParallaxStatic } from '../other/Parallax.jsx';
 
-const Header = () => <h3>header</h3>;
 const Footer = () => <h3>footer</h3>;
-const Promo = () => <h2>promo</h2>;
 
 // Данный шаблон используется всеми страницами (кроме 404)
 
@@ -53,7 +51,8 @@ const PageTemplate = ({ pageTitle, home, children }: Props) => (
 
 PageTemplate.defaultProps = {
 	pageTitle: 'Pink',
-	home: false
+	home: false,
+	activeSection: null
 };
 
 export default PageTemplate;

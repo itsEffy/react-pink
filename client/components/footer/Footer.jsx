@@ -2,27 +2,25 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "../extra/Logo";
+import Logo from "../other/Logo.jsx";
 
-import styles from "../sass/blocks/page-footer.scss";
-import logoS from "../sass/blocks/main-logo.scss";
+// import styles from "../sass/blocks/page-footer.scss";
+// import logoS from '../sass/blocks/main-logo.scss';
 
 const Footer = (props: {}) => (
-  <footer className={styles["page-footer"]}>
-    <div className={styles["page-footer__inner"]}>
+  <footer className="page-footer">
+    <div className="page-footer__inner">
       <Link
-        to={{ pathname: "/hey" }}
-        className={`${styles["page-footer__logo"]} ${logoS["black-logo"]}`}
+        to={{ pathname: "/" }}
+        className="page-footer__logo black-logo"
         title="Pink"
       >
         <Logo type="footer" />
       </Link>
-      <div className={styles["page-footer__social"]}>
+      <div className="page-footer__social">
         <a
           href="https://twitter.com/?lang=ru"
-          className={`${styles["page-footer__social-item--twitter"]} ${
-            styles["page-footer__social-item"]
-          }`}
+          className="page-footer__social-item--twitter page-footer__social-item"
         >
           <svg width="20" height="16">
             <use xlinkHref="img/svg/sprite.svg#twitter-icon" />
@@ -31,9 +29,7 @@ const Footer = (props: {}) => (
         </a>
         <a
           href="https://www.facebook.com"
-          className={`${styles["page-footer__social-item--facebook"]} ${
-            styles["page-footer__social-item"]
-          }`}
+          className="page-footer__social-item--facebook page-footer__social-item"
         >
           <svg width="16" height="18">
             <use xlinkHref="img/svg/sprite.svg#facebook-icon" />
@@ -42,9 +38,7 @@ const Footer = (props: {}) => (
         </a>
         <a
           href="https://www.youtube.com"
-          className={`${styles["page-footer__social-item--youtube"]} ${
-            styles["page-footer__social-item"]
-          }`}
+          className="page-footer__social-item--youtube page-footer__social-item"
         >
           <svg width="15" height="13">
             <use xlinkHref="img/svg/sprite.svg#youtube-icon" />
@@ -52,11 +46,11 @@ const Footer = (props: {}) => (
           Мы в YouTube
         </a>
       </div>
-      <div className={styles["page-footer__copyright"]}>
-        Дизайн{" "}
+      <div className="page-footer__copyright">
+        Дизайн
         <a
           href="https://htmlacademy.ru"
-          className={styles["page-footer__copyright-link"]}
+          className="page-footer__copyright-link"
         >
           <svg width="28" height="35">
             <use xlinkHref="img/svg/sprite.svg#academy-logo" />

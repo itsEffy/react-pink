@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@import '../variables.scss';
 
 .form-btn {
 	display: block;
@@ -14,7 +14,7 @@
 	text-align: center;
 
 	text-transform: uppercase;
-	font-family: "Open Sans", "Arial", sans-serif;
+	font-family: 'Open Sans', 'Arial', sans-serif;
 	font-size: 18px;
 	line-height: 20px;
 	font-weight: bold;
@@ -47,7 +47,7 @@
 }
 
 // только для курсорных, ховер-состояние
-:global .hasHover :local .form-btn {
+.hasHover .form-btn {
 	&:hover {
 		background-color: $green-dark;
 	}
@@ -63,7 +63,7 @@
 	}
 }
 
-:global .hasHover :local .form-btn--light {
+.hasHover .form-btn--light {
 	&:hover {
 		color: #fff;
 		background-color: $pink;

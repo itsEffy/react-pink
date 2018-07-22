@@ -1,27 +1,26 @@
 // @flow
 
-import React from 'react';
+import React from "react";
 
-// import PageTemplate from '../other/PageTemplate.jsx';
+import PageTemplate from "../other/PageTemplate.jsx";
+import { fetchReviews } from "../../actions/actionCreators";
 
-// import Features from './Features.jsx';
-// import Reviews from './Reviews.jsx';
-// import Price from './Price.jsx';
-// import Contacts from './Contacts.jsx';
-// import AdressMap from './Map.jsx';
+import Features from "./Features.jsx";
+import Reviews from "./Reviews.jsx";
+import Price from "./Price.jsx";
+import Contacts from "./Contacts.jsx";
+import AdressMap from "./Map.jsx";
 
-/*
-const xHomePage = (props: {}) => (
+const HomePage = (props: {}) => (
 	<PageTemplate home>
 		<Features />
 		<Reviews />
 		<Price />
 		<Contacts />
-		<AdressMap />
+		<AdressMap />;
 	</PageTemplate>
 );
-*/
 
-const HomePage = (props: {}) => <h2>You are at home page</h2>;
+const loadData = store => store.dispatch(fetchReviews());
 
-export default { component: HomePage };
+export default { component: HomePage, loadData };

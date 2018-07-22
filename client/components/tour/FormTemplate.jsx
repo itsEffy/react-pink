@@ -3,26 +3,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Input from "../form/Input";
-import CheckboxGroup from "../form/CheckboxGroup";
-import RadioGroup from "../form/RadioGroup";
-import TextArea from "../form/TextArea";
-import Button from "../form/Button";
-import { Fieldset } from "../form/FormTemplates";
+import Input from "../form/Input.jsx";
+import CheckboxGroup from "../form/CheckboxGroup.jsx";
+import RadioGroup from "../form/RadioGroup.jsx";
+import TextArea from "../form/TextArea.jsx";
+import Button from "../form/Button.jsx";
+import { Fieldset } from "../form/FormTemplates.jsx";
 
-import SuccessBlock from "../form/SuccessBlock";
-import Description from "../extra/Description";
-import FormNote from "../form/FormNote";
-import Spinner from "../extra/Spinner";
+import SuccessBlock from "../form/SuccessBlock.jsx";
+import Description from "../other/Description.jsx";
+import FormNote from "../form/FormNote.jsx";
+import Spinner from "../other/Spinner.jsx";
 
-import getLayoutState from "../utils/getLayoutState";
-import { resetFormData } from "../actions/formActionCreators";
-import { checkFormValidity } from "../utils/checkFormValidity";
-import { postFormData } from "../utils/postFormData";
-import { URL } from "../extra/constants";
+import getLayoutState from "../../utils/getLayoutState";
+import { resetFormData } from "../../actions/formActionCreators";
+import { checkFormValidity } from "../../utils/checkFormValidity";
+import { postFormData } from "../../utils/postFormData";
 
-import pageS from "../sass/blocks/tour/form-page.scss";
-import formS from "../sass/blocks/tour/tour-form.scss";
+// не понадобится?
+import { URL } from "../other/constants";
+
+// import pageS from '../sass/blocks/tour/form-page.scss';
+// import formS from '../sass/blocks/tour/tour-form.scss';
 
 type Props = {
 	settings: Object,
@@ -38,6 +40,8 @@ type State = {
 	submittingStatus: LoadingStatusType,
 	validationStateOfForm: boolean,
 	validationState: Object,
+	// включается только в Реакт приложении для удобства
+	preventSubmitting: boolean,
 	reset: boolean
 };
 
@@ -46,6 +50,7 @@ class FormTemplate extends Component<Props, State> {
 		submittingStatus: "",
 		validationState: {},
 		validationStateOfForm: false,
+		preventSubmitting: false,
 		reset: false
 	};
 
@@ -54,7 +59,13 @@ class FormTemplate extends Component<Props, State> {
 		// setInitialValidationState();
 	}
 
-	//  Данный метод возвращает вычисляет новое состояние валидации, проверяет валидность всей формы и возвращает соответствующие состояния.
+	componentDidMount() {
+		this.setState({
+			preventSubmitting: true
+		});
+	}
+
+	//  Данный метод возвращает вычисляет новое состояние валидации, основываясь на проверке переданного ему поля, проверяет валидность всей формы и возвращает соответствующие состояния.
 
 	setFormValidationState = (name: string, newValue: boolean) => {
 		this.setState(prevState => {
@@ -66,9 +77,8 @@ class FormTemplate extends Component<Props, State> {
 			const isValid = checkFormValidity(validationState);
 
 			//
-
 			if (isValid !== wasValid) {
-				console.log("change");
+				console.log("change form validation state");
 			}
 			return {
 				validationState,
@@ -132,7 +142,12 @@ class FormTemplate extends Component<Props, State> {
 			successMessage
 		} = this.props;
 
-		const { submittingStatus, validationStateOfForm, reset } = this.state;
+		const {
+			submittingStatus,
+			validationStateOfForm,
+			reset,
+			preventSubmitting
+		} = this.state;
 
 		const Form = (
 			<React.Fragment>
@@ -145,89 +160,91 @@ class FormTemplate extends Component<Props, State> {
 					)}
 				</Description>
 				<form
-					className={formS["form"]}
+					className="form"
 					id={formId}
 					onSubmit={this.submitFormHandler}
 				>
-					<div className={formS["personal"]}>
+					<div className="personal">
 						<Input
 							settings={surname}
-							specStyles={formS["personal__input"]}
+							specStyles="personal__input"
 							setFormValidity={this.setFormValidationState}
 							reset={reset}
 						/>
 						<Input
 							settings={name}
 							setFormValidity={this.setFormValidationState}
-							specStyles={formS["personal__input"]}
+							specStyles="personal__input"
 						/>
 						<Input
 							settings={patronymic}
 							setFormValidity={this.setFormValidationState}
-							specStyles={formS["personal__input"]}
+							specStyles="personal__input"
 						/>
 					</div>
 					<Fieldset
 						legend={`Ваши безбашенные достижения в\u00A0путешествии`}
-						specStyles={formS["achieves__fieldset"]}
+						specStyles="achieves__fieldset"
 						required
 					>
 						<CheckboxGroup
 							settings={achieves}
-							specStyles={formS["achieves__checkbox"]}
+							specStyles="achieves__checkbox"
 							setFormValidity={this.setFormValidationState}
 							required
 						/>
 					</Fieldset>
 					<Fieldset
 						legend="Контактная информация"
-						specStyles={formS["contacts__fieldset"]}
+						specStyles="contacts__fieldset"
 					>
 						<Input
 							settings={tel}
 							setFormValidity={this.setFormValidationState}
-							specStyles={formS["contacts__input"]}
+							specStyles="contacts__input"
 						/>
 						<Input
 							settings={email}
 							setFormValidity={this.setFormValidationState}
-							specStyles={formS["contacts__input"]}
+							specStyles="contacts__input"
 						/>
 					</Fieldset>
 					<Fieldset
 						legend="С каким приложением путешествовали"
-						specStyles={formS["app__fieldset"]}
+						specStyles="app__fieldset"
 					>
 						<RadioGroup settings={appOptions} />
 					</Fieldset>
 					<Fieldset
 						legend="Опишите свои эмоции"
-						specStyles={formS["emotions__fieldset"]}
+						specStyles="emotions__fieldset"
 						required
 					>
 						<TextArea
 							settings={emotions}
-							specStyles={formS["emotions__textarea"]}
+							specStyles="emotions__textarea"
 							setFormValidity={this.setFormValidationState}
 						/>
 					</Fieldset>
-					<div className={formS["form__footer"]}>
+					<div className="form__footer">
 						<Button
 							type="submit"
 							label={buttonLabel}
-							disabled={!validationStateOfForm}
-							specStyles={formS["form__submit"]}
+							disabled={
+								preventSubmitting && !validationStateOfForm
+							}
+							specStyles="form__submit"
 							id={formId}
 						/>
 
-						<FormNote specStyles={formS["form__note"]} />
+						<FormNote specStyles="form__note" />
 					</div>
 				</form>
 			</React.Fragment>
 		);
 
 		const FailureBlock = (
-			<div className={formS["form__failure-block"]}>
+			<div className="form__failure-block">
 				Что-то пошло не так. Попробуйте позже!
 			</div>
 		);
@@ -279,12 +296,13 @@ class FormTemplate extends Component<Props, State> {
 				);
 				break;
 			default:
+				// на сервере
 				Template = Form;
 		}
 
 		return (
-			<section className={pageS["form-page"]}>
-				<div className={pageS["form-page__inner"]}>{Template}</div>
+			<section className="form-page">
+				<div className="form-page__inner">{Template}</div>
 			</section>
 		);
 	}
@@ -304,4 +322,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormTemplate);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(FormTemplate);

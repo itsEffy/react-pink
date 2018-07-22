@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@import '../variables.scss';
 
 // На флексах, посему универсальный
 
@@ -64,12 +64,12 @@
 	border-radius: 50%;
 }
 
-:global .noHover :local .page-footer__social-item:active,
-:global .hasHover :local .page-footer__social-item:hover {
+.noHover .page-footer__social-item:active,
+.hasHover .page-footer__social-item:hover {
 	border-color: #000;
 }
 
-:global .hasHover :local .page-footer__social-item:active {
+.hasHover .page-footer__social-item:active {
 	opacity: 0.3;
 }
 
@@ -94,11 +94,11 @@
 	margin-left: 15px;
 }
 
-:global .noHover :local .page-footer__copyright:active svg,
-:global .hasHover :local .page-footer__copyright:hover svg {
+.noHover .page-footer__copyright:active svg,
+.hasHover .page-footer__copyright:hover svg {
 	fill: #000;
 }
 
-:global .hasHover :local .page-footer__copyright:active svg {
+.hasHover .page-footer__copyright:active svg {
 	fill: $black-muted;
 }

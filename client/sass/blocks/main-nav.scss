@@ -1,6 +1,4 @@
-@import "../variables.scss",
-  "../scaffolding.scss",
-  "../mixins.scss",
+@import "../variables.scss", "../scaffolding.scss", "../mixins.scss",
   "../fonts.scss";
 
 //    NAVIGATION logo + toggle + menu
@@ -22,116 +20,130 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
   .main-nav {
     min-height: 68px;
     position: relative;
-
-    // Вспомогательный элемент для анимации, из-за него выезжает список.
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      height: 68px;
-      width: 100%;
-      background-color: transparent;
-      z-index: 20;
-    }
-
-    // При открытии
-
-    &--opened {
-      background-color: $open-menu-color; //нельзя удалять
-      transition: background-color 0.2s;
-
-      &::before {
-        background-color: $open-menu-color;
-        transition: background-color 0.2s;
-      }
-
-      // Анимация выезжания сверху
-      & .main-nav__list {
-        display: block;
-        margin-top: 0;
-        transition: margin-top 0.3s, background-color 0.3s;
-      }
-    }
   }
 
-  // Общие стили. Особые размеры и позиционирование далее.
-  .main-nav__toggle {
-    font-size: 0;
-    background-color: transparent;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
+  // кнопка-чекбокс
 
+  // стилизованная кнопка. По умолчанию - бургер
+  .main-nav__toggler-label {
     position: absolute;
+    top: 0;
+    right: 0;
     z-index: 50;
 
-    // Бургер
-    & span {
+    cursor: pointer;
+
+    // отключает затенение при клике на ios
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  // требуется для визуальных эффектов - меняет цвет, а также
+  .main-nav__panel {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 68px;
+    width: 100%;
+    z-index: 20;
+    transition: background-color 0.5s;
+
+    background-color: transparent;
+  }
+
+  // чекбокс
+  .main-nav__toggler-element {
+    display: none;
+
+    // стили при выбранном чекбоксе ("меню открыто")
+    &:checked ~ .main-nav__toggler-label .main-nav__toggler-indicator {
+      // индикатор в виде крестика
+      display: block;
+      visibility: hidden;
       position: absolute;
-      right: 20px;
+      background-color: #fff;
+
+      border: 1px solid green;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -17px;
+
+        width: 3px;
+        height: 34px;
+
+        transform: rotate(135deg);
+
+        background-color: #fff;
+        visibility: visible;
+        z-index: 10;
+      }
+
+      &::after {
+        transform: rotate(-135deg);
+      }
+    }
+
+    // отображает меню
+    &:checked ~ .main-nav__list {
+      margin-top: 0;
+      background-color: $open-menu-color;
+    }
+
+    // меняет цвет панели при открытом меню
+    &:checked ~ .main-nav__panel {
+      background-color: $open-menu-color;
+      transition: none;
+    }
+
+    // изолированные стили при не выбранном чекбосе (меню скрыто)
+    &:not(:checked) ~ .main-nav__toggler-label .main-nav__toggler-indicator {
+      // индикатор в виде бургера
+      position: absolute;
+
+      // данное позиционирование делается для выравнивания
+      // с крестиком, чтобы абсолютные координаты всей кнопки были легко кастомизириуемы
+      transform: translate(5px, 15px);
 
       width: 50px;
       height: 4px;
       background-color: #fff;
       box-shadow: 0 10px 0 0 #fff, 0 -10px 0 0 #fff;
     }
+  }
 
-    // Крестик
-    &--opened span::before,
-    &--opened span::after {
-      content: "";
-      position: absolute;
+  // стили взаимодействия для устройств с мышью и для сенсорных
+  .noHover .main-nav__toggler-label:active .main-nav__toggler-indicator,
+  .hasHover .main-nav__toggler-label:hover .main-nav__toggler-indicator {
+    background-color: $pink;
+    box-shadow: 0 10px 0 0 $pink, 0 -10px 0 0 $pink;
 
-      width: 3px;
-      height: 34px;
+    &::before,
+    &::after {
+      background-color: $pink;
+    }
+  }
 
-      transform: rotate(45deg);
+  .hasHover .main-nav__toggler-label:active .main-nav__toggler-indicator {
+    background-color: #fff;
+    box-shadow: 0 10px 0 0 #fff, 0 -10px 0 0 #fff;
+    opacity: 0.3;
 
+    &::before,
+    &::after {
       background-color: #fff;
-      visibility: visible;
-      z-index: 10;
-    }
-
-    &--opened span::after {
-      transform: rotate(-45deg);
-    }
-
-    //Визуально скрыли бургер, оставив его в DOM
-    &--opened span {
-      visibility: hidden;
-    }
-
-    /*
-    &:hover span {
-        background-color: $pink;
-        box-shadow:
-          0 10px 0 0 $pink,
-          0 -10px 0 0 $pink;
-
-      &::before,
-      &::after {
-        background-color: $pink;
-      }
-
-    }
-
-    &:active span {
-        opacity: 0.3;
-    }
-
-    */
-
-    // Стили кнопки без JS, по умолчанию
-    &--no-js {
-      display: none;
+      opacity: 0.3;
     }
   }
 
   // active .main-nav__toggle устройств с сенсорным экраном
   // и hover для курсорных
 
-  :global .noHover :local .main-nav__toggle:active :global span,
-  :global .hasHover :local .main-nav__toggle:hover :global span {
+  // удалить кнопку
+  .noHover .main-nav__toggle:active span,
+  .hasHover .main-nav__toggle:hover span {
     background-color: $pink;
     box-shadow: 0 10px 0 0 $pink, 0 -10px 0 0 $pink;
 
@@ -143,9 +155,7 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
 
   // active .main-nav__toggle для устройств с курсором
 
-  :global .hasHover :local .main-nav__toggle:active :global span {
-    opacity: 0.3;
-  }
+  // удалить кнопку
 
   .main-nav__list {
     display: block;
@@ -157,8 +167,9 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
 
     // В состоянии открытия меню не видно, оно сверху (анимация выезжания сверху)
     margin-top: -800px;
+    transition: margin-top 0.3s, background-color 0.3s;
 
-    z-index: 10; //
+    z-index: 1; //
   }
 
   .main-nav__item {
@@ -213,27 +224,26 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
 
   // main-nav__link для touch
 
-  :global .noHover :local .main-nav__link:active {
+  .noHover .main-nav__link:active {
     color: $pink-muted;
   }
 
   // main-nav__link для mouse
 
-  :global .hasHover :local .main-nav__link:hover {
+  .hasHover .main-nav__link:hover {
     color: $pink;
   }
 
-  :global .hasHover :local .main-nav__link:active {
+  .hasHover .main-nav__link:active {
     color: $pink-muted;
   }
 
-  :global .hasHover :local .main-nav__link--active:hover {
+  .hasHover .main-nav__link--active:hover {
     color: gray;
   }
+
+  /* Отдельные мобильные стили для логотипа и кнопки */
 }
-
-/* Отдельные мобильные стили для логотипа и кнопки */
-
 @media ($main-nav-mobile) {
   .main-nav__logo {
     position: relative;
@@ -250,19 +260,14 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     font-size: 0;
   }
 
-  .main-nav__toggle {
-    top: 0;
-    right: 0;
-
+  .main-nav__toggler-label {
     height: 68px;
     width: 90px;
+  }
 
-    // Мобильное позиционирование кнопки
-    &--opened span::before,
-    &--opened span::after {
-      top: -15px;
-      right: 20px; // Примерно
-    }
+  .main-nav__toggler-indicator {
+    top: 15px;
+    right: 30px;
   }
 }
 
@@ -271,10 +276,10 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
 @media ($main-nav-tablet) {
   .main-nav {
     min-height: 110px;
+  }
 
-    &::before {
-      height: 110px;
-    }
+  .main-nav__panel {
+    height: 110px;
   }
 
   .main-nav__logo {
@@ -292,24 +297,14 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     font-size: 0;
   }
 
-  .main-nav__toggle {
-    top: 0;
-    right: 0;
-
-    display: block;
+  .main-nav__toggler-label {
     height: 110px;
-    width: 150px;
+    width: 130px;
+  }
 
-    // Планшетное позиционирование кнопки
-    & span {
-      right: 55px;
-    }
-
-    &--opened span::before,
-    &--opened span::after {
-      top: -17px;
-      right: 35px; // Примерно
-    }
+  .main-nav__toggler-indicator {
+    top: 35px;
+    right: 50px;
   }
 }
 
@@ -320,7 +315,10 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
   .main-nav__item {
     display: inline-block;
     width: 50%;
-    margin-left: -4px;
+    margin-left: -0px;
+
+    border-right: 1px solid $open-menu-dark-border;
+    border-left: 1px solid $open-menu-light-border;
   }
 
   .main-nav__logo {
@@ -330,14 +328,6 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     width: 150px;
 
     text-decoration: none;
-  }
-
-  .main-nav__toggle {
-    top: 0;
-    right: 0;
-
-    //height: 68px;
-    //width: 110px;
   }
 }
 
@@ -369,7 +359,9 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     font-size: 0;
   }
 
-  .main-nav__toggle {
+  .main-nav__toggler-label,
+  .main-nav__toggler-element,
+  .main-nav__panel {
     display: none;
   }
 
@@ -455,29 +447,29 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
 
   // main-nav__link для touch-экранов
 
-  :global .noHover :local .main-nav__link:active {
+  .noHover .main-nav__link:active {
     color: $pink;
   }
 
-  :global .noHover :local .main-nav__link--active:active {
+  .noHover .main-nav__link--active:active {
     color: $white-muted;
   }
 
   // main-nav__link для mouse
 
-  :global .hasHover :local .main-nav__link:hover {
+  .hasHover .main-nav__link:hover {
     color: $pink;
   }
 
-  :global .hasHover :local .main-nav__link--active:hover {
+  .hasHover .main-nav__link--active:hover {
     color: #fff;
   }
 
-  :global .hasHover :local .main-nav__link:active {
+  .hasHover .main-nav__link:active {
     color: $white-muted;
   }
 
-  :global .hasHover :local .main-nav__link--active:active {
+  .hasHover .main-nav__link--active:active {
     color: $white-muted;
   }
 }

@@ -1,8 +1,8 @@
 // @flow
 
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { setViewportVersion } from "../actions/actionCreators";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setViewportVersion } from '../../actions/actionCreators';
 
 type Props = {
 	viewportVersion: ViewportVersionType,
@@ -18,14 +18,14 @@ class WindowViewportListener extends Component<Props> {
 
 	componentDidMount = () => {
 		// console.log('Viewport Listener was created');
-		window.addEventListener("resize", this.updateWindowDimensions);
+		window.addEventListener('resize', this.updateWindowDimensions);
 	};
 
 	// возможно, это и не нужно вообще. Береженого бог бережет
 	shouldComponentUpdate = () => false;
 
 	componentWillUnmount = () => {
-		window.removeEventListener("resize", this.updateWindowDimensions);
+		window.removeEventListener('resize', this.updateWindowDimensions);
 	};
 
 	version;
@@ -34,13 +34,13 @@ class WindowViewportListener extends Component<Props> {
 		// console.log('updating state');
 		const width = window.innerWidth;
 		if (width < 660) {
-			this.version = "mobile";
+			this.version = 'mobile';
 		} else if (width < 980) {
-			this.version = "tablet";
+			this.version = 'tablet';
 		} else if (width < 1200) {
-			this.version = "desktop";
+			this.version = 'desktop';
 		} else {
-			this.version = "wide";
+			this.version = 'wide';
 		}
 		if (this.version !== this.props.viewportVersion) {
 			this.props.setViewportVersion(this.version);
@@ -62,6 +62,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-	WindowViewportListener
-);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(WindowViewportListener);

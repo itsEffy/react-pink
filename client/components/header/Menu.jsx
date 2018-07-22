@@ -1,46 +1,32 @@
 // @flow
 
-import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import React from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
+import Routes from '../../Routes';
 
-import styles from "../sass/blocks/main-nav.scss";
+// import styles from "../sass/blocks/main-nav.scss";
 
 // to - объект, поскольку иначе не работает переключение активного стиля
 
 const Menu = (props: {}) => (
-	<ul className={styles["main-nav__list"]}>
-		<li className={styles["main-nav__item"]}>
+	<ul className="main-nav__list">
+		{Routes[0].routes.filter(route => route.inMenu).map(route => (
+			<li className="main-nav__item" key={route.path}>
+				<NavLink
+					to={{ pathname: route.path }}
+					className="main-nav__link"
+					activeClassName="main-nav__link--active"
+				>
+					<span>{route.title}</span>
+				</NavLink>
+			</li>
+		))}
+		{/* Демонстрация перехода на несуществующую страницу */}
+		<li className="main-nav__item">
 			<NavLink
-				to={{ pathname: "/photo" }}
-				className={styles["main-nav__link"]}
-				activeClassName={styles["main-nav__link--active"]}
-			>
-				<span>Фотографии</span>
-			</NavLink>
-		</li>
-		<li className={styles["main-nav__item"]}>
-			<NavLink
-				to={{ pathname: "/tour" }}
-				className={styles["main-nav__link"]}
-				activeClassName={styles["main-nav__link--active"]}
-			>
-				<span>Конкурс</span>
-			</NavLink>
-		</li>
-		<li className={styles["main-nav__item"]}>
-			<NavLink
-				to={{ pathname: "/about" }}
-				className={styles["main-nav__link"]}
-				activeClassName={styles["main-nav__link--active"]}
-			>
-				<span>О проекте</span>
-			</NavLink>
-		</li>
-		<li className={styles["main-nav__item"]}>
-			<NavLink
-				to={{ pathname: "/some_not_existing_page" }}
-				className={styles["main-nav__link"]}
-				activeClassName={styles["main-nav__link--active"]}
+				to={{ pathname: '/some_not_existing_page' }}
+				className="main-nav__link"
+				activeClassName="main-nav__link--active"
 			>
 				<span>Тут еще</span>
 			</NavLink>
@@ -49,3 +35,45 @@ const Menu = (props: {}) => (
 );
 
 export default Menu;
+
+/*
+
+
+		<li className="main-nav__item">
+			<NavLink
+				to={{ pathname: '/photo' }}
+				className="main-nav__link"
+				activeClassName="main-nav__link--active"
+			>
+				<span>Фотографии</span>
+			</NavLink>
+		</li>
+		<li className="main-nav__item">
+			<NavLink
+				to={{ pathname: '/tour' }}
+				className="main-nav__link"
+				activeClassName="main-nav__link--active"
+			>
+				<span>Конкурс</span>
+			</NavLink>
+		</li>
+		<li className="main-nav__item">
+			<NavLink
+				to={{ pathname: '/about' }}
+				className="main-nav__link"
+				activeClassName="main-nav__link--active"
+			>
+				<span>О проекте</span>
+			</NavLink>
+		</li>
+		<li className="main-nav__item">
+			<NavLink
+				to={{ pathname: '/some_not_existing_page' }}
+				className="main-nav__link"
+				activeClassName="main-nav__link--active"
+			>
+				<span>Тут еще</span>
+			</NavLink>
+		</li>
+
+*/

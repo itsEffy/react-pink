@@ -1,7 +1,7 @@
 // @flow
 
-import { combineReducers } from 'redux';
-import * as A from '../actions/actions';
+import { combineReducers } from "redux";
+import * as A from "../actions/actions";
 import {
 	surname,
 	name,
@@ -11,7 +11,7 @@ import {
 	email,
 	emotions,
 	achieves
-} from './form-reducers.jsx';
+} from "./form-reducers.jsx";
 
 /*
 const userInfo = (state = null, action: Action) => {
@@ -31,7 +31,7 @@ const userInfoLoadingStatus = (state = '', action: Action) => {
 
 const panoram = (state = null, action: Action) => {
 	switch (action.type) {
-		case A.ADD_PANORAM:
+		case A.FETCH_PANORAM:
 			return { ...action.payload };
 		case A.LIKE_PANORAM:
 			return {
@@ -80,31 +80,25 @@ const gallery = (state = [], action: Action) => {
 
 // сохраняет количество уже загруженных фотографий
 
-const isMobileMenuOpened = (state = true, action: Action) => {
-	if (action.type === A.OPEN_CLOSE_MOBILE_MENU) {
-		return action.payload;
-	}
-	return state;
-};
-
-const viewportVersion = (state = 'mobile', action: Action) => {
+// по умолчанию пусть будет мобильное устройство -
+// с большой вероятностью именно до него бандл дольше будет доходить
+const viewportVersion = (state = "mobile", action: Action) => {
 	if (action.type === A.SET_VIEWPORT_VERSION) {
 		return action.payload;
 	}
 	return state;
 };
 
-const SomeVariable = (state = 'initialized', action: Object) => {
-	if (action.type === A.CHANGE_VAR) {
+const reviews = (state: Reviews = null, action: Object) => {
+	if (action.type === A.FETCH_REVIEWS) {
 		return action.payload;
 	}
 	return state;
 };
 
 const rootReducer = combineReducers({
-	isMobileMenuOpened,
 	viewportVersion,
-	SomeVariable,
+	reviews,
 	panoram,
 	gallery,
 	surname,

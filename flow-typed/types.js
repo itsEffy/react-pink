@@ -26,8 +26,8 @@ declare type ActionType = string;
   | "SET_LOADING_STATUS"
   | "SET_VIEWPORT_VERSION"; */
 
-declare type LoadingStatusType = "" | "loading" | "loaded" | "failed";
-declare type ViewportVersionType = "mobile" | "tablet" | "desktop" | "wide";
+declare type LoadingStatusType = '' | 'loading' | 'loaded' | 'failed';
+declare type ViewportVersionType = 'mobile' | 'tablet' | 'desktop' | 'wide';
 
 declare type ActionT<A: ActionType, P> = {|
 	type: A,
@@ -35,24 +35,24 @@ declare type ActionT<A: ActionType, P> = {|
 |};
 
 export type Action =
-	| ActionT<"SET_SEARCH_TEXT", string>
-	| ActionT<"OPEN_CLOSE_MOBILE_MENU", boolean>
-	| ActionT<"SHOW_USER_INFO", Object>
-	| ActionT<"SET_USER_INFO_LOADING_STATUS", LoadingStatusType>
-	| ActionT<"SET_VIEWPORT_VERSION", ViewportVersionType>
-	| ActionT<"ADD_MORE_PHOTOS", Object>
-	| ActionT<"ADD_PANORAM", AboutPhotoData>
-	| ActionT<"SET_NAME_VALUE", string>
-	| ActionT<"SET_SURNAME_VALUE", string>
-	| ActionT<"SET_APPOPTIONS_VALUE", "android" | "ios" | "windows">
-	| ActionT<"SET_PATRONYMIC_VALUE", string>
-	| ActionT<"SET_TEL_VALUE", string>
-	| ActionT<"SET_EMAIL_VALUE", string>
-	| ActionT<"SET_EMOTIONS_VALUE", string>
-	| ActionT<"SET_ACHIEVE_VALUE", string>
-	| ActionT<"RESET_FORM", {}>
-	| ActionT<"LIKE_PANORAM", boolean>
-	| ActionT<"LIKE_PHOTO", {}>;
+	| ActionT<'SET_SEARCH_TEXT', string>
+	| ActionT<'OPEN_CLOSE_MOBILE_MENU', boolean>
+	| ActionT<'SHOW_USER_INFO', Object>
+	| ActionT<'SET_USER_INFO_LOADING_STATUS', LoadingStatusType>
+	| ActionT<'SET_VIEWPORT_VERSION', ViewportVersionType>
+	| ActionT<'ADD_MORE_PHOTOS', Object>
+	| ActionT<'ADD_PANORAM', AboutPhotoData>
+	| ActionT<'SET_NAME_VALUE', string>
+	| ActionT<'SET_SURNAME_VALUE', string>
+	| ActionT<'SET_APPOPTIONS_VALUE', 'android' | 'ios' | 'windows'>
+	| ActionT<'SET_PATRONYMIC_VALUE', string>
+	| ActionT<'SET_TEL_VALUE', string>
+	| ActionT<'SET_EMAIL_VALUE', string>
+	| ActionT<'SET_EMOTIONS_VALUE', string>
+	| ActionT<'SET_ACHIEVE_VALUE', string>
+	| ActionT<'RESET_FORM', {}>
+	| ActionT<'LIKE_PANORAM', boolean>
+	| ActionT<'LIKE_PHOTO', {}>;
 
 export type Review = {
 	id: string,
@@ -60,6 +60,8 @@ export type Review = {
 	authorAbout: string,
 	text: string
 };
+
+export type Reviews = Array<Review> | null | false;
 
 export type Tarif = {
 	id: number,
@@ -70,7 +72,7 @@ export type Tarif = {
 	label: string | false
 };
 
-export type InputType = "text" | "email" | "tel" | "textarea" | "file";
+export type InputType = 'text' | 'email' | 'tel' | 'textarea' | 'file';
 
 export type InputSettings = {
 	type: InputType,
@@ -115,8 +117,8 @@ export type ValidationStateOfField = {
 };
 
 export type LayoutStateType =
-	| "form"
-	| "loading"
-	| "failed"
-	| "desktopSubmitted"
-	| "mobileSubmitted";
+	| 'form'
+	| 'loading'
+	| 'failed'
+	| 'desktopSubmitted'
+	| 'mobileSubmitted';

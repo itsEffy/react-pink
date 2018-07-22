@@ -4,10 +4,10 @@ import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
-import getTimeInfo from "../utils/getTimeInfo";
-import Spinner from "../extra/Spinner";
+import getTimeInfo from "../../utils/getTimeInfo";
+import Spinner from "../other/Spinner.jsx";
 
-import styles from "../sass/blocks/gallery/about-photo.scss";
+// import styles from "../sass/blocks/gallery/about-photo.scss";
 
 type Props = {
 	data: AboutPhotoData | null,
@@ -81,8 +81,8 @@ class AboutPhoto extends PureComponent<Props, State> {
 		}
 		return (
 			<section
-				className={`${styles["about-photo"]} ${containerClassName} ${
-					wide ? `${styles["about-photo--wide"]}` : ""
+				className={`about-photo ${containerClassName} ${
+					wide ? "about-photo--wide" : ""
 				}`}
 				onMouseEnter={this.toggleExtension}
 				onMouseLeave={this.toggleExtension}
@@ -90,29 +90,23 @@ class AboutPhoto extends PureComponent<Props, State> {
 				onBlur={this.toggleExtension}
 				onTouchStart={this.toggleExtension}
 			>
-				<div className={styles["about-photo__inner"]}>
+				<div className="about-photo__inner">
 					{data === null ? (
 						<Spinner />
 					) : (
 						<React.Fragment>
-							<h3 className={styles["about-photo__header"]}>
-								<span className={styles["about-photo__author"]}>
+							<h3 className="about-photo__header">
+								<span className="about-photo__author">
 									{data.authorName}
 								</span>{" "}
 								<span>({timeInfo.toUpperCase()})</span>
 							</h3>
-							<p className={styles["about-photo__description"]}>
+							<p className="about-photo__description">
 								<span>{description}</span>
 							</p>
 							<button
-								className={`${styles["about-photo__likes"]} ${
-									wide
-										? `${
-												styles[
-													"about-photo__likes--wide"
-												]
-										  }`
-										: ""
+								className={`about-photo__likes ${
+									wide ? "about-photo__likes--wide" : ""
 								}`}
 								onClick={this.onClickHandler}
 							>
@@ -123,11 +117,7 @@ class AboutPhoto extends PureComponent<Props, State> {
 								>
 									<use xlinkHref="img/svg/sprite.svg#heart" />
 								</svg>
-								<span
-									className={
-										styles["about-photo__like-label"]
-									}
-								>
+								<span className="about-photo__like-label">
 									НРАВИТСЯ: {data.likes}
 								</span>
 							</button>

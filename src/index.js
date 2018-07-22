@@ -1,33 +1,47 @@
 // x@flow
 
 // позволяет использовать async/await
-import 'babel-polyfill';
-import express from 'express';
-import { matchRoutes } from 'react-router-config';
-import proxy from 'express-http-proxy';
-import Routes from '../client/Routes';
-import renderer from './helpers/renderer';
-import createStore from './helpers/createStore';
+import "babel-polyfill";
+
+import express from "express";
+import compression from "compression";
+import { matchRoutes } from "react-router-config";
+import proxy from "express-http-proxy";
+import Routes from "../client/Routes";
+import renderer from "./helpers/renderer";
+import createStore from "./helpers/createStore";
+import { API_URL } from "./helpers/constants";
 
 const app = express();
 
-app.use(express.static('client/public'));
+// перенаправляем все api-запросы сюда
+app.use("/api", proxy(API_URL));
 
-app.get('*', (req, res) => {
-	console.log('запрос ресурса ', req.url);
+app.use(express.static("client/public"));
+app.use(compression());
+
+// делегируем обработку роутов Роутеру
+app.get("*", (req, res) => {
+	console.log("запрос ресурса ", req.url);
 
 	const store = createStore(req);
 
 	// вызываем функцию, проверяющую список нужных компонентов до вызова рендеринга. Извлекаем свойство route у каждого такого объекта, если оно есть. Возвращаем массив промизов- диспетчингов хранилища
-	const promises = matchRoutes(Routes, req.path)
-		.map(({ route }) => (route.loadData ? route.loadData(store) : null))
-		.map(promise => {
-			if (promise) {
-				return new Promise((resolve, reject) => {
-					promise.then(resolve).catch(resolve);
-				});
-			}
-		});
+	const promiseS = matchRoutes(Routes, req.path);
+	const routesWithLoadData = promiseS.map(({ route }) => {
+		if (route.loadData) {
+			return route.loadData(store);
+		}
+		return null;
+		// return route.loadData ? route.loadData(store) : null;
+	});
+	const promises = routesWithLoadData.map(promise => {
+		if (promise) {
+			return new Promise((resolve, reject) => {
+				promise.then(resolve).catch(resolve);
+			});
+		}
+	});
 
 	Promise.all(promises).then(() => {
 		// создаем пустой контекст перед рендерингом
@@ -38,7 +52,7 @@ app.get('*', (req, res) => {
 
 		// проверка на наличие редиректа
 		if (context.url) {
-			console.log('доступ невозможен, перенаправляю');
+			console.log("доступ невозможен, перенаправляю");
 			return res.redirect(301, context.url);
 		}
 
@@ -54,5 +68,5 @@ app.get('*', (req, res) => {
 const PORT = process.env.PORT || 7000;
 
 app.listen(PORT, () => {
-	console.log('listening on', PORT);
+	console.log("listening on", PORT, "process:");
 });

@@ -1,7 +1,13 @@
-@import
-  "variables.scss",
-  "scaffolding.scss",
-  "mixins.scss",
-  "note.scss",
-  "fonts.scss";
+@import "variables.scss", "scaffolding.scss", "mixins.scss", "note.scss",
+	"fonts.scss";
 
+// общие блоки
+@import "blocks/parallax.scss", "blocks/btn.scss", "blocks/not-found.scss",
+	"blocks/main-logo.scss", "blocks/main-nav.scss", "blocks/page-header.scss",
+	"blocks/page-footer.scss", "blocks/slick-slider.scss",
+	"blocks/description.scss", "blocks/page-title.scss", "blocks/spinner.scss",
+	"blocks/form-btn.scss", "blocks/form-templates.scss";
+
+// постраничные импорты
+@import "blocks/home/home.scss", "blocks/tour/tour.scss",
+	"blocks/gallery/gallery.scss";

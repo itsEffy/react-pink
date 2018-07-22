@@ -1,8 +1,8 @@
 // @flow
 
-import * as React from "react";
-import type { Element } from "react";
-import styles from "../sass/blocks/description.scss";
+import * as React from 'react';
+import type { Element } from 'react';
+// import styles from "../sass/blocks/description.scss";
 
 // дочерних элементов должно быть несколько! Если второго элемента нет, пусть будет null
 // TODO - разобраться с этим, разрешить только один дочерний элемент
@@ -10,12 +10,12 @@ import styles from "../sass/blocks/description.scss";
 type Props = { children: React.ChildrenArray<React.Element<any> | null> };
 
 const Description = ({ children }: Props) => (
-	<section className={styles["description"]}>
-		<div className={styles["description__inner"]}>
+	<section className="description">
+		<div className="description__inner">
 			{React.Children.map(children, block => {
 				if (React.isValidElement(block)) {
 					return React.cloneElement(block, {
-						className: styles["description__block"]
+						className: 'description__block'
 					});
 				}
 				return null;
@@ -25,4 +25,3 @@ const Description = ({ children }: Props) => (
 );
 
 export default Description;
-

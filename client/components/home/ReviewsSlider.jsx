@@ -1,59 +1,33 @@
 // @flow
 
 // Здесь реализация конкретного слайдера отзывов. Получение данных и установка настроек
-import React, { Component } from "react";
-import axios from "axios";
-import { URL } from "../extra/constants";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchReviews } from '../../actions/actionCreators';
 
-import ReviewsSlick from "./ReviewsSlick";
+import ReviewsSlick from './ReviewsSlick.jsx';
 
 type Props = {
 	amount: number,
-	start: number
+	start: number,
+	reviews: Array<Review> | null | false,
+	getReviews: Function
 };
 
-type State = {
-	loadingStatus: LoadingStatusType,
-	reviews: Array<Review>,
-	URL: string
-};
-
-class ReviewsSlider extends Component<Props, State> {
-	state = {
-		loadingStatus: "",
-		reviews: []
-	};
-
+class ReviewsSlider extends Component<Props> {
 	componentDidMount() {
-		axios
-			.get(
-				`${URL}/reviews?_start=${this.props.start}&_end=${
-					this.props.amount
-				}`
-			)
-			.then(response => {
-				this.setState({
-					reviews: response.data,
-					loadingStatus: "loaded"
-				});
-			})
-			.catch(error => {
-				this.setState({
-					loadingStatus: "failed"
-				});
-			});
+		this.props.getReviews();
 	}
 
-	template = null;
-
 	render() {
-		const { loadingStatus, reviews } = this.state;
-		switch (loadingStatus) {
-			case "loaded":
-				this.template = <ReviewsSlick data={reviews} />; //
+		const { reviews } = this.props;
+		switch (reviews) {
+			case null:
+				this.template = null;
 				break;
-			case "failed":
-				// Для демонстрации. На самом деле блок не сильно важен, так что его вообще лучше не отображать в случае любого статуса, кроме loaded
+			case false:
+				// Для демонстрации. На самом деле блок не сильно важен,
+				// так что его вообще лучше не отображать, если он не загрузился
 				this.template = (
 					<div className="error-block">
 						К сожалению, с интернет-соединением что-то не так, и
@@ -63,10 +37,20 @@ class ReviewsSlider extends Component<Props, State> {
 				);
 				break;
 			default:
-				this.template = null; //
+				this.template = <ReviewsSlick data={reviews} />; //
 		}
 		return this.template;
 	}
 }
 
-export default ReviewsSlider;
+const mapStateToProps = ({ reviews }) => ({ reviews });
+const mapDispatchToProps = dispatch => ({
+	getReviews() {
+		dispatch(fetchReviews());
+	}
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(ReviewsSlider);

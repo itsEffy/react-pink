@@ -2,12 +2,12 @@
 
 import React, { PureComponent } from "react";
 
-import styles from "../sass/blocks/gallery/photo-item.scss";
+// import styles from "../sass/blocks/gallery/photo-item.scss";
 
 type Props = { id: string, copyright?: string };
 
 const PhotoPicture = ({ id, copyright }: Props) => (
-	<div className={styles["photo-item__container"]}>
+	<div className="photo-item__container">
 		<picture>
 			<source
 				media="(min-width: 350px)"
@@ -16,7 +16,7 @@ const PhotoPicture = ({ id, copyright }: Props) => (
 			<img src={`/img/gallery/${id}-1.jpg`} width="100%" alt="Фото" />
 		</picture>
 		{copyright ? (
-			<span className={styles["photo-item__copyright"]}>{copyright}</span>
+			<span className="photo-item__copyright">{copyright}</span>
 		) : null}
 	</div>
 );

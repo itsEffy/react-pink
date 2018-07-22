@@ -3,17 +3,21 @@
 // Точки
 
 // не работает
-:global .slick-dots {
+#root .slick-dots {
     bottom: -40px;
 }
 
-:global .slick-dots li button:before {
+#root .slick-slide {
+    height: auto;
+}
+
+#root .slick-dots li button:before {
     width: 5px;
     height: 5px;
 
     border-radius: 50%;
 
-    content: "";
+    content: '';
     padding: 4px;
 
     opacity: 1;
@@ -22,7 +26,7 @@
     border: 3px solid transparent;
 }
 
-:global .slick-dots li.slick-active button:before {
+#root .slick-dots li.slick-active button:before {
     opacity: 1;
     background-color: transparent;
     border: 3px solid black;
@@ -31,9 +35,10 @@
 // Стрелки
 // width и height не правятся стилями, а устанавливаются из кода slick в зависимости от размера шрифта
 
-:global .slick-prev,
-:global .slick-next {
+#root .slick-prev,
+#root .slick-next {
     z-index: 10;
+    top: 20%;
     outline: none;
 
     // Скорее определяет область нажатия. Должно быть больше, чем размер шрифта, иначе вызывает непонятный баг на планшете
@@ -41,23 +46,23 @@
     height: 40px;
 }
 
-:global .slick-prev {
+#root .slick-prev {
     left: 0px;
     transform: rotate(-45deg);
 }
 
-:global .slick-next {
+#root .slick-next {
     right: 0px;
     transform: rotate(135deg);
 }
 
-:global .slick-prev:hover,
-:global .slick-next:hover {
+#root .slick-prev:hover,
+#root .slick-next:hover {
     outline: none;
 }
 
-:global .slick-prev:before,
-:global .slick-next:before {
+#root .slick-prev:before,
+#root .slick-next:before {
     // Отвечает за размер стрелки
     font-size: 30px;
 

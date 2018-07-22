@@ -3,7 +3,7 @@
 import React, { PureComponent } from "react";
 import type { Node } from "react";
 
-import styles from "../sass/blocks/form-templates.scss";
+// import styles from "../sass/blocks/form-templates.scss";
 
 // абсолютно тупые, без поведения шаблоны вспомогательных элементов
 
@@ -133,12 +133,17 @@ const Fieldset = ({
 */
 
 class Fieldset extends PureComponent<FieldsetProps> {
+	defaultProps = {
+		required: false,
+		specStyles: ""
+	};
+
 	render() {
 		const { legend, required, children, specStyles } = this.props;
 		return (
-			<div className={`${styles["fieldset__box"]} ${specStyles}`}>
-				<fieldset className={`${styles["fieldset__element"]} element`}>
-					<div className={`${styles["fieldset__legend"]} legend`}>
+			<div className={`fieldset__box ${specStyles}`}>
+				<fieldset className="fieldset__element element">
+					<div className="fieldset__legend legend">
 						<legend style={calculateLegendWidth(legend, required)}>
 							{legend.toUpperCase()}
 							{required === true ? (
@@ -146,9 +151,7 @@ class Fieldset extends PureComponent<FieldsetProps> {
 							) : null}
 						</legend>
 					</div>
-					<div className={`${styles["fieldset__inner"]} inner`}>
-						{children}
-					</div>
+					<div className="fieldset__inner inner">{children}</div>
 				</fieldset>
 			</div>
 		);
@@ -168,7 +171,7 @@ type SubmitProps = {
 };
 
 const Submit = ({ text, disabled }: SubmitProps) => (
-	<button type="submit" className={styles["submit"]} disabled={disabled}>
+	<button type="submit" className="submit" disabled={disabled}>
 		{text}
 	</button>
 );

@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react';
-import styles from '../sass/blocks/page-title.scss';
-import { splitedPageTitle } from '../../utils/utils'; //
+// import styles from '../sass/blocks/page-title.scss';
+import { splitedPageTitle } from '../../utils/utils.jsx'; //
 
 const PageTitle = (props: { pageTitle: string }) => (
 	<section className={styles['page-title']}>

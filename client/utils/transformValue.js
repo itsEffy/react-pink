@@ -1,6 +1,6 @@
 // @flow
 
-import changeTelFormat from "./changeTelFormat";
+import changeTelFormat from "./changeTelFormat.jsx";
 import handleStringValue from "./handleStringValue";
 import handleEmailValue from "./handleEmailValue";
 import handleTextValue from "./handleTextValue";

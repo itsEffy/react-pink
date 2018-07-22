@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import axios from 'axios';
-import reducers from '../client/reducers/reducers';
+import { API_URL } from './constants';
+import reducers from '../../client/reducers/reducers';
 
 export default req => {
-	// создать api-сервер
 	const axiosInstance = axios.create({
-		baseURL: 'http://react-ssr-api.herokuapp.com',
+		baseURL: `${API_URL}/api`,
 		headers: { cookie: req.get('cookie') || '' }
 	});
 

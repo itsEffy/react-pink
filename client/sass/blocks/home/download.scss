@@ -1,6 +1,4 @@
-@import
-  "../../fonts.scss",
-  "../../variables.scss";
+// @import '../../fonts.scss', '../../variables.scss';
 
 //за ширину отвечает promo__download
 
@@ -15,8 +13,8 @@
   display: inline-block;
   margin-right: 35px;
   height: 60px;
-  
-  font-size: 0;  
+
+  font-size: 0;
   color: #fff;
 }
 
@@ -52,7 +50,7 @@
     margin: 0 auto 0px;
 
     font-weight: bold;
-    
+
     /*
     &:hover {
       background-color: #fff;
@@ -63,21 +61,18 @@
 
   // Hover для mouse, active для touch
 
-  :global .noHover
-  :local .download__button:active,
-
-  :global .hasHover
-  :local .download__button:hover {
-     background-color: #fff;
-     color: $pink;
+  .noHover .download__button:active,
+  .hasHover .download__button:hover {
+    background-color: #fff;
+    color: $pink;
   }
 
   .download__market-list {
     display: block;
     padding-top: 30px;
     padding-bottom: 25px;
-}
-  
+  }
+
   .download__availability-note {
     display: block;
     margin: 0;
@@ -85,9 +80,7 @@
     line-height: 24px;
     font-size: 14px;
   }
-
 }
-
 
 @media ($tablet-version) {
   .download {
@@ -108,7 +101,6 @@
     line-height: 48px;
 
     color: #fff;
-
   }
 
   .download__button {
@@ -117,7 +109,7 @@
     margin: 0 auto 45px;
 
     font-weight: bold;
-    
+
     /*
     &:hover {
       background-color: #fff;
@@ -126,13 +118,10 @@
     */
   }
 
-  :global .noHover
-  :local .download__button:active,
-
-  :global .hasHover
-  :local .download__button:hover {
-     background-color: #fff;
-     color: $pink;
+  .noHover .download__button:active,
+  .hasHover .download__button:hover {
+    background-color: #fff;
+    color: $pink;
   }
 
   .download__market-list {
@@ -143,9 +132,7 @@
     display: block;
     margin: 0;
   }
-
 }
-
 
 @media ($desktop-version) {
   .download {
@@ -162,8 +149,8 @@
 
     text-align: center;
 
-    font-size: 2.8rem;//50px;
-    line-height: 3.36rem;//60px;
+    font-size: 2.8rem; //50px;
+    line-height: 3.36rem; //60px;
 
     color: #fff;
   }
@@ -183,19 +170,16 @@
     */
   }
 
-  :global .noHover
-  :local .download__button:active,
-
-  :global .hasHover
-  :local .download__button:hover {
-     background-color: #fff;
-     color: $pink;
+  .noHover .download__button:active,
+  .hasHover .download__button:hover {
+    background-color: #fff;
+    color: $pink;
   }
 
   .download__market {
     margin: 0 3%;
   }
-  
+
   .download__market-list {
     margin-bottom: 50px;
   }
@@ -207,20 +191,19 @@
     font-size: 18px;
     line-height: 27px;
   }
-
 }
 
 //Увеличение шрифта
 
 @media ($big-desktop-version) {
   .download__slogan {
-    font-size: calc( 0.6rem + 3vw );//4.2vw;
-    line-height: calc( 1.1rem + 3vw );//5vw;
+    font-size: calc(0.6rem + 3vw); //4.2vw;
+    line-height: calc(1.1rem + 3vw); //5vw;
   }
 
   .download__availability-note {
-    font-size: calc( 0.5rem + 0.84vw );//1.5vw;
-    line-height: calc(1.5rem + 1vw ); //2.3vw;
+    font-size: calc(0.5rem + 0.84vw); //1.5vw;
+    line-height: calc(1.5rem + 1vw); //2.3vw;
   }
 
   /*.download__market {

@@ -1,27 +1,27 @@
 // @flow
 
-import React, { Component, PureComponent } from "react";
-import { connect } from "react-redux";
-import { inputActionCreator } from "../actions/formActionCreators";
+import React, { Component, PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { inputActionCreator } from '../../actions/formActionCreators';
 
-import styles from "../sass/blocks/form-btn.scss";
+// import styles from "../sass/blocks/form-btn.scss";
 
 type ButtonProps = {
 	disabled: boolean,
 	specStyles: string,
 	id: string,
 	label: string,
-	type: "button" | "submit",
+	type: 'button' | 'submit',
 	onClick: Function,
 	light: boolean
 };
 
 class Button extends PureComponent<ButtonProps> {
 	static defaultProps = {
-		specStyles: "",
-		id: "",
+		specStyles: '',
+		id: '',
 		disabled: false,
-		type: "button",
+		type: 'button',
 		light: false
 	};
 
@@ -39,8 +39,8 @@ class Button extends PureComponent<ButtonProps> {
 		return (
 			<button
 				type={type}
-				className={`${styles["form-btn"]} ${
-					light ? styles["form-btn--light"] : ""
+				className={`form-btn ${
+					light ? 'form-btn--light' : ''
 				} ${specStyles}`}
 				disabled={disabled}
 				id={id}
@@ -57,4 +57,7 @@ const mapStateToProps = (state, ownProps) => ({ ...ownProps });
 
 const mapDispatchToProps = (dispatch: Function, ownProps) => ({ ...ownProps });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Button);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Button);

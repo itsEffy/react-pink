@@ -2,11 +2,11 @@
 
 import React, { PureComponent } from "react";
 
-import Button from "../form/Button";
-import FilterImage from "./FilterImage";
-import Range, { Icon } from "../form/Range";
+import Button from "../form/Button.jsx";
+import FilterImage from "./FilterImage.jsx";
+import Range from "../form/Range.jsx";
 
-import styles from "../sass/blocks/gallery/filter.scss";
+// import styles from "../sass/blocks/gallery/filter.scss";
 
 type Props = {};
 
@@ -58,15 +58,15 @@ class PhotoFilter extends PureComponent<Props, State> {
 	render() {
 		const { contrast, color, blur } = this.state;
 		return (
-			<section className={styles["filter"]}>
-				<div className={styles["filter__inner"]}>
+			<section className="filter">
+				<div className="filter__inner">
 					<FilterImage
 						contrast={contrast / 100}
 						color={color}
 						blur={blur}
 					/>
-					<div className={styles["filter__panel"]}>
-						<div className={styles["filter__sliders"]}>
+					<div className="filter__panel">
+						<div className="filter__sliders">
 							<Range
 								name="blur"
 								valueRange={10}
@@ -94,7 +94,7 @@ class PhotoFilter extends PureComponent<Props, State> {
 						<Button
 							label="Сбросить все фильтры"
 							light
-							specStyles={styles["filter__btn"]}
+							specStyles="filter__btn"
 							onClick={this.reset}
 						/>
 					</div>

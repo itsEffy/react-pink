@@ -3,8 +3,8 @@
 import React, { Component, PureComponent } from "react";
 import Slider from "rc-slider";
 
-import styles from "../sass/blocks/gallery/filter.scss";
-import sliderStyles from "../sass/other/rc-slider.scss";
+// import styles from "../sass/blocks/gallery/filter.scss";
+// import sliderStyles from "../sass/other/rc-slider.scss";
 
 type iconProps = {
 	name: string
@@ -37,7 +37,7 @@ const Icon = ({ name }: iconProps) => {
 		default:
 			template = null;
 	}
-	return <span className={styles["filter__range-icon"]}>{template}</span>;
+	return <span className="filter__range-icon">{template}</span>;
 };
 
 type Props = {
@@ -73,7 +73,7 @@ class Range extends PureComponent<Props, State> {
 	render() {
 		const { value, valueRange, showIcon, name } = this.props;
 		return (
-			<div className={styles["filter__range-box"]}>
+			<div className="filter__range-box">
 				{showIcon ? <Icon name={name} /> : null}
 				<Slider
 					trackStyle={trackStyle}

@@ -3,17 +3,17 @@
 import React, { Component, PureComponent } from "react";
 import { connect } from "react-redux";
 
-import { Label, InputIcon, ValidationMessage } from "./FormTemplates";
-import { inputActionCreator } from "../actions/formActionCreators";
+import { Label, InputIcon, ValidationMessage } from "./FormTemplates.jsx";
+import { inputActionCreator } from "../../actions/formActionCreators";
 
-import transformValue from "../utils/transformValue";
-import { setValidationStateOfField } from "../utils/checkFormValidity";
+import transformValue from "../../utils/transformValue";
+import { setValidationStateOfField } from "../../utils/checkFormValidity";
 import {
 	formValidationDelay as validDelay,
 	formSavingDelay as saveDelay
-} from "../extra/constants";
+} from "../other/constants";
 
-import styles from "../sass/blocks/form-templates.scss";
+// import styles from '../sass/blocks/form-templates.scss';
 
 type InputProps = {
 	settings: InputSettings,
@@ -177,43 +177,34 @@ class Input extends PureComponent<InputProps, InputState> {
 		} = this.state;
 
 		return (
-			<div className={`${styles["input"]} ${specStyles}`}>
+			<div className={`input ${specStyles}`}>
 				{label ? (
 					<Label
 						id={name}
 						label={label.toUpperCase()}
-						className={`${styles["input__label"]}  label`}
+						className="input__label label"
 						required={required}
 					/>
 				) : null}
-				<div
-					className={`${styles["input__box"]} ${
-						styles[`input__box--${type}`]
-					}  box`}
-				>
+				<div className={`input__box  input__box--${type}  box`}>
 					<input
 						type={type}
 						id={name}
 						name={name}
 						placeholder={placeholder}
-						className={`${styles["input__element"]} ${
-							styles[`input__element--${type} element`]
-						} ${
-							value !== "" && !showMessage
-								? styles["input__element--success"]
-								: ""
-						}`}
+						className={`input__element input__element--${type} element
+						 ${value !== "" && !showMessage ? "input__element--success" : ""}`}
 						required={required}
 						value={value}
 						onKeyDown={this.handleKeyDown}
 						onChange={this.handleValueChange}
 					/>
-					<InputIcon type={type} className={styles["input__icon"]} />
+					<InputIcon type={type} className="input__icon" />
 				</div>
 				<ValidationMessage
 					valid={valid}
 					validationMessage={validationMessage}
-					className={`${styles["input__message"]} message`}
+					className="input__message message"
 					showMessage={isTouched ? showMessage : false}
 				/>
 			</div>
@@ -235,4 +226,7 @@ const mapDispatchToProps = (dispatch: Function, ownProps) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Input);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Input);

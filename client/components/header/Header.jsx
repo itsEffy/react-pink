@@ -1,61 +1,58 @@
 // @flow
 
 import React, { Component } from "react";
-import { connect } from "react-redux";
 // NavLink здесь негде использовать
-import { NavLink, Link, withRouter } from "react-router-dom";
-import Logo from "../extra/Logo";
-import { openCloseMobileMenu } from "../actions/actionCreators";
-import Menu from "./Menu";
+import { NavLink, Link } from "react-router-dom";
+import Logo from "../other/Logo.jsx";
+import Menu from "./Menu.jsx";
 
-import headerS from "../sass/blocks/page-header.scss";
-import mainNavS from "../sass/blocks/main-nav.scss";
-import logoS from "../sass/blocks/main-logo.scss";
+// import headerS from "../sass/blocks/page-header.scss";
+// import mainNavS from "../sass/blocks/main-nav.scss";
+// import logoS from "../sass/blocks/main-logo.scss";
 
-type Props = {
-	openCloseMobileMenu: Function,
-	isMobileMenuOpened: boolean
+type State = {
+	allowJS: boolean
 };
 
-class Header extends Component<Props> {
-	componentDidMount() {
-		this.props.openCloseMobileMenu(false);
-	}
+type Props = {};
 
-	// Функция-переключатель
-	toggleMobileMenu = event => {
-		this.props.openCloseMobileMenu(!this.props.isMobileMenuOpened);
+// TODO перенести в отдельный модуль?
+const Toggler = () => (
+	<React.Fragment>
+		<input
+			type="checkbox"
+			className="main-nav__toggler-element"
+			id="mainNavToggler"
+		/>
+		<label className="main-nav__toggler-label" htmlFor="mainNavToggler">
+			<span className="main-nav__toggler-indicator" />
+		</label>
+		<div className="main-nav__panel" />
+	</React.Fragment>
+);
+
+class Header extends Component<Props, State> {
+	state = {
+		allowJS: false
 	};
 
 	render() {
 		return (
-			<header className={headerS["page-header"]}>
-				<nav
-					className={`${headerS["page-header__inner"]} ${
-						mainNavS["main-nav"]
-					} ${
-						this.props.isMobileMenuOpened
-							? mainNavS["main-nav--opened"]
-							: ""
-					}`}
-				>
+			<header
+				className={` page-header page-header${
+					this.state.allowJS ? "" : ""
+				} `}
+			>
+				<nav className="page-header__inner main-nav">
 					<Link
 						to={{ pathname: "/" }}
-						className={`${mainNavS["main-nav__logo"]} ${
-							logoS["white-logo"]
-						}`}
+						className="main-nav__logo white-logo"
 						title="Pink"
 					>
-						PINK
-						<Logo />
+						PINK<Logo />
 					</Link>
-					<button
-						type="button"
-						onClick={this.toggleMobileMenu}
-						className={mainNavS["main-nav__toggle"]}
-					>
-						<span>Открыть меню</span>
-					</button>
+					{/* Обязательно должен быть перед меню */}
+					<Toggler />
 					<Menu />
 				</nav>
 			</header>
@@ -63,17 +60,4 @@ class Header extends Component<Props> {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => ({
-	isMobileMenuOpened: state.isMobileMenuOpened
-});
-
-const mapDispatchToProps = (dispatch: Function, ownProps) => ({
-	// Функция-открытия/закрытия, которой нужен аргумент
-	openCloseMobileMenu(isOpened) {
-		dispatch(openCloseMobileMenu(isOpened));
-	}
-});
-// ???
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default Header;

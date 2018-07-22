@@ -3,15 +3,23 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-import Description from "../extra/Description";
-import DailyPanoram from "./DailyPanoram";
-import Gallery from "./Gallery";
-import PhotoFilter from "./PhotoFilter";
+import Description from "../other/Description.jsx";
+import DailyPanoram from "./DailyPanoram.jsx";
+import Gallery from "./Gallery.jsx";
+import PhotoFilter from "./PhotoFilter.jsx";
 
-import PageTemplate from "../extra/PageTemplate";
+import { fetchPanoram } from "../../actions/galleryActionCreators";
 
-const GalleryPage = (props: { pageTitle: string }) => (
-	<PageTemplate pageTitle={props.pageTitle}>
+import PageTemplate from "../other/PageTemplate.jsx";
+
+type Props = {
+	route: {
+		pageTitle: string
+	}
+};
+
+const GalleryPage = ({ route: { pageTitle } }: Props) => (
+	<PageTemplate pageTitle={pageTitle}>
 		<Description>
 			<p>
 				{`Взгляните на\u00A0фотографии, которые выкладывают пользователи!`}
@@ -30,4 +38,12 @@ const GalleryPage = (props: { pageTitle: string }) => (
 	</PageTemplate>
 );
 
-export default GalleryPage;
+const loadData = store => store.dispatch(fetchPanoram());
+
+export default { component: GalleryPage, loadData };
+
+/*
+
+
+
+*/

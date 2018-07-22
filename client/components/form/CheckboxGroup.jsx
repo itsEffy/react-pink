@@ -2,21 +2,21 @@
 
 import React, { Component, PureComponent } from "react";
 import { connect } from "react-redux";
-import { Label, ValidationMessage } from "./FormTemplates";
+import { Label, ValidationMessage } from "./FormTemplates.jsx";
 
-import { setAchieve } from "../actions/formActionCreators";
+import { setAchieve } from "../../actions/formActionCreators";
 
 import {
 	formValidationDelay as validDelay,
 	formSavingDelay as saveDelay
-} from "../extra/constants";
+} from "../other/constants";
 
 import {
 	setValidStateOfCheckboxGroup,
 	checkCheckboxGroup
-} from "../utils/checkFormValidity";
+} from "../../utils/checkFormValidity";
 
-import styles from "../sass/blocks/form-templates.scss";
+// import styles from "../sass/blocks/form-templates.scss";
 
 type CheckboxProps = {
 	name: string,
@@ -42,11 +42,11 @@ export class Checkbox extends PureComponent<CheckboxProps> {
 			handleCheckboxChange
 		} = this.props;
 		return (
-			<div className={`${styles["checkbox"]} checkbox`}>
+			<div className="checkbox checkbox">
 				<Label
 					label={label}
 					id={value}
-					className={`${styles["checkbox__label"]} label`}
+					className="checkbox__label label"
 					required={false}
 				>
 					<input
@@ -54,13 +54,11 @@ export class Checkbox extends PureComponent<CheckboxProps> {
 						id={value}
 						name={name}
 						value={value}
-						className={`${styles["checkbox__element"]} element`}
+						className="checkbox__element element"
 						checked={checked}
 						onChange={handleCheckboxChange}
 					/>
-					<span
-						className={`${styles["checkbox__indicator"]} indicator`}
-					/>
+					<span className="checkbox__indicator indicator" />
 				</Label>
 			</div>
 		);
@@ -185,7 +183,7 @@ class CheckboxGroupTemplate extends PureComponent<
 
 		return (
 			<React.Fragment>
-				<div className={`${styles["checkbox-group"]} ${specStyles}`}>
+				<div className={`checkbox-group ${specStyles}`}>
 					{valueList.map(item => (
 						<Checkbox
 							name={name}
@@ -200,7 +198,7 @@ class CheckboxGroupTemplate extends PureComponent<
 				<ValidationMessage
 					valid={valid}
 					validationMessage={validationMessage}
-					className={`${styles["checkbox-group__message"]} message`}
+					className="checkbox-group__message message"
 					showMessage
 				/>
 			</React.Fragment>
@@ -219,7 +217,8 @@ const mapDispatchToProps = (dispatch: Function) => ({
 	}
 });
 
-const CheckboxGroup = connect(mapStateToProps, mapDispatchToProps)(
-	CheckboxGroupTemplate
-);
+const CheckboxGroup = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(CheckboxGroupTemplate);
 export default CheckboxGroup;

@@ -1,5 +1,3 @@
-@import "../../variables.scss";
-
 // Одинаковая таблица, с небольшими переопределениями
 
 // Чтобы выровнять таблицу с первой колонкой, потребуется фиксированная высота
@@ -9,9 +7,30 @@ $tablet-table-header-height: 80px;
 $table-cell-height: 60px;
 $tablet-table-cell-height: 50px;
 
-// существует только вне слайдера
-.price__table {
+// существуют только вне слайдера (без JS)
+
+.price__static-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+
   width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  /*
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  */
+}
+
+.price__static-table {
+  width: 100%;
+
+  flex: 0 0 auto;
+
+  min-width: 600px;
+  // overflow: auto;
 
   display: flex;
   flex-direction: row;
@@ -19,6 +38,7 @@ $tablet-table-cell-height: 50px;
   border-right: 1px solid #e5e5e5;
 }
 
+// существуют везде
 .price__item {
   padding: 0;
   margin: 0;
@@ -152,6 +172,7 @@ $tablet-table-cell-height: 50px;
   font-size: 14px;
   line-height: 26px;
   font-weight: 400;
+  text-align: left;
 
   @media ($tablet-version), ($desktop-version) {
     display: none;
@@ -174,6 +195,10 @@ $tablet-table-cell-height: 50px;
   flex-grow: 1;
 
   border: 1px solid #e5e5e5;
+
+  @media ($mobile-version) {
+    display: none;
+  }
 
   // 2px - ширина рамки
   @media ($tablet-version) {
@@ -222,6 +247,11 @@ $tablet-table-cell-height: 50px;
   .price__inner {
     margin: 0 auto;
     padding: 0 20px;
+
+    // используется в статической версии для горизонтального скроллинга "без границ"
+    &.no-paddings {
+      padding: 0;
+    }
   }
 }
 

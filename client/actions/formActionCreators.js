@@ -1,6 +1,6 @@
 // @flow
 
-import * as A from "./actions";
+import * as A from './actions';
 
 // Изменение элементов форм
 
@@ -39,35 +39,6 @@ export function setAchieve(value: string, checked: boolean) {
 export function resetFormData() {
 	return { type: A.RESET_FORM, payload: {} };
 }
-
-// ***
-// Отдельное изменение для каждого чекбокса
-/*
-export function setSelfieAchieve(checked: boolean) {
-	return { type: A.SET_SELFIE_ACHIEVE, payload: checked };
-}
-
-export function setBurntAchieve(checked: boolean) {
-	return { type: A.SET_BURNT_ACHIEVE, payload: checked };
-}
-
-export function setSawSelebAchieve(checked: boolean) {
-	return { type: A.SET_SAWSELEB_ACHIEVE, payload: checked };
-}
-
-export function setSouvenirsAchieve(checked: boolean) {
-	return { type: A.SET_SOUVENIRS_ACHIEVE, payload: checked };
-}
-
-export function setHoldAchieve(checked: boolean) {
-	return { type: A.SET_HOLD_ACHIEVE, payload: checked };
-}
-
-export function setDestroyAchieve(checked: boolean) {
-	return { type: A.SET_DESTROY_ACHIEVE, payload: checked };
-}
-*/
-// ***
 
 // Это словарь для доступа к нужной функции по имени поля
 

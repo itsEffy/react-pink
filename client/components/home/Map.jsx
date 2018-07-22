@@ -1,40 +1,46 @@
 // @flow
 
-import React, { PureComponent } from "react";
-import type { Node } from "react";
+import React, { PureComponent } from 'react';
+import type { Node } from 'react';
 
-import GoogleMap from "./GoogleMap";
+import GoogleMap from './GoogleMap.jsx';
 
-import styles from "../sass/blocks/home/map.scss";
+// import styles from "../sass/blocks/home/map.scss";
 
 type Props = {};
-type State = { error: ?Error };
+type State = { error: ?Error, showMap: boolean };
 
 class AdressMap extends PureComponent<Props, State> {
 	state = {
-		error: null
+		error: null,
+		showMap: false
 	};
 	componentDidCatch = (error: Error, info: any) => {
 		console.log(error, info);
 		this.setState({ error });
 	};
+
+	componentDidMount() {
+		this.setState({
+			showMap: true
+		});
+	}
 	render() {
-		if (this.state.error) {
+		const { error, showMap } = this.state;
+		if (error || !showMap) {
 			return (
 				<div
-					className={styles["map__container"]}
-					style={{ padding: "150px 40px" }}
+					className="map__container"
+					style={{ padding: '150px 40px' }}
 				>
 					<div
 						style={{
-							fontSize: "40px",
-							margin: "0 auto",
-							textAlign: "center",
-							color: "pink"
+							fontSize: '40px',
+							margin: '0 auto',
+							textAlign: 'center',
+							color: 'pink'
 						}}
-					>
-						Oops!! fallback image map must be here
-					</div>
+					/>
 				</div>
 			);
 		}

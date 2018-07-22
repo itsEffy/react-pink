@@ -1,15 +1,15 @@
 // @flow
 
 import React from "react";
-import styles from "../sass/blocks/spinner.scss";
+// import styles from "../sass/blocks/spinner.scss";
 
 type Props = {
 	color: string
 };
 
 const Spinner = ({ color }: Props) => (
-	<div className={styles["spinner-outer"]}>
-		<div className={styles["spinner"]} style={{ borderColor: color }} />
+	<div className="spinner-outer">
+		<div className="spinner" style={{ borderColor: color }} />
 	</div>
 );
 

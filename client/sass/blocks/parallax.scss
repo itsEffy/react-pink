@@ -1,14 +1,24 @@
-@import "../variables.scss";
+// @import "../variables.scss";
 
 // для всех
 .parallax__group {
   background-color: #fff;
 }
 
-// Только для устройств с мышью
-:global .hasHover {
+// Включает фон на переднем слое по умолчанию
+@media ($desktop-version) {
+  .parallax__layer--base {
+    background-color: $background-color;
+    background-image: url("/img/index/bg-back-desktop.jpg");
+    background-position: center 0;
+    background-size: cover;
+  }
+}
+
+// Только для устройств с мышью и не Microsoft
+.hasHover.enableParallax {
   @media ($desktop-version) {
-    :local .parallax-page {
+    .parallax-page {
       position: relative;
       perspective: 300px;
       overflow-x: hidden;
@@ -22,7 +32,7 @@
       //-webkit-overflow-scrolling: touch;
     }
 
-    :local .parallax__group {
+    .parallax__group {
       position: relative;
       transform-style: preserve-3d;
       margin: 0;
@@ -68,7 +78,7 @@
       }
     }
 
-    :local .parallax__layer {
+    .parallax__layer {
       position: absolute;
       top: 0;
       left: -6px;
@@ -78,9 +88,9 @@
       margin: 0;
       padding: 0;
 
-      /* &--base {
-
-      } */
+      &--base {
+        background: none;
+      }
 
       &--back {
         transform: translateZ(-600px) scale(3);

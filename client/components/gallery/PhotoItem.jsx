@@ -1,10 +1,10 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import AboutPhoto from "./AboutPhoto";
-import PhotoPicture from "./PhotoPicture";
+import AboutPhoto from "./AboutPhoto.jsx";
+import PhotoPicture from "./PhotoPicture.jsx";
 
-import styles from "../sass/blocks/gallery/photo-item.scss";
+// import styles from "../sass/blocks/gallery/photo-item.scss";
 
 type Props = {
 	data: AboutPhotoData,
@@ -25,16 +25,14 @@ class PhotoItem extends PureComponent<Props> {
 	render() {
 		const { data, containerClassName } = this.props;
 		return (
-			<article
-				className={`${styles["photo-item"]} ${containerClassName}`}
-			>
+			<article className={`photo-item ${containerClassName}`}>
 				<PhotoPicture
 					id={this.props.data.id}
 					copyright={this.props.data.copyright}
 				/>
 				<AboutPhoto
 					data={this.props.data}
-					containerClassName={styles["photo-item__about"]}
+					containerClassName="photo-item__about"
 					onLikeHandler={this.onThisPhotoLikeHandler}
 				/>
 			</article>

@@ -2,12 +2,12 @@
 
 import React, { Component, PureComponent } from "react";
 import { connect } from "react-redux";
-import { Label } from "./FormTemplates";
-import { setAppOptions } from "../actions/formActionCreators";
+import { Label } from "./FormTemplates.jsx";
+import { setAppOptions } from "../../actions/formActionCreators";
 
-import { formSavingDelay as saveDelay } from "../extra/constants";
+import { formSavingDelay as saveDelay } from "../other/constants";
 
-import styles from "../sass/blocks/form-templates.scss";
+// import styles from "../sass/blocks/form-templates.scss";
 
 type RadioProps = {
 	name: string,
@@ -26,18 +26,18 @@ const Radio = ({
 	specStyles,
 	handleRadioChange
 }: RadioProps) => (
-	<div className={styles["radio"]}>
-		<Label label={label} id={value} className={styles["radio__label"]}>
+	<div className="radio">
+		<Label label={label} id={value} className="radio__label">
 			<input
 				type="radio"
 				id={value}
 				name={name}
 				value={value}
-				className={styles["radio__element"]}
+				className="radio__element"
 				checked={checked}
 				onChange={handleRadioChange}
 			/>
-			<span className={styles["radio__indicator"]} />
+			<span className="radio__indicator" />
 		</Label>
 	</div>
 );
@@ -93,7 +93,7 @@ class RadioGroupTemplate extends PureComponent<
 		const { selectedValue } = this.state;
 
 		return (
-			<div className={`${styles["radio-group"]} ${specStyles}`}>
+			<div className={`radio-group ${specStyles}`}>
 				{valueList.map(item => (
 					<Radio
 						name={name}
@@ -121,8 +121,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
 	}
 });
 
-const RadioGroup = connect(mapStateToProps, mapDispatchToProps)(
-	RadioGroupTemplate
-);
+const RadioGroup = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(RadioGroupTemplate);
 
 export default RadioGroup;

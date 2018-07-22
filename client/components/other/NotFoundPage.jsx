@@ -3,11 +3,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-// import Header from '../header/Header';
+import Header from '../header/Header.jsx';
 // import Footer from '../footer/Footer';
 // import styles from '../../sass/blocks/not-found.scss';
 
-const Header = () => <h3>header</h3>;
 const Footer = () => <h3>footer</h3>;
 
 const NotFoundPage = ({ staticContext = {} }) => {

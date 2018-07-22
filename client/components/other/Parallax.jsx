@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import type { Node } from "react";
 
-import styles from "../sass/blocks/parallax.scss";
+// import styles from "../sass/blocks/parallax.scss";
 
 // В ParallaxActive оборачивается секция страницы, к которой должен быть применен параллакс-эффект
 // ParallaxStatic - обертка для остальных, статичных частей страницы
@@ -14,25 +14,26 @@ type Props = {
 };
 type State = { heightOfParallaxContainer: string };
 
+/*
 export class ParallaxActiveX extends Component<Props, State> {
-	state = { heightOfParallaxContainer: "90vh" };
+	state = { heightOfParallaxContainer: '90vh' };
 
 	componentDidMount = () => {
-		window.addEventListener("resize", this.setHeightOfParallaxContainer);
+		window.addEventListener('resize', this.setHeightOfParallaxContainer);
 		this.setHeightOfParallaxContainer();
-	};
-	/*
+	};  */
+/*
 	componentWillUpdate = () => {
 		this.setHeightOfParallaxContainer();
 	}; */
 
+/*
+
 	setHeightOfParallaxContainer = () => {
-		const container = document.querySelector(
-			`.${styles["parallax__layer"]}`
-		);
-		console.log("container: ", container);
+		const container = document.querySelector('.parallax__layer');
+		console.log('container: ', container);
 		const childAbsolute = container.firstElementChild;
-		console.log("his child: ", childAbsolute);
+		console.log('his child: ', childAbsolute);
 		const height = childAbsolute.clientHeight;
 		console.log(height);
 		this.setState({ heightOfParallaxContainer: `${height}px` });
@@ -41,9 +42,9 @@ export class ParallaxActiveX extends Component<Props, State> {
 	render() {
 		return (
 			<div
-				className={styles["parallax__group--active"]}
+				className={styles['parallax__group--active']}
 				style={
-					this.props.titleText !== "none"
+					this.props.titleText !== 'none'
 						? {
 								height: `${
 									this.state.heightOfParallaxContainer
@@ -56,8 +57,8 @@ export class ParallaxActiveX extends Component<Props, State> {
 				}
 			>
 				<div
-					className={`${styles["parallax__layer--base"]} ${
-						styles["parallax__layer"]
+					className={`${styles['parallax__layer--base']} ${
+						styles['parallax__layer']
 					}`}
 				>
 					{React.cloneElement(this.props.children, {
@@ -65,14 +66,16 @@ export class ParallaxActiveX extends Component<Props, State> {
 					})}
 				</div>
 				<div
-					className={`${styles["parallax__layer--back"]} ${
-						styles["parallax__layer"]
+					className={`${styles['parallax__layer--back']} ${
+						styles['parallax__layer']
 					}`}
 				/>
 			</div>
 		);
 	}
 }
+
+*/
 
 /* <div className={styles[`parallax__group--active--${props.heightModifier}`]}> */
 
@@ -83,36 +86,20 @@ const defineLines = (text: string, maxLineLength: number = 23) => {
 };
 
 const getHeightForText = (text: string) => {
-	const heightX = document.querySelector(`.${styles["parallax__layer"]}`);
-	console.log(`.${styles["parallax__layer"]}`);
+	const heightX = document.querySelector(".parallax__layer");
+	console.log(".parallax__layer");
 	const height = 240 + 64 * defineLines(text);
 	return `${height}px`;
 };
 
 export const ParallaxActive = ({ titleText, children }: Props) => (
 	<div
-		className={
-			styles[
-				`parallax__group--active--${
-					titleText !== "none"
-						? `lines-${defineLines(titleText)}`
-						: "full"
-				}`
-			]
-		}
+		className={`parallax__group--active--${
+			titleText !== "none" ? `lines-${defineLines(titleText)}` : "full"
+		}`}
 	>
-		<div
-			className={`${styles["parallax__layer--base"]} ${
-				styles["parallax__layer"]
-			}`}
-		>
-			{children}
-		</div>
-		<div
-			className={`${styles["parallax__layer--back"]} ${
-				styles["parallax__layer"]
-			}`}
-		/>
+		<div className="parallax__layer--base  parallax__layer">{children}</div>
+		<div className="parallax__layer--back  parallax__layer" />
 	</div>
 );
 
@@ -128,5 +115,5 @@ export class ParallaxStatic extends Component {
 */
 
 export const ParallaxStatic = (props: { children: Node }) => (
-	<div className={styles["parallax__group"]}>{props.children}</div>
+	<div className="parallax__group">{props.children}</div>
 );

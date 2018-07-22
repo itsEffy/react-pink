@@ -2,8 +2,9 @@
 
 import React, { PureComponent } from "react";
 
-import { URL } from "../extra/constants";
-import styles from "../sass/blocks/gallery/filter.scss";
+import { URL } from "../other/constants";
+
+// import styles from "../sass/blocks/gallery/filter.scss";
 
 type State = {
 	loaded: boolean
@@ -23,9 +24,9 @@ class FilterImage extends PureComponent<Props, State> {
 		const { loaded } = this.state;
 		const { contrast, color, blur } = this.props;
 		return (
-			<section className={styles["filter__image-container"]}>
+			<section className="filter__image-container">
 				<img
-					className={styles["filter__basic-image"]}
+					className="filter__basic-image"
 					src="/img/gallery/filter-2.jpg"
 					alt="Фото по умолчанию здесь"
 					width="100%"
