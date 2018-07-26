@@ -41,7 +41,7 @@
         "redux-thunk": "2.2.0",
         "slick": "^1.12.2",
         "style-loader": "0.21.0",
-        "optimize-css-assets-webpack-plugin": "^5.0.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.0"
     },
     "devDependencies": {
         "babel-core": "6.26.3",
