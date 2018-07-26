@@ -6,10 +6,6 @@ export function setViewportVersion(viewportVersion: ViewportVersionType) {
 	return { type: A.SET_VIEWPORT_VERSION, payload: viewportVersion };
 }
 
-export function changeVariable(variable: string) {
-	return { type: A.CHANGE_VAR, payload: variable };
-}
-
 export const xfetchReviews = () => async (dispatch, getState, api) => {
 	try {
 		const res = await api.get("/reviews");

@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "portfolio project",
   "main": "index.js",
+  "engines": {
+    "node": "8.11.3",
+    "npm": "5.6.0"
+  },
   "scripts": {
     "start": "node bundle.js",
     "client": "npm run start --prefix client",
@@ -10,7 +14,6 @@
     "dev:server": "nodemon --watch bundle.js --exec node bundle.js ",
     "dev:build-server": "webpack -d --config webpack.server.js --watch",
     "build-server": "webpack --config webpack.server.js -p",
-    "postinstall": "npm run build-server",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Effy P",
