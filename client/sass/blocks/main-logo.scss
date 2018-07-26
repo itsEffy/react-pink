@@ -1,5 +1,7 @@
-@import '../variables.scss';
+// @import "../variables.scss";
 // Здесь размещены стили, относящиеся к стилизации svg-логотипа
+
+/* 1 Цвета и стилизация */
 
 // Логотип на меню, светлый (для темного фона)
 
@@ -36,7 +38,7 @@
   }
 }
 
-/* Логотип темный (для белого фона)*/
+// Логотип темный (для белого фона)
 
 .black-logo {
   & .glasses {
@@ -82,5 +84,30 @@
 
   &:active svg {
     fill-opacity: 0.3;
+  }
+}
+
+/* 2 логика отображения типа лого в засисимости от вьюпорта */
+svg .mobile,
+svg .tablet,
+svg .desktop {
+  display: none;
+}
+
+@media ($mobile-version) {
+  svg .mobile {
+    display: block;
+  }
+}
+
+@media ($tablet-version) {
+  svg .tablet {
+    display: block;
+  }
+}
+
+@media ($desktop-version) {
+  svg .desktop {
+    display: block;
   }
 }

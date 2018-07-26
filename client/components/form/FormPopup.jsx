@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import { connect } from "react-redux";
 import Button from "./Button.jsx";
 import LinkButton from "./LinkButton.jsx";
 
@@ -11,9 +10,10 @@ import LinkButton from "./LinkButton.jsx";
 type PopupProps = {
 	title: string,
 	text: string,
-	specStyles: string,
-	buttonType: "link" | "close",
-	closePopup: Function | null
+	specStyles?: string,
+	buttonType?: "link" | "close",
+	closePopup?: Function | null,
+	fullPage?: boolean
 };
 
 const Popup = ({
@@ -21,9 +21,14 @@ const Popup = ({
 	text,
 	specStyles,
 	buttonType,
-	closePopup
+	closePopup,
+	fullPage
 }: PopupProps) => (
-	<section className="popup">
+	<section
+		className={`popup ${
+			fullPage ? "popup--fullpage" : "popup--window"
+		} ${specStyles}`}
+	>
 		<div className="popup__inner">
 			<div className="popup__message">
 				<h3 className="popup__title">{title}</h3>
@@ -44,22 +49,13 @@ const Popup = ({
 		</div>
 	</section>
 );
-/*
-class Popup extends PureComponent<PopupProps> {
-	render() {
-		return;
-	}
-}
-*/
 
 Popup.defaultProps = {
 	buttonType: "close",
 	specStyles: "",
-	closePopup: null
+	closePopup: null,
+	fullPage: false
 	// type: "success"
 };
 
-// не нужно?
-const mapStateToProps = ({ viewportVersion }) => ({ viewportVersion });
-
-export default connect(mapStateToProps)(Popup);
+export default Popup;

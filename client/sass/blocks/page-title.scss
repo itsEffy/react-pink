@@ -1,4 +1,4 @@
-@import "../variables.scss";
+// @import "../variables.scss";
 
 @media ($mobile-version) {
   .page-title {
@@ -10,7 +10,7 @@
     color: red;
 
     background-color: $background-color;
-    background-image: url("/img/index/50-bg-back-mobile@1x.jpg");
+    background-image: url("/img/index/50-bg-back-mobile.jpg");
     background-position: 45% 35%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -51,7 +51,7 @@
     color: red;
 
     background-color: $background-color;
-    background-image: url("/img/index/bg-back-tablet@1x.jpg");
+    background-image: url("/img/index/bg-back-tablet.jpg");
     background-position: 45% 0;
     // Чтобы фон не прыгал при смене страницы, он должен быть идентичным блоку promo
     background-size: auto $promo-tablet-height;
@@ -101,7 +101,7 @@
     background-repeat: no-repeat;
   }
 
-  :global .noHover :local .page-title {
+  .noHover .page-title {
     background-image: url("/img/index/bg-back-desktop.jpg");
     background-position: center 0;
     background-size: cover;

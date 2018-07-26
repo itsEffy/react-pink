@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+// @import "../../variables.scss";
 
 .about-photo {
 	padding: 20px;
@@ -48,6 +48,8 @@
 	bottom: 0;
 */
 
+	position: relative;
+
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -82,6 +84,31 @@
 	}
 }
 
+.about-photo__no-script {
+	display: none;
+
+	position: absolute;
+	left: 150px;
+	right: auto;
+	top: 10px;
+
+	width: 300px;
+
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid $gray-text;
+	border-radius: 5px;
+
+	color: $gray-text;
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: 400;
+}
+
+.hasHover .about-photo__likes:hover .about-photo__no-script,
+.noHover .about-photo__likes:active .about-photo__no-script {
+	display: block;
+}
+
 // картинка с другой стороны
 @media ($tablet-version), ($desktop-version) {
 	.about-photo__likes {
@@ -100,5 +127,12 @@
 
 			padding-top: 0;
 		}
+	}
+
+	.about-photo__no-script {
+		top: auto;
+		bottom: 50px;
+		right: 0;
+		left: auto;
 	}
 }

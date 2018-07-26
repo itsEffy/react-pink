@@ -34,6 +34,28 @@
 	margin: 0 auto 20px;
 }
 
+.gallery__loading-failed {
+	width: 100%;
+	color: $pink;
+	text-align: center;
+
+	& span {
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+.gallery__no-more-block {
+	width: 100%;
+	color: $gray-text;
+	text-align: center;
+
+	& span {
+		display: block;
+		margin: 0 auto;
+	}
+}
+
 @media ($desktop-version) {
 	.gallery__inner {
 		max-width: $big-desktop-breakpoint;

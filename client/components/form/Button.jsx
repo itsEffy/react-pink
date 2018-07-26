@@ -1,8 +1,8 @@
 // @flow
 
-import React, { Component, PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { inputActionCreator } from '../../actions/formActionCreators';
+import React, { Component, PureComponent } from "react";
+import { connect } from "react-redux";
+import { inputActionCreator } from "../../actions/formActionCreators";
 
 // import styles from "../sass/blocks/form-btn.scss";
 
@@ -11,17 +11,17 @@ type ButtonProps = {
 	specStyles: string,
 	id: string,
 	label: string,
-	type: 'button' | 'submit',
+	type: "button" | "submit" | "link",
 	onClick: Function,
 	light: boolean
 };
 
 class Button extends PureComponent<ButtonProps> {
 	static defaultProps = {
-		specStyles: '',
-		id: '',
+		specStyles: "",
+		id: "",
 		disabled: false,
-		type: 'button',
+		type: "button",
 		light: false
 	};
 
@@ -40,7 +40,7 @@ class Button extends PureComponent<ButtonProps> {
 			<button
 				type={type}
 				className={`form-btn ${
-					light ? 'form-btn--light' : ''
+					light ? "form-btn--light" : ""
 				} ${specStyles}`}
 				disabled={disabled}
 				id={id}

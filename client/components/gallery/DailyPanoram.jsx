@@ -6,16 +6,13 @@ import { connect } from "react-redux";
 import PanoramPicture from "./PanoramPicture.jsx";
 import AboutPhoto from "./AboutPhoto.jsx";
 import { URL } from "../other/constants";
-import {
-	loadPanoramData,
-	likePanoram
-} from "../../actions/galleryActionCreators";
+import { fetchPanoram, likePanoram } from "../../actions/galleryActionCreators";
 
 // import styles from "../sass/blocks/gallery/daily-panoram.scss";
 
 type Props = {
 	aboutData: AboutPhotoData,
-	loadPanoramData: Function,
+	fetchPanoramData: Function,
 	likePanoram: Function
 };
 
@@ -26,15 +23,11 @@ type State = {
 // Панорама - единственная картинка, которую сервер должен обновлять каждый день
 
 class DailyPanoram extends PureComponent<Props, State> {
-	/*
-	state = {
-		loadingStatus: ""
-	};
-	*/
-
 	// лучше сделать разный статус загрузки. пока упрощенно
 	componentDidMount() {
-		this.props.loadPanoramData();
+		if (!this.props.aboutData) {
+			this.props.fetchPanoramData();
+		}
 	}
 
 	onLikeHandler = (liked: boolean) => {
@@ -43,9 +36,8 @@ class DailyPanoram extends PureComponent<Props, State> {
 	};
 
 	render() {
-		console.log(this.props.aboutData);
 		return (
-			<section className="panoram">
+			<article className="panoram">
 				<PanoramPicture />
 				<div className="panoram__inner">
 					<AboutPhoto
@@ -55,18 +47,18 @@ class DailyPanoram extends PureComponent<Props, State> {
 						wide
 					/>
 				</div>
-			</section>
+			</article>
 		);
 	}
 }
 
-const mapStateToProps = state => ({
-	aboutData: state.panoram
+const mapStateToProps = ({ panoram }) => ({
+	aboutData: panoram
 });
 
-const mapDispatchToProps = (dispatch: Function, ownProps) => ({
-	loadPanoramData() {
-		dispatch(loadPanoramData());
+const mapDispatchToProps = (dispatch: Function) => ({
+	fetchPanoramData() {
+		dispatch(fetchPanoram());
 	},
 
 	likePanoram(liked: boolean) {

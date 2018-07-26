@@ -51,13 +51,6 @@
 
   color: $pink;
   text-decoration: underline;
-
-  /*
-  &:hover {
-    text-decoration: none;
-  }
-
-  */
 }
 
 // active для touch, hover для mouse
@@ -77,11 +70,21 @@
 
 @media ($desktop-version) {
   .effect {
-    padding: 95px calc((100vw - #{$tablet-desktop-breakpoint}) * 0.3) 80px 35%;
+    padding: 30px 0 0;
 
-    background-color: #f2f2f2;
+    background: none;
+  }
+
+  .effect__inner {
+    width: 75%;
+
+    // отступ с местом для фона
+    padding: 30px 0 90px 33%;
+    margin: 0 auto;
+
+    background-image: url("/img/svg/clock.svg");
+    background-repeat: no-repeat;
     background-size: 300px;
-    background-position: calc((100vw - #{$tablet-desktop-breakpoint}) * 0.3);
   }
 
   .effect__description {
@@ -92,27 +95,3 @@
     line-height: 28px;
   }
 }
-
-// Фиксация позиций на очень больших экранах
-
-/*
-@media ($max-desktop-version) {
-  .effect {
-    padding-left: 666px;
-    padding-right: 282px;
-
-    background-position: 282px;
-  }
-}
-
-@media ($big-desktop-1) {
-  .effect {
-    zoom: 115%;
-  }
-}
-  @media ($big-desktop-2) {
-   
-  }
-}
-
-*/

@@ -176,6 +176,9 @@ class Input extends PureComponent<InputProps, InputState> {
 			validationState: { valid, validationMessage }
 		} = this.state;
 
+		// const success = value !== "" && !showMessage;
+		// const success = valid;
+
 		return (
 			<div className={`input ${specStyles}`}>
 				{label ? (
@@ -192,10 +195,11 @@ class Input extends PureComponent<InputProps, InputState> {
 						id={name}
 						name={name}
 						placeholder={placeholder}
-						className={`input__element input__element--${type} element
-						 ${value !== "" && !showMessage ? "input__element--success" : ""}`}
+						className={`element input__element input__element--${type}`}
 						required={required}
 						value={value}
+						pattern={pattern ? pattern.source : "none"}
+						minLength={minLength || 0}
 						onKeyDown={this.handleKeyDown}
 						onChange={this.handleValueChange}
 					/>

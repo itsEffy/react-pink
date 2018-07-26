@@ -1,7 +1,7 @@
 export const URL = "http://192.168.0.2:5050"; // json-server
 
 export const formValidationDelay = 700; // ms
-export const formSavingDelay = 1500; // ms
+export const formSavingDelay = 1000; // ms
 
 // данный енам хранит запрещенные символы для каждого типа
 export const forbiddenInputSymbols = {

@@ -13,22 +13,6 @@ import {
 	achieves
 } from "./form-reducers.jsx";
 
-/*
-const userInfo = (state = null, action: Action) => {
-	if (action.type === SHOW_USER_INFO) {
-		return action.payload;
-	}
-	return state;
-};
-
-const userInfoLoadingStatus = (state = '', action: Action) => {
-	if (action.type === SET_USER_INFO_LOADING_STATUS) {
-		return action.payload;
-	}
-	return state;
-};
-*/
-
 const panoram = (state = null, action: Action) => {
 	switch (action.type) {
 		case A.FETCH_PANORAM:
@@ -45,6 +29,7 @@ const panoram = (state = null, action: Action) => {
 	}
 };
 
+// редьюсер для обработки отдельного фото - для лайка
 const photo = (state = {}, action: Action) => {
 	switch (action.type) {
 		case A.LIKE_PHOTO:
@@ -62,23 +47,29 @@ const photo = (state = {}, action: Action) => {
 	}
 };
 
-const gallery = (state = [], action: Action) => {
+const galleryDefaultState = { photos: [], noMore: false };
+
+const gallery = (state = galleryDefaultState, action: Action) => {
 	switch (action.type) {
-		case A.ADD_PHOTOS:
-			return [...state, ...action.payload];
-		case A.LIKE_PHOTO:
-			return state.map(ph => {
+		case A.ADD_PHOTOS: //
+			return [...state, ...action.payload]; //
+		case A.LIKE_PHOTO: {
+			const newPhotos = state.photos.map(ph => {
 				if (ph.id === action.payload.id) {
 					return photo(ph, action);
 				}
 				return ph;
 			});
+			// вернуть объект с новыми данными о лайке,
+			// информацию о наличии подгрузки оставить прежней
+			return { photos: newPhotos, noMore: state.noMore };
+		}
+		case A.FETCH_PHOTOS:
+			return action.payload;
 		default:
 			return state;
 	}
 };
-
-// сохраняет количество уже загруженных фотографий
 
 // по умолчанию пусть будет мобильное устройство -
 // с большой вероятностью именно до него бандл дольше будет доходить

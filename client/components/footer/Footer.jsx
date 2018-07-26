@@ -21,27 +21,30 @@ const Footer = (props: {}) => (
         <a
           href="https://twitter.com/?lang=ru"
           className="page-footer__social-item--twitter page-footer__social-item"
+          title="Twitter"
         >
           <svg width="20" height="16">
-            <use xlinkHref="img/svg/sprite.svg#twitter-icon" />
+            <use xlinkHref="/img/svg/sprite.svg#twitter-icon" />
           </svg>
           Мы в Twitter
         </a>
         <a
           href="https://www.facebook.com"
           className="page-footer__social-item--facebook page-footer__social-item"
+          title="Facebook"
         >
           <svg width="16" height="18">
-            <use xlinkHref="img/svg/sprite.svg#facebook-icon" />
+            <use xlinkHref="/img/svg/sprite.svg#facebook-icon" />
           </svg>
           Мы в Facebook
         </a>
         <a
           href="https://www.youtube.com"
           className="page-footer__social-item--youtube page-footer__social-item"
+          title="Youtube"
         >
           <svg width="15" height="13">
-            <use xlinkHref="img/svg/sprite.svg#youtube-icon" />
+            <use xlinkHref="/img/svg/sprite.svg#youtube-icon" />
           </svg>
           Мы в YouTube
         </a>
@@ -51,9 +54,10 @@ const Footer = (props: {}) => (
         <a
           href="https://htmlacademy.ru"
           className="page-footer__copyright-link"
+          title="Html Academy"
         >
           <svg width="28" height="35">
-            <use xlinkHref="img/svg/sprite.svg#academy-logo" />
+            <use xlinkHref="/img/svg/sprite.svg#academy-logo" />
           </svg>
           HTML Academy
         </a>

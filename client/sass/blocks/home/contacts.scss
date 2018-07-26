@@ -1,6 +1,7 @@
-@import "../../variables.scss";
+// @import "../../variables.scss";
 
 //Планшетная и десктопная версии практически идентичны
+// Данный файл демонстрирует абсолютно независимый спобос написания стилей
 
 @media ($mobile-version) {
   .contacts {
@@ -72,13 +73,13 @@
     margin-bottom: 25px;
   }
 
-  :global .hasHover :local .contacts__item a:hover {
+  .hasHover .contacts__item a:hover {
     color: #000;
     text-decoration: underline;
   }
 
-  :global .hasHover :local .contacts__item a:active,
-  :global .noHover :local .contacts__item a:active {
+  .hasHover .contacts__item a:active,
+  .noHover .contacts__item a:active {
     color: $black-muted;
     text-decoration: none;
   }
@@ -191,13 +192,13 @@
     margin: 0 auto 30px;
   }
 
-  :global .hasHover :local .contacts__item a:hover {
+  .hasHover .contacts__item a:hover {
     color: #000;
     text-decoration: underline;
   }
 
-  :global .hasHover :local .contacts__item a:active,
-  :global .noHover :local .contacts__item a:active {
+  .hasHover .contacts__item a:active,
+  .noHover .contacts__item a:active {
     color: $black-muted;
     text-decoration: none;
   }
@@ -302,13 +303,13 @@
     }
   }
 
-  :global .hasHover :local .contacts__item a:hover {
+  .hasHover .contacts__item a:hover {
     color: #000;
     text-decoration: underline;
   }
 
-  :global .hasHover :local .contacts__item a:active,
-  :global .noHover :local .contacts__item a:active {
+  .hasHover .contacts__item a:active,
+  .noHover .contacts__item a:active {
     color: $black-muted;
     text-decoration: none;
   }

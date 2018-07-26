@@ -17,8 +17,21 @@ const app = express();
 // перенаправляем все api-запросы сюда
 app.use("/api", proxy(API_URL));
 
-app.use(express.static("client/public"));
 app.use(compression());
+
+app.use(express.static("client/public"));
+
+app.post("/tour/post", (req, res) => {
+	const store = createStore(req);
+	console.log("форма пришла");
+
+	// просто повторяю процесс, как для гет, без особых модификаций
+	const context = {};
+	const content = renderer(req, store, context, true);
+	res.status(201);
+
+	res.send(content);
+});
 
 // делегируем обработку роутов Роутеру
 app.get("*", (req, res) => {

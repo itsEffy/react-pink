@@ -13,51 +13,43 @@ type Props = {
 // на мобильном футер отображается по-другому, поэтому логика отображения такая сложная
 const Logo = ({ type }: Props) => {
   const template = (
-    <svg
-      width="100%"
-      viewBox="0 0 147 41"
-      className={type === "footer" ? "footer" : ""}
-    >
+    <svg width="100%" viewBox="0 0 147 41">
       <use
-        className={`mobile glasses ${type === "footer" ? "dark" : "light"}`}
+        className={`mobile glasses`}
         xlinkHref={`/img/svg/logo.svg#logo-${
           type === "footer" ? "tablet-base" : "mobile"
         }`}
       />
       {type === "footer" ? (
         <use
-          className={`mobile text ${type === "footer" ? "dark" : "light"}`}
+          className={`mobile text`}
           xlinkHref="/img/svg/logo.svg#logo-tablet-text"
         />
       ) : null}
 
       <use
-        className={`tablet glasses ${type === "footer" ? "dark" : "light"}`}
+        className={`tablet glasses`}
         xlinkHref="/img/svg/logo.svg#logo-tablet-base"
       />
       <use
-        className={`tablet text ${type === "footer" ? "dark" : "light"}`}
+        className={`tablet text`}
         xlinkHref="/img/svg/logo.svg#logo-tablet-text"
       />
       <use
-        className={`desktop stars stars--glasses ${
-          type === "footer" ? "dark" : "light"
-        }}`}
-        xlinkHref="img/svg/logo.svg#logo-desktop-glasses-stars"
+        className={`desktop stars stars--glasses`}
+        xlinkHref="/img/svg/logo.svg#logo-desktop-glasses-stars"
       />
       <use
-        className={`desktop stars stars--text ${
-          type === "footer" ? "dark" : "light"
-        }}`}
-        xlinkHref="img/svg/logo.svg#logo-desktop-text-star"
+        className={`desktop stars stars--text`}
+        xlinkHref="/img/svg/logo.svg#logo-desktop-text-star"
       />
       <use
-        className={`desktop glasses ${type === "footer" ? "dark" : "light"}`}
-        xlinkHref="img/svg/logo.svg#logo-desktop-base"
+        className={`desktop glasses`}
+        xlinkHref="/img/svg/logo.svg#logo-desktop-base"
       />
       <use
-        className={`desktop text ${type === "footer" ? "dark" : "light"}`}
-        xlinkHref="img/svg/logo.svg#logo-desktop-text"
+        className={`desktop text`}
+        xlinkHref="/img/svg/logo.svg#logo-desktop-text"
       />
     </svg>
   );

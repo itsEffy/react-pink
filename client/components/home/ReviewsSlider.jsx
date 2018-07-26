@@ -1,11 +1,11 @@
 // @flow
 
 // Здесь реализация конкретного слайдера отзывов. Получение данных и установка настроек
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchReviews } from '../../actions/actionCreators';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchReviews } from "../../actions/actionCreators";
 
-import ReviewsSlick from './ReviewsSlick.jsx';
+import ReviewsSlick from "./ReviewsSlick.jsx";
 
 type Props = {
 	amount: number,
@@ -20,15 +20,18 @@ class ReviewsSlider extends Component<Props> {
 	}
 
 	render() {
+		console.log(this.props.reviews);
+		let template;
 		const { reviews } = this.props;
 		switch (reviews) {
 			case null:
-				this.template = null;
+				template = null;
 				break;
 			case false:
+			case "its API server for Pink":
 				// Для демонстрации. На самом деле блок не сильно важен,
 				// так что его вообще лучше не отображать, если он не загрузился
-				this.template = (
+				template = (
 					<div className="error-block">
 						К сожалению, с интернет-соединением что-то не так, и
 						отзывы о приложении не загрузились. Но поверьте, они
@@ -37,9 +40,9 @@ class ReviewsSlider extends Component<Props> {
 				);
 				break;
 			default:
-				this.template = <ReviewsSlick data={reviews} />; //
+				template = <ReviewsSlick data={reviews} />; //
 		}
-		return this.template;
+		return template;
 	}
 }
 

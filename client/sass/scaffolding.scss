@@ -25,6 +25,14 @@ body {
 	box-sizing: border-box;
 }
 
+// стили для навигации с клавиатуры
+/*
+*:focus {
+	outline: 2px solid $pink;
+	// box-shadow: 0 0 4px 3px $pink;
+}
+*/
+
 *:before,
 *:after {
 	box-sizing: border-box;

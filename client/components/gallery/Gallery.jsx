@@ -3,8 +3,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 
+//
 import axios from "axios";
 import { URL } from "../other/constants";
+
+// import { requestToApi } from "../../store/store.jsx";
 
 import PhotoItem from "./PhotoItem.jsx";
 import Spinner from "../other/Spinner.jsx";
@@ -12,29 +15,37 @@ import Button from "../form/Button.jsx";
 // import { ArrayFromArrayLike } from "../../utils/utils.jsx";
 
 import {
-	loadGalleryData,
-	likePhoto,
-	addGalleryData
+  fetchPhotos,
+  likePhoto,
+  addGalleryData
 } from "../../actions/galleryActionCreators";
 
 // import styles from '../sass/blocks/gallery/gallery.scss';
 
 type Props = {
-	storeGallery: Array<AboutPhotoData>,
-	saveGallery: Function,
-	savePhotoLike: Function
+  storePhotos: Array<AboutPhotoData>,
+  storeNoMore: boolean,
+  saveGallery: Function,
+  savePhotoLike: Function,
+  fetchFirstPhotos: Function
 };
 
 type State = {
-	loadingStatus: LoadingStatusType,
-	loadedSection: number,
-	photos: Array<AboutPhotoData>
+  loadingStatus: LoadingStatusType,
+  loadedSection: number,
+  photos: Array<AboutPhotoData>,
+  noMore: boolean,
+  buttonType: "button" | "link"
 };
 
-// Самая последняя секция фотографий (показываемая первой) хранится в store на клиенте - чтобы
-// при обновлении страницы или переходах был какой-то контент, и только для этого.
-// От идеи хранения большого кличества фото в store пришлось отказаться для оптимизации памяти
-// (и демонстрации подзагрузки)
+const requestToApi = axios.create({
+  baseURL: "/api",
+  timeout: 5000
+});
+
+// TODO: реализовать кнопку как ссылку, добавив новый роут-хэндлер.
+// ссылка заменится на кнопку в componentDidMount
+
 // Состояние лайка должно храниться НА СЕРВЕРЕ, поскольку привязано к аккаунту. Соответственно,
 // при обновлении страницы и новой подзагрузке состояние лайка просто считывается из только
 // что подзагруженных данных, поэтому не хранится в store(!).
@@ -43,162 +54,240 @@ type State = {
 const sectionSize = 6;
 
 class Gallery extends PureComponent<Props, State> {
-	state = {
-		loadingStatus: "",
-		loadedSection: 0,
-		photos: []
-	};
+  state = {
+    loadingStatus: "",
+    loadedSection: 0,
+    photos: [],
+    noMore: false,
+    buttonType: "link"
+  };
 
-	componentDidMount() {
-		this.showFirstSection();
-	}
+  componentDidMount() {
+    this.showFirstSection();
+  }
 
-	onLikeHandler = (id: string, liked: boolean) => {
-		this.likePhoto(id, liked);
-		this.props.savePhotoLike(id, liked);
-	};
+  onLikeHandler = (id: string, liked: boolean) => {
+    this.likePhoto(id, liked);
+    this.props.savePhotoLike(id, liked);
+  };
 
-	likePhoto = (id: string, liked: boolean) => {
-		this.setState(prevState => {
-			const photos = prevState.photos.map(photo => {
-				if (photo.id === id) {
-					return {
-						...photo,
-						liked,
-						likes:
-							liked === true ? photo.likes + 1 : photo.likes - 1
-					};
-				}
-				return photo;
-			});
-			return {
-				photos
-			};
-		});
-	};
+  likePhoto = (id: string, liked: boolean) => {
+    this.setState(prevState => {
+      const photos = prevState.photos.map(photo => {
+        if (photo.id === id) {
+          return {
+            ...photo,
+            liked,
+            likes: liked === true ? photo.likes + 1 : photo.likes - 1
+          };
+        }
+        return photo;
+      });
+      return {
+        photos
+      };
+    });
+  };
 
-	loadPhotos = (saveToStore: boolean) => {
-		const start = this.state.loadedSection * sectionSize;
-		const end = start + sectionSize;
-		axios
-			.get(`${URL}/photos?_start=${start}&_end=${end}`)
-			.then(response => {
-				this.setState(prevState => {
-					// Смещаем указатель загруженной секции
-					const loadedSection = prevState.loadedSection + 1;
-					return {
-						loadingStatus: "loaded",
-						photos: [...prevState.photos, ...response.data],
-						loadedSection
-					};
-				});
-				// полученные данные сохраним в store
-				if (saveToStore) {
-					this.props.saveGallery(response.data);
-				}
-			})
-			.catch(error => {
-				this.setState({
-					loadingStatus: "failed"
-				});
-				console.log("smth wrong", error);
-			});
-	};
+  loadPhotos = async () => {
+    const start = this.state.loadedSection * sectionSize;
+    const end = start + sectionSize;
 
-	// при загрузке первой секции пытаемся взять ее из хранилища
-	showFirstSection = () => {
-		this.setState({ loadingStatus: "loading" });
+    try {
+      console.log("пытаюсь подгрузить больше фото", start, end);
+      const res = await requestToApi.get(`/photos?start=${start}&end=${end}`);
 
-		// если там пусто, немедленно начинаем загрузку. Иначе загрузить прямо из хранилища
-		if (this.props.storeGallery.length === 0) {
-			this.loadPhotos(true);
-		} else {
-			this.setState({
-				photos: this.props.storeGallery,
-				loadingStatus: "loaded",
-				loadedSection: Math.floor(
-					this.props.storeGallery.length / sectionSize
-				)
-			});
-		}
-	};
+      this.setState(prevState => {
+        let { loadedSection } = prevState;
 
-	// дальнейшие фото не сохраняем, но функция написана так,
-	// что всегда можно передать параметр true и сохранить.
-	// В данной "локальной" версии механизма лайков сохранение также приведет к сохранению лайков.
-	showMorePhotos = () => {
-		this.setState({ loadingStatus: "loading" });
-		this.loadPhotos(false);
-	};
+        // Смещаем указатель загруженной секции, если ответ пришел непустым / не нужно?!
+        if (res.data.photos.length !== 0) {
+          loadedSection += 1;
+        }
 
-	render() {
-		console.log(this.state.photos);
-		const { loadingStatus, photos } = this.state;
-		let loadingTemplate;
-		switch (loadingStatus) {
-			case "loading":
-				loadingTemplate = <Spinner />;
-				break;
-			case "loaded":
-				loadingTemplate = null;
-				break;
-			case "failed":
-				loadingTemplate = (
-					<div className="gallery__loading-failed">
-						<span>
-							Не удалось загрузить фотографии. Проверьте
-							соединение
-						</span>
-					</div>
-				);
-				break;
-			default:
-				loadingTemplate = null;
-		}
-		return (
-			<section className="gallery">
-				<h2 className="visually-hidden">Галерея фотографий</h2>
-				<div className="gallery__inner">
-					<section className="gallery__photos">
-						{photos.map(photo => (
-							<PhotoItem
-								data={photo}
-								key={photo.id}
-								onLikeHandler={this.onLikeHandler}
-								containerClassName="gallery__photo-item"
-							/>
-						))}
-					</section>
-					<section className="gallery__footer">
-						<Button
-							label="Загрузить еще"
-							onClick={this.showMorePhotos}
-							specStyles="gallery__btn"
-							disabled={loadingStatus === "loading"}
-						/>
-						{loadingTemplate}
-					</section>
-				</div>
-			</section>
-		);
-	}
+        return {
+          loadingStatus: "loaded",
+          photos: [...prevState.photos, ...res.data.photos],
+          loadedSection,
+          noMore: res.data.noMore
+        };
+      });
+    } catch (err) {
+      this.setState({
+        loadingStatus: "failed"
+      });
+      console.log("smth wrong with loading photos", err);
+    }
+
+    /*
+    axios
+      .get(`${URL}/photos?_start=${start}&_end=${end}`)
+      .then(response => {
+        this.setState(prevState => {
+          // Смещаем указатель загруженной секции
+          const loadedSection = prevState.loadedSection + 1;
+          return {
+            loadingStatus: "loaded",
+            photos: [...prevState.photos, ...response.data],
+            loadedSection
+          };
+        });
+        // полученные данные сохраним в store
+        if (saveToStore) {
+          this.props.saveGallery(response.data);
+        }
+      })
+      .catch(error => {
+        this.setState({
+          loadingStatus: "failed"
+        });
+        console.log("smth wrong", error);
+      });
+      */
+  };
+
+  loadFirstPhotos = async () => {
+    const res = await this.props.fetchFirstPhotos();
+    this.setState({
+      photos: this.props.storePhotos,
+      loadingStatus: "loaded",
+      loadedSection: Math.floor(this.props.storePhotos.length / sectionSize)
+    });
+  };
+
+  // при загрузке в state первой секции пытаемся взять ее из хранилища
+  async showFirstSection() {
+    this.setState({ loadingStatus: "loading" });
+    console.log(" пытаюсь подгрузить первую секцию");
+
+    // если в хранилище пусто, немедленно фетчим
+    if (!this.props.storePhotos || this.props.storePhotos.length === 0) {
+      const res = await this.props.fetchFirstPhotos();
+      this.setState({
+        photos: this.props.storePhotos,
+        loadingStatus: "loaded",
+        loadedSection: Math.floor(this.props.storePhotos.length / sectionSize)
+      });
+    } else {
+      this.setState({
+        photos: this.props.storePhotos,
+        loadingStatus: "loaded",
+        loadedSection: Math.floor(this.props.storePhotos.length / sectionSize)
+      });
+    }
+  }
+
+  // что всегда можно передать параметр true и сохранить.
+  // В данной "локальной" версии механизма лайков сохранение также приведет к сохранению лайков.
+  showMorePhotos = () => {
+    this.setState({ loadingStatus: "loading" });
+    this.loadPhotos();
+  };
+
+  render() {
+    // первые фото всегда хранятся в store - они могут приехать с рендер-сервера и "кэшатся" для удобства.
+    // Их может быть и более 1 секции, если запрос произошел до того, как приехал бандл - TODO
+    const { storePhotos } = this.props;
+    // далее все фото могут храниться в state - их незачем кэшировать
+    const { loadingStatus, photos } = this.state;
+
+    // Если рендерящий сервер сразу сообщил, что больше нечего грузить -
+    // присвоить это значение локальной переменной, чтобы не отирсовывать кнопку, когда не нужно
+    const noMore = this.props.storeNoMore || this.state.noMore;
+
+    // меняется только на клиенте, и там же имеет смысл
+    let loadingTemplate;
+    switch (loadingStatus) {
+      case "loading":
+        loadingTemplate = <Spinner />;
+        break;
+      case "loaded":
+        loadingTemplate = null;
+        break;
+      case "failed":
+        loadingTemplate = (
+          <div className="gallery__loading-failed">
+            <span>Не удалось загрузить фотографии.</span>
+          </div>
+        );
+        break;
+      default:
+        loadingTemplate = null;
+    }
+
+    // если сервер прислал ответ "noMore", сообщить об этом, отрисовав сообщение вместо конпки
+    let buttonTemplate;
+    if (noMore) {
+      buttonTemplate = (
+        <div className="gallery__no-more-block">
+          <span>Больше нет фотографий для загрузки</span>
+        </div>
+      );
+    } else
+      buttonTemplate = (
+        <Button
+          label="Загрузить еще"
+          onClick={this.showMorePhotos}
+          specStyles="gallery__btn"
+          disabled={loadingStatus === "loading"}
+          type={this.state.buttonType}
+        />
+      );
+
+    // определяем, откуда будем отрисовывать
+    // Если в state компонента ничего нет (пустой массив photos),
+    // отрисовывам из store.
+    // Если и тот массив пустой - это ненадолго, клиентский компонент скачает его заново
+    // присваивание пустого массива - защита от ошибок
+    let templatePhotos;
+    if (photos.length === 0) {
+      templatePhotos = storePhotos || [];
+    } else {
+      templatePhotos = photos || [];
+    }
+
+    return (
+      <section className="gallery">
+        <h2 className="visually-hidden">Галерея фотографий</h2>
+        <div className="gallery__inner">
+          <section className="gallery__photos">
+            {templatePhotos.map(photo => (
+              <PhotoItem
+                data={photo}
+                key={photo.id}
+                onLikeHandler={this.onLikeHandler}
+                containerClassName="gallery__photo-item"
+              />
+            ))}
+          </section>
+          <section className="gallery__footer">
+            {buttonTemplate}
+            {loadingTemplate}
+          </section>
+        </div>
+      </section>
+    );
+  }
 }
 
-const mapStateToProps = ({ gallery }) => ({
-	storeGallery: gallery
+const mapStateToProps = ({ gallery: { photos, noMore } }) => ({
+  storePhotos: photos,
+  storeNoMore: noMore
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-	saveGallery(photos: Array<AboutPhotoData>) {
-		dispatch(addGalleryData(photos));
-	},
+  // в случае перехода на эту страницу с клиентского роутера,
+  // подгружает первые фотографии и сохраняет их в хранилище для быстрого доступа
+  fetchFirstPhotos() {
+    return dispatch(fetchPhotos());
+  },
 
-	savePhotoLike(id: string, liked: boolean) {
-		dispatch(likePhoto(id, liked));
-	}
+  savePhotoLike(id: string, liked: boolean) {
+    dispatch(likePhoto(id, liked));
+  }
 });
 
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Gallery);

@@ -36,7 +36,7 @@ type TextAreaState = {
 };
 
 class TextArea extends PureComponent<TextAreaProps, TextAreaState> {
-	defaultProps = {
+	static defaultProps = {
 		settings: {
 			label: "",
 			placeholder: "",
@@ -57,6 +57,7 @@ class TextArea extends PureComponent<TextAreaProps, TextAreaState> {
 	// тут же установить на их основе корректный статус валидации
 	componentWillMount() {
 		const { savedValue, settings } = this.props;
+		console.log("текстблок: ", savedValue, settings);
 		const initialValidationState = setValidationStateOfField(
 			savedValue,
 			settings.validation
@@ -190,6 +191,7 @@ class TextArea extends PureComponent<TextAreaProps, TextAreaState> {
 						id={name}
 						className="textarea__label label"
 						required={required}
+						onclick={"console.log(hey)"}
 					/>
 				) : null}
 				<textarea
@@ -200,7 +202,9 @@ class TextArea extends PureComponent<TextAreaProps, TextAreaState> {
 					onChange={this.handleValueChange}
 					required={required}
 					id={name}
-				/>
+				>
+					{value}
+				</textarea>
 				<ValidationMessage
 					valid={valid}
 					validationMessage={validationMessage}

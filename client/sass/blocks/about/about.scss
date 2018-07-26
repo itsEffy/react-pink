@@ -1,0 +1,15 @@
+.about {
+	width: 100%;
+	padding: 0 20px;
+}
+
+.about__inner {
+	margin: 0;
+}
+
+@media ($desktop-version) {
+	.about__inner {
+		max-width: $big-desktop-breakpoint;
+		margin: 0 auto;
+	}
+}

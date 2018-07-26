@@ -1,8 +1,8 @@
 // @flow
 
-import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
-import Routes from '../../Routes';
+import React from "react";
+import { NavLink, withRouter } from "react-router-dom";
+import Routes from "../../Routes";
 
 // import styles from "../sass/blocks/main-nav.scss";
 
@@ -16,6 +16,7 @@ const Menu = (props: {}) => (
 					to={{ pathname: route.path }}
 					className="main-nav__link"
 					activeClassName="main-nav__link--active"
+					title={`${route.title}`}
 				>
 					<span>{route.title}</span>
 				</NavLink>
@@ -24,9 +25,10 @@ const Menu = (props: {}) => (
 		{/* Демонстрация перехода на несуществующую страницу */}
 		<li className="main-nav__item">
 			<NavLink
-				to={{ pathname: '/some_not_existing_page' }}
+				to={{ pathname: "/some_not_existing_page" }}
 				className="main-nav__link"
 				activeClassName="main-nav__link--active"
+				title="тут еще"
 			>
 				<span>Тут еще</span>
 			</NavLink>

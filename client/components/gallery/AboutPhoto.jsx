@@ -95,12 +95,12 @@ class AboutPhoto extends PureComponent<Props, State> {
 						<Spinner />
 					) : (
 						<React.Fragment>
-							<h3 className="about-photo__header">
+							<h1 className="about-photo__header">
 								<span className="about-photo__author">
 									{data.authorName}
 								</span>{" "}
 								<span>({timeInfo.toUpperCase()})</span>
-							</h3>
+							</h1>
 							<p className="about-photo__description">
 								<span>{description}</span>
 							</p>
@@ -120,6 +120,10 @@ class AboutPhoto extends PureComponent<Props, State> {
 								<span className="about-photo__like-label">
 									НРАВИТСЯ: {data.likes}
 								</span>
+								<noscript className="no-script about-photo__no-script">
+									У вас должен быть влючен JS, чтобы лайкать
+									фотографии
+								</noscript>
 							</button>
 						</React.Fragment>
 					)}
@@ -139,4 +143,7 @@ const mapDispatchToProps = (state, ownProps) => ({
 	...ownProps
 });
 
-export default connect(mapDispatchToProps)(AboutPhoto);
+export default connect(
+	null,
+	mapDispatchToProps
+)(AboutPhoto);

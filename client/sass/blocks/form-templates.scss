@@ -1,6 +1,3 @@
-@import "../variables.scss";
-
-//
 // Здесь находятся дефолтные стили для элементов форм, чтобы их можно было вставить куда угодно и выглядело при этом прилично
 // Специфические стили для конкретной формы расписаны в соответствующем файле (ничего, что форма у нас одна. Так правильно)
 // В специфических стилях должна быть указана ширина и позиционирование box, label и т.д.
@@ -53,6 +50,7 @@
 	}
 
 	&:focus {
+		box-shadow: none;
 		border-color: $pink;
 		// к сожалению, без зависимости от позиционирования никак -
 		// требуется псевдокласс focus
@@ -99,7 +97,7 @@
 
 // Интерактивность для устройств с мышью. Дубликаты фокуса необходимы (каскадность)
 
-:global .hasHover :local .input__element {
+.hasHover .input__element {
 	&:hover {
 		border-color: #333;
 
@@ -168,7 +166,9 @@
 }
 
 .checkbox__element {
-	display: none;
+	@include visually-hidden;
+	&:focus ~ .checkbox__indicator {
+	}
 }
 
 .checkbox__indicator {
@@ -235,7 +235,7 @@
 }
 
 // только для курсорных, ховер-состояние
-:global .hasHover :local .checkbox__label {
+.hasHover .checkbox__label {
 	&:hover .checkbox__indicator {
 		border-color: #333;
 	}
@@ -255,7 +255,7 @@
 }
 
 .radio__element {
-	display: none;
+	@include visually-hidden;
 }
 
 .radio__indicator {
@@ -313,7 +313,7 @@
 }
 
 // только для курсорных, ховер-состояние
-:global .hasHover :local .radio__label {
+.hasHover .radio__label {
 	&:hover .radio__indicator {
 		border-color: #333;
 	}
@@ -372,6 +372,10 @@
 	&:focus {
 		border-color: $pink;
 	}
+
+	&:invalid {
+		box-shadow: none;
+	}
 }
 
 .textarea__message {
@@ -384,7 +388,7 @@
 	font-weight: 400;
 }
 
-:global .hasHover :local .textarea__element {
+.hasHover .textarea__element {
 	&:hover {
 		border-color: #333;
 	}

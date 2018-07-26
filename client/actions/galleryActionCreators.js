@@ -104,3 +104,26 @@ export const fetchPanoram = () => async (dispatch, getState, api) => {
 		payload: res.data
 	});
 };
+/*
+export const fetchFirstPhotos = () => async (dispatch, getState, api) => {
+	const res = await api.get("/photos?start=0&end=5");
+
+	return dispatch({
+		type: A.FETCH_FIRST_PHOTOS,
+		payload: res.data
+	});
+};
+*/
+
+export const fetchPhotos = (start = 0, end = 5) => async (
+	dispatch,
+	getState,
+	api
+) => {
+	const res = await api.get("/photos?start=" + start + "&end=" + end);
+
+	return dispatch({
+		type: A.FETCH_PHOTOS,
+		payload: res.data
+	});
+};

@@ -1,27 +1,27 @@
-const path = require('path');
-const autoprefixer = require('autoprefixer');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const path = require("path");
+const autoprefixer = require("autoprefixer");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const config = {
   // входная точка клиентского приложения
-  entry: './client.js',
+  entry: "./client.js",
 
   // куда поместить выходной файл
   output: {
-    filename: 'client-bundle.js',
+    filename: "client-bundle.js",
     // помещаем в директорию сборки. dirname - текущая директория
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, "public")
   },
-  devtool: 'cheap-eval-source-map',
+  devtool: "cheap-eval-source-map",
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
     new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /o.css$/g,
-      cssProcessor: require('cssnano'),
+      assetNameRegExp: /css$/g,
+      cssProcessor: require("cssnano"),
       cssProcessorOptions: { safe: true, discardComments: { removeAll: true } },
       canPrint: true
     })
@@ -31,7 +31,7 @@ const config = {
       {
         test: /\.jsx?$/,
         // лодер-модуль для вебпака, запускающий бабель
-        loader: 'babel-loader',
+        loader: "babel-loader",
         // исключаем файлы в определенной директории, понятное дело - сторонние модули (это RegExp)
         exclude: /node_modules/
       },
@@ -43,40 +43,40 @@ const config = {
             options: {
               // you can specify a publicPath here
               // by default it use publicPath in webpackOptions.output
-              publicPath: './public'
+              publicPath: "./public"
             }
           },
           {
-            loader: require.resolve('css-loader'),
+            loader: require.resolve("css-loader"),
             options: {
               importLoaders: 2,
               modules: false,
               sourceMap: true,
-              localIdentName: '[local]__[hash:3]'
+              localIdentName: "[local]__[hash:3]"
             }
           },
           {
-            loader: require.resolve('postcss-loader'),
+            loader: require.resolve("postcss-loader"),
             options: {
               // Necessary for external CSS imports to work
               // https://github.com/facebookincubator/create-react-app/issues/2677
-              ident: 'postcss',
+              ident: "postcss",
               plugins: () => [
-                require('postcss-flexbugs-fixes'), // eslint-disable-line global-require
+                require("postcss-flexbugs-fixes"), // eslint-disable-line global-require
                 autoprefixer({
                   browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 11'
+                    ">1%",
+                    "last 4 versions",
+                    "Firefox ESR",
+                    "not ie < 11"
                   ],
-                  flexbox: 'no-2009'
+                  flexbox: "no-2009"
                 })
               ]
             }
           },
           {
-            loader: require.resolve('sass-loader'),
+            loader: require.resolve("sass-loader"),
             options: {
               sourceMap: false
             }

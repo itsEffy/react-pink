@@ -9,13 +9,16 @@ import FormData from "./FormData.jsx";
 
 type Props = {
 	route: {
-		pageTitle: string
+		pageTitle: string,
+		posted: boolean
 	}
 };
 
-const TourPage = ({ route: { pageTitle } }: Props) => (
+// posted нужно для статического роутинга
+
+const TourPage = ({ route: { pageTitle, posted } }: Props) => (
 	<PageTemplate pageTitle={pageTitle}>
-		<FormData />
+		<FormData posted={posted} />
 	</PageTemplate>
 );
 

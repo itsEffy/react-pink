@@ -23,10 +23,13 @@ const Toggler = () => (
 			type="checkbox"
 			className="main-nav__toggler-element"
 			id="mainNavToggler"
+			tabIndex="0"
+			aria-label="Открыть/Закрыть меню"
 		/>
 		<label className="main-nav__toggler-label" htmlFor="mainNavToggler">
 			<span className="main-nav__toggler-indicator" />
 		</label>
+		<label className="main-nav__toggler-overlay" htmlFor="mainNavToggler" />
 		<div className="main-nav__panel" />
 	</React.Fragment>
 );

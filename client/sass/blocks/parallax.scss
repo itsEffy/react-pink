@@ -16,7 +16,7 @@
 }
 
 // Только для устройств с мышью и не Microsoft
-.hasHover.enableParallax {
+.hasHover.notMS {
   @media ($desktop-version) {
     .parallax-page {
       position: relative;

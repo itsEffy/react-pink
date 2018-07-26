@@ -14,7 +14,7 @@ type LabelProps = {
 	id: string,
 	label: string,
 	className: string,
-	required: boolean,
+	required?: boolean,
 	children: Node
 };
 
@@ -94,9 +94,9 @@ const InputIcon = (props: { type: InputType, className: string }) => {
 
 type FieldsetProps = {
 	legend: string,
-	required: boolean,
+	required?: boolean,
 	children: Node,
-	specStyles: string
+	specStyles?: string
 };
 
 const calculateLegendWidth = (legend: string, hasStar: boolean) => {
@@ -107,30 +107,6 @@ const calculateLegendWidth = (legend: string, hasStar: boolean) => {
 		boxSizing: "content-box"
 	};
 };
-/*
-const Fieldset = ({
-	legend,
-	required,
-	children,
-	specStyles
-}: FieldsetProps) => (
-	<div className={`${styles["fieldset__box"]} ${specStyles}`}>
-		<fieldset className={`${styles["fieldset__element"]} element`}>
-			<div className={`${styles["fieldset__legend"]} legend`}>
-				<legend style={calculateLegendWidth(legend, required)}>
-					{legend.toUpperCase()}
-					{required === true ? (
-						<abbr title="Обязательно к заполнению"> *</abbr>
-					) : null}
-				</legend>
-			</div>
-			<div className={`${styles["fieldset__inner"]} inner`}>
-				{children}
-			</div>
-		</fieldset>
-	</div>
-);
-*/
 
 class Fieldset extends PureComponent<FieldsetProps> {
 	defaultProps = {
@@ -158,10 +134,6 @@ class Fieldset extends PureComponent<FieldsetProps> {
 	}
 }
 
-Fieldset.defaultProps = {
-	required: false,
-	specStyles: ""
-};
 //
 // Кнопка отправки формы
 

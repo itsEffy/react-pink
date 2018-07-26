@@ -1,4 +1,4 @@
-@import "../variables.scss";
+// @import "../variables.scss";
 
 .popup__inner {
 	width: 100%;
@@ -36,7 +36,6 @@
 	padding: 50px 0;
 
 	@media ($desktop-version) {
-		
 	}
 	background-color: $light-gray;
 }

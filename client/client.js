@@ -38,11 +38,12 @@ console.log("привет, клиентское приложение доеха�
 const disableHelpers = () => {
 	try {
 		console.log("пытаюсь отключить");
-		disableWatchingForm();
+		window.disableWatchingForm();
 	} catch (err) {
-		console.log(err);
+		console.log("не удалось отключить ", err);
 		return undefined;
 	}
 };
 
+// !! safari
 disableHelpers();

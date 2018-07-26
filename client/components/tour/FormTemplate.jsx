@@ -33,7 +33,8 @@ type Props = {
 	buttonLabel: string,
 	successMessage: Object,
 	viewportVersion: ViewportVersionType,
-	resetFormInStore: Function
+	resetFormInStore: Function,
+	posted: boolean
 };
 
 type State = {
@@ -65,7 +66,9 @@ class FormTemplate extends Component<Props, State> {
 		});
 	}
 
-	//  Данный метод возвращает вычисляет новое состояние валидации, основываясь на проверке переданного ему поля, проверяет валидность всей формы и возвращает соответствующие состояния.
+	// Данный метод возвращает вычисляет новое состояние валидации,
+	// основываясь на проверке переданного ему поля, проверяет валидность
+	// всей формы и возвращает соответствующие состояния.
 
 	setFormValidationState = (name: string, newValue: boolean) => {
 		this.setState(prevState => {
@@ -163,6 +166,9 @@ class FormTemplate extends Component<Props, State> {
 					className="form"
 					id={formId}
 					onSubmit={this.submitFormHandler}
+					autoсomplete="off"
+					method="post"
+					action="/tour/post"
 				>
 					<div className="personal">
 						<Input

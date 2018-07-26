@@ -27,7 +27,7 @@ export const xfetchReviews = () => async (dispatch, getState, api) => {
 };
 
 export const fetchReviews = () => async (dispatch, getState, api) => {
-	const res = await api.get("/api/reviews");
+	const res = await api.get("/reviews");
 
 	return dispatch({
 		type: A.FETCH_REVIEWS,

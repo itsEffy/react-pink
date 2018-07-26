@@ -35,6 +35,11 @@ const f = `function watchTourForm() {var formValues = {
 			}
 		}
 	}
+	function setValuesToInputs() {
+		for (var i = keys.length; i; i -= 1) {
+			form[keys[i - 1]].value = formValues[keys[i - 1]];
+		}
+	}
 	function saveToStorage(key, value) {
 		// создать пустой объект, если ничего не сохранено
 		if (state === undefined) {
@@ -69,6 +74,7 @@ const f = `function watchTourForm() {var formValues = {
 	var state = loadStorageState();
 	getSavedFormValues();
 	var form = document.querySelector("#tour");
+	setValuesToInputs();
 	addListeners();
 	console.log("отслеживаю форму");
 	return function() {

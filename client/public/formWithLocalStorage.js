@@ -58,6 +58,13 @@ function watchTourForm() {
 		}
 	}
 
+	function setValuesToInputs() {
+		// обработчик на каждый элемент
+		for (var i = keys.length; i; i -= 1) {
+			form[keys[i - 1]].value = formValues[keys[i - 1]];
+		}
+	}
+
 	function saveToStorage(key, value) {
 		// создать пустой объект, если ничего не сохранено
 		if (state === undefined) {
@@ -106,7 +113,9 @@ function watchTourForm() {
 	// загружаем состояние из хранилища, модифицируем наш объект
 	var state = loadStorageState();
 	getSavedFormValues();
+	// var formElements = getFormElements();
 	var form = document.querySelector("#tour");
+	setValuesToInputs();
 	addListeners();
 
 	console.log("отслеживаю форму");
@@ -114,8 +123,9 @@ function watchTourForm() {
 	// выключает отслеживание
 	return function() {
 		removeListeners();
+		formValues = null;
 	};
 }
 
-// включить отслеживание
+// включить отслеживание, вернув вызываемую затем функцию выключения.
 var disableWatchingForm = watchTourForm();

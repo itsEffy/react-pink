@@ -1,5 +1,5 @@
-@import "../variables.scss", "../scaffolding.scss", "../mixins.scss",
-  "../fonts.scss";
+// @import "../variables.scss", "../scaffolding.scss", "../mixins.scss",
+// "../fonts.scss";
 
 //    NAVIGATION logo + toggle + menu
 //
@@ -51,8 +51,21 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
   }
 
   // чекбокс
+
   .main-nav__toggler-element {
-    display: none;
+    // доступно спрятана
+    @include visually-hidden;
+
+    &:checked ~ .main-nav__toggler-overlay {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+
+      z-index: -1;
+
+      cursor: default;
+    }
 
     // стили при выбранном чекбоксе ("меню открыто")
     &:checked ~ .main-nav__toggler-label .main-nav__toggler-indicator {
@@ -169,6 +182,8 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     margin-top: -800px;
     transition: margin-top 0.3s, background-color 0.3s;
 
+    box-shadow: 0 0 10px 0 #000;
+
     z-index: 1; //
   }
 
@@ -193,32 +208,9 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     color: #fff;
     text-decoration: none;
 
-    /*
-
-    &:hover {
-      color: $pink;
-    }
-
-    &:active {
-      color: $pink-muted;
-    }
-
-    */
-
     &--active {
       color: gray;
       background-color: $open-menu-opened;
-
-      /*
-      &:hover {
-        color: gray;
-      }
-      
-      &:active {
-        color: gray;
-      }
-
-      */
     }
   }
 
@@ -258,6 +250,8 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     color: $pink; //удалить. это для текста
     text-decoration: none;
     font-size: 0;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   .main-nav__toggler-label {
@@ -295,6 +289,8 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     color: $pink; //удалить. это для текста
     text-decoration: none;
     font-size: 0;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   .main-nav__toggler-label {
@@ -320,7 +316,7 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     border-right: 1px solid $open-menu-dark-border;
     border-left: 1px solid $open-menu-light-border;
   }
-
+  /*
   .main-nav__logo {
     display: block;
     margin-left: 20px;
@@ -328,7 +324,7 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     width: 150px;
 
     text-decoration: none;
-  }
+  }*/
 }
 
 /* Полноразмерная версия */
@@ -357,6 +353,8 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     color: $pink; //удалить? это для текста
     text-decoration: none;
     font-size: 0;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   .main-nav__toggler-label,
@@ -398,16 +396,6 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     line-height: 22px;
     color: #fff;
     text-decoration: none;
-
-    /*
-    &:hover {
-      color: $pink;
-    }
-
-    &:active {
-      color: $muted;
-    }
-    */
 
     & span {
       position: relative; // для псевдо-подчеркивания
