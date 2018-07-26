@@ -35,19 +35,20 @@ app.post("/tour/post", (req, res) => {
 
 // делегируем обработку роутов Роутеру
 app.get("*", (req, res) => {
-	console.log("запрос ресурса ", req.url);
+	// console.log("запрос ресурса ", req.url);
 
 	const store = createStore(req);
 
 	// вызываем функцию, проверяющую список нужных компонентов до вызова рендеринга. Извлекаем свойство route у каждого такого объекта, если оно есть. Возвращаем массив промизов- диспетчингов хранилища
-	const promiseS = matchRoutes(Routes, req.path);
-	const routesWithLoadData = promiseS.map(({ route }) => {
-		if (route.loadData) {
-			return route.loadData(store);
+	const routesWithLoadData = matchRoutes(Routes, req.path).map(
+		({ route }) => {
+			if (route.loadData) {
+				return route.loadData(store);
+			}
+			return null;
 		}
-		return null;
-		// return route.loadData ? route.loadData(store) : null;
-	});
+	);
+
 	const promises = routesWithLoadData.map(promise => {
 		if (promise) {
 			return new Promise((resolve, reject) => {
@@ -65,7 +66,7 @@ app.get("*", (req, res) => {
 
 		// проверка на наличие редиректа
 		if (context.url) {
-			console.log("доступ невозможен, перенаправляю");
+			// console.log("доступ невозможен, перенаправляю");
 			return res.redirect(301, context.url);
 		}
 

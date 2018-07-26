@@ -75,36 +75,3 @@ export const debounce = (func, time) => {
 		});
 	};
 };
-
-const f = (a, b, c) => {
-	console.log(a, b, c);
-};
-
-let a;
-let b;
-
-const func = debounce(f, 1000);
-
-a = 1;
-b = 2;
-
-func(a, "and", b);
-func(a, "and", b);
-
-a = 3;
-b = 4;
-
-func(a, "and", b);
-func(a, "and", b);
-func(a, "and", b);
-
-a = 5;
-b = 6;
-
-func(a, "and", b);
-
-b = "66";
-
-func(a, "and", b);
-// почему-то установка этого таймаута стирает предыдущие вызовы
-setTimeout(func(a, "aaand", b), 3000);

@@ -34,15 +34,15 @@ export default (req, store, context, isPostMethod) => {
     );
   }
 
-  console.log(req.get("User-Agent"));
+  // console.log(req.get("User-Agent"));
 
   // предварительный код
   const isMobile =
     req.get("User-Agent").search(/Mobile|Android|Opera Mini/g) >= 0;
-  console.log("mobile: ", isMobile);
+  // console.log("mobile: ", isMobile);
 
   const isMicrosoftUA = req.get("User-Agent").search(/Trident|Edge/g) >= 0;
-  console.log("isMSUA: ", isMicrosoftUA);
+  // console.log("isMSUA: ", isMicrosoftUA);
 
   const helmet = Helmet.renderStatic();
 
@@ -73,6 +73,7 @@ export default (req, store, context, isPostMethod) => {
     const isRetina = defineRetina(UAheader);
     const supportsWebp = defineWebpSupport(UAheader);
 
+    /*
     console.log(
       "probableDevice: ",
       probableDevice,
@@ -81,6 +82,7 @@ export default (req, store, context, isPostMethod) => {
       "supportsWebp: ",
       supportsWebp
     );
+    */
 
     const imageVersion = `${probableDevice}${isRetina ? "@2x" : ""}`;
     const jpegOrWebp = supportsWebp ? "jpg" : "jpg";

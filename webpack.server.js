@@ -1,15 +1,15 @@
-const path = require('path');
-const merge = require('webpack-merge');
-const webpackNodeExternals = require('webpack-node-externals');
+const path = require("path");
+const merge = require("webpack-merge");
+const webpackNodeExternals = require("webpack-node-externals");
 // const baseConfig = require('./webpack.base.js');
 
 const config = {
 	// говорим вебпаку, что бандл мы делаем не для браузера, а для ноды
-	target: 'node',
-	entry: './src/index.js',
+	target: "node",
+	entry: "./src/index.js",
 	// куда поместить выходной файл
 	output: {
-		filename: 'bundle.js',
+		filename: "bundle.js",
 		path: path.resolve(__dirname)
 	},
 	module: {
@@ -17,16 +17,16 @@ const config = {
 			{
 				test: /\.jsx?$/,
 				// лодер-модуль для вебпака, запускающий бабель
-				loader: 'babel-loader',
+				loader: "babel-loader",
 				// исключаем файлы в определенной директории, понятное дело - сторонние модули (это RegExp)
 				exclude: /node_modules/
 				// опции для бабель-лодера
 			}
 		]
-	},
+	}
 
 	// опционально, можно отключить
-	externals: [webpackNodeExternals()]
+	// externals: [webpackNodeExternals()]
 };
 
 module.exports = config;

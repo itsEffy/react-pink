@@ -51,8 +51,6 @@ const galleryDefaultState = { photos: [], noMore: false };
 
 const gallery = (state = galleryDefaultState, action: Action) => {
 	switch (action.type) {
-		case A.ADD_PHOTOS: //
-			return [...state, ...action.payload]; //
 		case A.LIKE_PHOTO: {
 			const newPhotos = state.photos.map(ph => {
 				if (ph.id === action.payload.id) {
