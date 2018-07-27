@@ -417,20 +417,6 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
         background: #fff;
       }
     }
-
-    /*
-    &--active {
-      
-      &:hover {
-        color: #fff;
-      }
-      
-      &:active {
-        color: $muted;
-      }
-      
-    }
-    */
   }
 
   // main-nav__link для touch-экранов
@@ -485,5 +471,16 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
   .main-nav__link {
     font-size: 25px;
     line-height: 36.5px;
+  }
+}
+
+// заплатки для IE
+.MS .main-nav__logo svg {
+  max-height: 53px;
+}
+
+@media ($big-desktop-version) {
+  .MS .main-nav__logo svg {
+    max-height: 65px;
   }
 }

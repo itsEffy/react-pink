@@ -23,7 +23,6 @@ type State = {
 // Панорама - единственная картинка, которую сервер должен обновлять каждый день
 
 class DailyPanoram extends PureComponent<Props, State> {
-	// лучше сделать разный статус загрузки. пока упрощенно
 	componentDidMount() {
 		if (!this.props.aboutData) {
 			this.props.fetchPanoramData();

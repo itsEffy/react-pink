@@ -1,16 +1,8 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import styles from '../sass/blocks/home/reviews.scss';
-import ReviewsSlider from './ReviewsSlider.jsx';
-
-const xReviews = (props: {}) => (
-	<section className="reviews  reviews">
-		<div className="reviews__inner">
-			<ReviewsSlider start={0} amount={3} />
-		</div>
-	</section>
-);
+import ReviewsSlider from "./ReviewsSlider.jsx";
 
 class Reviews extends Component {
 	state = {

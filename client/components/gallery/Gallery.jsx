@@ -94,7 +94,6 @@ class Gallery extends PureComponent<Props, State> {
     const end = start + sectionSize;
 
     try {
-      console.log("пытаюсь подгрузить больше фото", start, end);
       const res = await requestToApi.get(`/photos?start=${start}&end=${end}`);
 
       this.setState(prevState => {
@@ -118,51 +117,12 @@ class Gallery extends PureComponent<Props, State> {
       });
       console.log("smth wrong with loading photos", err);
     }
-
-    /*
-    axios
-      .get(`${URL}/photos?_start=${start}&_end=${end}`)
-      .then(response => {
-        this.setState(prevState => {
-          // Смещаем указатель загруженной секции
-          const loadedSection = prevState.loadedSection + 1;
-          return {
-            loadingStatus: "loaded",
-            photos: [...prevState.photos, ...response.data],
-            loadedSection
-          };
-        });
-        // полученные данные сохраним в store
-        if (saveToStore) {
-          this.props.saveGallery(response.data);
-        }
-      })
-      .catch(error => {
-        this.setState({
-          loadingStatus: "failed"
-        });
-        console.log("smth wrong", error);
-      });
-      */
   };
 
   loadFirstPhotos = async () => {
     const res = await this.props.fetchFirstPhotos();
-    this.setState({
-      photos: this.props.storePhotos,
-      loadingStatus: "loaded",
-      loadedSection: Math.floor(this.props.storePhotos.length / sectionSize)
-    });
-  };
-
-  // при загрузке в state первой секции пытаемся взять ее из хранилища
-  async showFirstSection() {
-    this.setState({ loadingStatus: "loading" });
-    console.log(" пытаюсь подгрузить первую секцию");
-
-    // если в хранилище пусто, немедленно фетчим
-    if (!this.props.storePhotos || this.props.storePhotos.length === 0) {
-      const res = await this.props.fetchFirstPhotos();
+    // если ответ пришел успешно и фото есть в хранилище
+    if (this.props.storePhotos) {
       this.setState({
         photos: this.props.storePhotos,
         loadingStatus: "loaded",
@@ -170,15 +130,42 @@ class Gallery extends PureComponent<Props, State> {
       });
     } else {
       this.setState({
+        loadingStatus: "failed"
+      });
+    }
+  };
+
+  // при загрузке в state первой секции пытаемся взять ее из хранилища
+  showFirstSection = async () => {
+    this.setState({ loadingStatus: "loading" });
+
+    // если в хранилище пусто или рендер-сервер не смог подгрузить данные,
+    // немедленно фетчим на клиенте
+    if (!this.props.storePhotos || this.props.storePhotos.length === 0) {
+      const res = await this.props.fetchFirstPhotos();
+      // если успешно
+      if (this.props.storePhotos) {
+        this.setState({
+          photos: this.props.storePhotos,
+          loadingStatus: "loaded",
+          loadedSection: Math.floor(this.props.storePhotos.length / sectionSize)
+        });
+      } else {
+        //если и клиент не смог
+        this.setState({
+          loadingStatus: "failed"
+        });
+      }
+    } else {
+      // иначе (в хранилище есть фото) загрузим из хранилища
+      this.setState({
         photos: this.props.storePhotos,
         loadingStatus: "loaded",
         loadedSection: Math.floor(this.props.storePhotos.length / sectionSize)
       });
     }
-  }
+  };
 
-  // что всегда можно передать параметр true и сохранить.
-  // В данной "локальной" версии механизма лайков сохранение также приведет к сохранению лайков.
   showMorePhotos = () => {
     this.setState({ loadingStatus: "loading" });
     this.loadPhotos();
@@ -192,7 +179,7 @@ class Gallery extends PureComponent<Props, State> {
     const { loadingStatus, photos } = this.state;
 
     // Если рендерящий сервер сразу сообщил, что больше нечего грузить -
-    // присвоить это значение локальной переменной, чтобы не отирсовывать кнопку, когда не нужно
+    // присвоить это значение локальной переменной, чтобы не отрисовывать кнопку, когда не нужно
     const noMore = this.props.storeNoMore || this.state.noMore;
 
     // меняется только на клиенте, и там же имеет смысл

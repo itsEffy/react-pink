@@ -17,7 +17,7 @@
 
     border-radius: 50%;
 
-    content: '';
+    content: "";
     padding: 4px;
 
     opacity: 1;
@@ -47,12 +47,12 @@
 }
 
 #root .slick-prev {
-    left: 0px;
+    left: -40px;
     transform: rotate(-45deg);
 }
 
 #root .slick-next {
-    right: 0px;
+    right: -40px;
     transform: rotate(135deg);
 }
 

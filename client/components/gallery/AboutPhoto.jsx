@@ -72,13 +72,66 @@ class AboutPhoto extends PureComponent<Props, State> {
 		// если это мобильная версия либо "широкое" фото, всегда показывать раскрытую версию
 		const nowExtended =
 			viewportVersion === "mobile" || wide ? true : extended;
-		if (data !== null) {
+		if (data) {
 			timeInfo = getTimeInfo(data.timeStamp);
 			description = defineLengthOfDescription(
 				data.description,
 				nowExtended
 			);
 		}
+
+		let template;
+		switch (data) {
+			case null:
+				template = <Spinner />;
+				break;
+			case false:
+				template = (
+					<div className="gallery__loading-failed">
+						<span>
+							Не удалось загрузить данные о панораме. Проверьте
+							соединение
+						</span>
+					</div>
+				);
+				break;
+			default:
+				template = (
+					<React.Fragment>
+						<h1 className="about-photo__header">
+							<span className="about-photo__author">
+								{data.authorName}
+							</span>{" "}
+							<span>({timeInfo.toUpperCase()})</span>
+						</h1>
+						<p className="about-photo__description">
+							<span>{description}</span>
+						</p>
+						<button
+							className={`about-photo__likes ${
+								wide ? "about-photo__likes--wide" : ""
+							}`}
+							onClick={this.onClickHandler}
+						>
+							<svg
+								width="15"
+								height="15"
+								fillOpacity={data.liked ? "1" : "0"}
+							>
+								<use xlinkHref="img/svg/sprite.svg#heart" />
+							</svg>
+							<span className="about-photo__like-label">
+								НРАВИТСЯ: {data.likes}
+							</span>
+							<noscript className="no-script about-photo__no-script">
+								У вас должен быть влючен JS, чтобы лайкать
+								фотографии
+							</noscript>
+						</button>
+					</React.Fragment>
+				);
+		}
+
 		return (
 			<section
 				className={`about-photo ${containerClassName} ${
@@ -90,44 +143,7 @@ class AboutPhoto extends PureComponent<Props, State> {
 				onBlur={this.toggleExtension}
 				onTouchStart={this.toggleExtension}
 			>
-				<div className="about-photo__inner">
-					{data === null ? (
-						<Spinner />
-					) : (
-						<React.Fragment>
-							<h1 className="about-photo__header">
-								<span className="about-photo__author">
-									{data.authorName}
-								</span>{" "}
-								<span>({timeInfo.toUpperCase()})</span>
-							</h1>
-							<p className="about-photo__description">
-								<span>{description}</span>
-							</p>
-							<button
-								className={`about-photo__likes ${
-									wide ? "about-photo__likes--wide" : ""
-								}`}
-								onClick={this.onClickHandler}
-							>
-								<svg
-									width="15"
-									height="15"
-									fillOpacity={data.liked ? "1" : "0"}
-								>
-									<use xlinkHref="img/svg/sprite.svg#heart" />
-								</svg>
-								<span className="about-photo__like-label">
-									НРАВИТСЯ: {data.likes}
-								</span>
-								<noscript className="no-script about-photo__no-script">
-									У вас должен быть влючен JS, чтобы лайкать
-									фотографии
-								</noscript>
-							</button>
-						</React.Fragment>
-					)}
-				</div>
+				<div className="about-photo__inner">{template}</div>
 			</section>
 		);
 	}

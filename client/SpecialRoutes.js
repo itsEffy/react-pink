@@ -13,8 +13,7 @@ export default [
         exact: true,
         inMenu: true,
         title: "Конкурс",
-        pageTitle: `Конкурс на\u00A0самое безбашенное путешествие с\u00A0Пинк`,
-        text: "Отправлено"
+        pageTitle: `Конкурс на\u00A0самое безбашенное путешествие с\u00A0Пинк`
       }
     ]
   }

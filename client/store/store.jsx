@@ -10,8 +10,7 @@ import { iterateOfObject } from "../utils/utils.jsx";
 import { loadState, saveState } from "./localStorage.jsx";
 
 export const requestToApi = axios.create({
-	baseURL: "/api",
-	timeout: 6000
+	baseURL: "/api"
 });
 
 const persistedState = loadState();

@@ -16,7 +16,9 @@ type Props = {
 
 class ReviewsSlider extends Component<Props> {
 	componentDidMount() {
-		this.props.getReviews();
+		if (!this.props.reviews) {
+			this.props.getReviews();
+		}
 	}
 
 	render() {

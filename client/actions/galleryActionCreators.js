@@ -49,13 +49,28 @@ export const likePanoram = (liked: boolean) => async dispatch => {
 	});
 };
 
-export const fetchPanoram = () => async (dispatch, getState, api) => {
-	const res = await api.get("/panoram");
+// даные функции пытаются вычленить ответ даже в случае пришедшего статуса ошибки
 
-	return dispatch({
-		type: A.FETCH_PANORAM,
-		payload: res.data
-	});
+export const fetchPanoram = () => async (dispatch, getState, api) => {
+	try {
+		const res = await api.get("/panoram");
+
+		return dispatch({
+			type: A.FETCH_PANORAM,
+			payload: res.data
+		});
+	} catch (err) {
+		if (err.response) {
+			return dispatch({
+				type: A.FETCH_PANORAM,
+				payload: res.data
+			});
+		}
+		return dispatch({
+			type: A.FETCH_PANORAM,
+			payload: false
+		});
+	}
 };
 
 export const fetchPhotos = (start = 0, end = 5) => async (
@@ -63,10 +78,23 @@ export const fetchPhotos = (start = 0, end = 5) => async (
 	getState,
 	api
 ) => {
-	const res = await api.get("/photos?start=" + start + "&end=" + end);
+	try {
+		const res = await api.get("/photos?start=" + start + "&end=" + end);
 
-	return dispatch({
-		type: A.FETCH_PHOTOS,
-		payload: res.data
-	});
+		return dispatch({
+			type: A.FETCH_PHOTOS,
+			payload: res.data
+		});
+	} catch (err) {
+		if (err.response) {
+			return dispath({
+				type: A.FETCH_PHOTOS,
+				payload: res.data
+			});
+		}
+		return dispatch({
+			type: A.FETCH_PHOTOS,
+			payload: false
+		});
+	}
 };
