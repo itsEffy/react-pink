@@ -1,15 +1,17 @@
 // @flow
 
-import React from 'react';
-import type { Node } from 'react';
+import React from "react";
+import type { Node } from "react";
 
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
-import Header from '../header/Header.jsx';
-import Footer from '../footer/Footer.jsx';
+import Header from "../header/Header.jsx";
+import Footer from "../footer/Footer.jsx";
+
+import GithubCorner from "./GithubCorner.jsx";
 
 // import ParallaxS from "../sass/blocks/parallax.scss";
-import { ParallaxStatic } from './Parallax.jsx';
+import { ParallaxStatic } from "./Parallax.jsx";
 
 // Данный шаблон используется всеми страницами (пока кроме 404)
 
@@ -20,6 +22,7 @@ const Layout = (props: { children: Node }) => (
 		<ParallaxStatic>
 			<Footer />
 		</ParallaxStatic>
+		<GithubCorner />
 	</div>
 );
 

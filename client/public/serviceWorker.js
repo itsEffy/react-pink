@@ -24,6 +24,18 @@ self.addEventListener("activate", event => {
 	// activate stuff
 });
 
+function addToCache(cacheKey, req, res) {
+	// Кэшируем ответ и возвращаем его далее
+	// * Response-объекты могут использоваться только один раз, потому требуется скопировать
+	if (res.ok) {
+		var copy = res.clone();
+		caches.open(cacheKey).then(cache => {
+			cache.put(req, copy);
+		});
+		return response;
+	}
+}
+
 self.addEventListener("fetch", event => {
 	// у автора странный метод, переписать проще
 	function shouldHandleFetch(event, opts) {
@@ -69,12 +81,19 @@ self.addEventListener("fetch", event => {
 
 		// собтсвенно ответ на событие
 		if (resourseType === "content") {
-			// network-first
+			// network-first - оно могло измениться
 			event.respondWith(
 				fetch(request)
 					.then(res => addToCache(cacheKey, request, res))
 					.catch(() => fetchFromCache(event))
+					.catch(() => offlineResponse(opts))
 			);
+		} else {
+			// cash-first - картинки вряд ли меняются
+			event
+				.respondWith(fetchFromCache(event))
+				.catch(() => fetch(request))
+				.catch(() => offlineResponse(resourceType, opts));
 		}
 	}
 
