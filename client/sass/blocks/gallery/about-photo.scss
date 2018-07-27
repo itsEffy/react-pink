@@ -42,12 +42,6 @@
 }
 
 .about-photo__likes {
-	/*
-	position: absolute;
-	left: 0;
-	bottom: 0;
-*/
-
 	position: relative;
 
 	display: flex;
@@ -61,6 +55,7 @@
 	border: none;
 
 	-webkit-appearance: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
 	background-color: transparent;
 

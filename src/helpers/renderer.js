@@ -108,6 +108,13 @@ export default (req, store, context, isPostMethod) => {
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+      <meta property="og:title" content="Pink" />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="http://react-pink.herokuapp.com/og-image.jpg" />
+      <meta property="og:image:secure_url" content="https://react-pink.herokuapp.com/og-image.jpg" />
+      <meta property="og:url" content="https://react-pink.herokuapp.com/"
+      <meta property="og:locale" content="ru_RU" />
+
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=cyrillic" rel="stylesheet">
 
       <link rel="preload" href="/client-bundle.js" as="script">
@@ -128,13 +135,25 @@ export default (req, store, context, isPostMethod) => {
     <body class="${isMobile ? "noHover" : "hasHover"} ${
     isMicrosoftUA ? "MS" : "notMS"
   }">
+
+ 
+
       <div id="root">${content}</div>
 
       <script>
         window.INITIAL_STATE = ${initialState};
 
        ${req.path === "/tour" ? formWithLocalStorage : ""}
-      </script>
+      </script> 
+
+      <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/serviceWorker.js', {
+        scope: '/'
+      });
+    }
+  </script>
+
       <script src="/client-bundle.js"></script>
     </body>
   </html> 
