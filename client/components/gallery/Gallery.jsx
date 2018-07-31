@@ -14,11 +14,7 @@ import Spinner from "../other/Spinner.jsx";
 import Button from "../form/Button.jsx";
 // import { ArrayFromArrayLike } from "../../utils/utils.jsx";
 
-import {
-  fetchPhotos,
-  likePhoto,
-  addGalleryData
-} from "../../actions/galleryActionCreators";
+import { fetchPhotos, likePhoto } from "../../actions/galleryActionCreators";
 
 // import styles from '../sass/blocks/gallery/gallery.scss';
 
@@ -112,6 +108,24 @@ class Gallery extends PureComponent<Props, State> {
         };
       });
     } catch (err) {
+      if (err.response.data) {
+        const res = err.response;
+        this.setState(prevState => {
+          let { loadedSection } = prevState;
+
+          // Смещаем указатель загруженной секции, если ответ пришел непустым / не нужно?!
+          if (res.data.photos.length !== 0) {
+            loadedSection += 1;
+          }
+
+          return {
+            loadingStatus: "loaded",
+            photos: [...prevState.photos, ...res.data.photos],
+            loadedSection,
+            noMore: res.data.noMore
+          };
+        });
+      }
       this.setState({
         loadingStatus: "failed"
       });

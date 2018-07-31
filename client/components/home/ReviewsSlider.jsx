@@ -22,7 +22,6 @@ class ReviewsSlider extends Component<Props> {
 	}
 
 	render() {
-		console.log(this.props.reviews);
 		let template;
 		const { reviews } = this.props;
 		switch (reviews) {

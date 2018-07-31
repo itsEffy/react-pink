@@ -49,6 +49,7 @@ export const likePanoram = (liked: boolean) => async dispatch => {
 	});
 };
 
+// рефактор async/await
 // даные функции пытаются вычленить ответ даже в случае пришедшего статуса ошибки
 
 export const fetchPanoram = () => async (dispatch, getState, api) => {
@@ -60,10 +61,11 @@ export const fetchPanoram = () => async (dispatch, getState, api) => {
 			payload: res.data
 		});
 	} catch (err) {
-		if (err.response) {
+		console.log(err);
+		if (err.response.data) {
 			return dispatch({
 				type: A.FETCH_PANORAM,
-				payload: res.data
+				payload: err.response.data
 			});
 		}
 		return dispatch({
@@ -86,10 +88,10 @@ export const fetchPhotos = (start = 0, end = 5) => async (
 			payload: res.data
 		});
 	} catch (err) {
-		if (err.response) {
+		if (err.response.data) {
 			return dispath({
 				type: A.FETCH_PHOTOS,
-				payload: res.data
+				payload: err.response.data
 			});
 		}
 		return dispatch({

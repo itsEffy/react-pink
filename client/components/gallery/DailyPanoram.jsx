@@ -24,13 +24,13 @@ type State = {
 
 class DailyPanoram extends PureComponent<Props, State> {
 	componentDidMount() {
-		if (!this.props.aboutData) {
+		// проверка даным на сущетвование и корректность
+		if (!this.props.aboutData.id) {
 			this.props.fetchPanoramData();
 		}
 	}
 
 	onLikeHandler = (liked: boolean) => {
-		console.log("onLikeHandler", liked);
 		this.props.likePanoram(liked);
 	};
 

@@ -57,7 +57,6 @@ class TextArea extends PureComponent<TextAreaProps, TextAreaState> {
 	// тут же установить на их основе корректный статус валидации
 	componentWillMount() {
 		const { savedValue, settings } = this.props;
-		console.log("текстблок: ", savedValue, settings);
 		const initialValidationState = setValidationStateOfField(
 			savedValue,
 			settings.validation

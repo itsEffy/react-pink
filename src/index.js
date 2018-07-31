@@ -19,7 +19,13 @@ app.use("/api", proxy(API_URL));
 
 app.use(compression());
 
-app.use(express.static("client/public"));
+const week = 604800000;
+
+app.use(
+	express.static("client/public", {
+		maxage: week
+	})
+);
 
 app.post("/tour/post", (req, res) => {
 	const store = createStore(req);

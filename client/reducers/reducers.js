@@ -33,7 +33,6 @@ const panoram = (state = null, action: Action) => {
 const photo = (state = {}, action: Action) => {
 	switch (action.type) {
 		case A.LIKE_PHOTO:
-			console.log(action.payload);
 			return {
 				...state,
 				liked: action.payload.liked,
