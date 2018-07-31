@@ -19,7 +19,7 @@ export const fetchReviews = () => async (dispatch, getState, api) => {
 		if (err.response) {
 			return dispatch({
 				type: A.FETCH_REVIEWS,
-				payload: res.data
+				payload: err.response.data
 			});
 		}
 		return dispatch({

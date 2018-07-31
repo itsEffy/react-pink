@@ -35,7 +35,7 @@ app.post("/tour/post", (req, res) => {
 
 // делегируем обработку роутов Роутеру
 app.get("*", (req, res) => {
-	// console.log("запрос ресурса ", req.url);
+	console.log("запрос ресурса ", req.url);
 
 	const store = createStore(req);
 

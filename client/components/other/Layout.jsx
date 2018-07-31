@@ -18,11 +18,11 @@ import { ParallaxStatic } from "./Parallax.jsx";
 const Layout = (props: { children: Node }) => (
 	<div className="parallax-page" id="parallax">
 		<Header />
+		<GithubCorner />
 		{props.children}
 		<ParallaxStatic>
 			<Footer />
 		</ParallaxStatic>
-		<GithubCorner />
 	</div>
 );
 

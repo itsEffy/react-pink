@@ -54,7 +54,7 @@
 }
 
 .not-found__description {
-	margin: 0 auto;
+	margin: 0 auto 20px;
 
 	color: #fff;
 	font-size: 30px;
@@ -62,4 +62,9 @@
 	font-weight: 400;
 
 	max-width: 350px;
+
+	&--small {
+		font-size: 20px;
+		line-height: 30px;
+	}
 }

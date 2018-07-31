@@ -5,6 +5,7 @@ import GalleryPage from "./components/gallery/GalleryPage.jsx";
 import TourPage from "./components/tour/TourPage.jsx";
 import AboutPage from "./components/about/AboutPage.jsx";
 import NotFoundPage from "./components/other/NotFoundPage.jsx";
+import OfflinePage from "./components/other/OfflinePage.jsx";
 
 export default [
   {
@@ -41,22 +42,15 @@ export default [
         pageTitle: "Несколько слов об\u00A0этом проекте"
       },
       {
+        ...OfflinePage,
+        path: "/offline",
+        exact: true,
+        inMenu: false,
+        title: "Соединение потеряно"
+      },
+      {
         ...NotFoundPage
       }
     ]
   }
 ];
-
-/*
-
-      
-      {
-        ...AboutPage,
-        path: '/about',
-        exact: true,
-        inMenu: true,
-        title: 'О проекте',
-        pageTitle: `Несколько слов об\u00A0этом проекте`
-      }
-
-      */

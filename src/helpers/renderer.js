@@ -118,16 +118,15 @@ export default (req, store, context, isPostMethod) => {
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=cyrillic" rel="stylesheet">
 
       <link rel="preload" href="/client-bundle.js" as="script">
-      
+
       <link rel="stylesheet" href="/main.css">
+      <link rel="stylesheet" href="/slick.css">
+
       <link rel="shortcut icon" href="/favicon-96x96.png">
 
       ${imagePreloads}
       
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=cyrillic" rel="stylesheet">
-
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 
       <script src="/svgxuse.min.js" defer></script>
 
@@ -145,17 +144,31 @@ export default (req, store, context, isPostMethod) => {
 
        ${req.path === "/tour" ? formWithLocalStorage : ""}
       </script> 
-
-      <script>
+<script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/serviceWorker.js', {
         scope: '/'
+      }).then(function(registration) {
+        console.log("new SW registered");
+      }).catch(function(err) {
+        console.log("SW registration failed", err)
       });
     }
   </script>
+
+      
 
       <script src="/client-bundle.js"></script>
     </body>
   </html> 
   `;
 };
+
+/*
+
+
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+
+
+  */

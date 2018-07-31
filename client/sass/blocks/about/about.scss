@@ -13,3 +13,11 @@
 		margin: 0 auto;
 	}
 }
+
+// контентные стили
+
+.about {
+	& h3 {
+		margin-left: 20px;
+	}
+}
