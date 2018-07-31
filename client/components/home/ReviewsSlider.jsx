@@ -26,6 +26,7 @@ class ReviewsSlider extends Component<Props> {
 		const { reviews } = this.props;
 		switch (reviews) {
 			case null:
+			case "":
 				template = null;
 				break;
 			case false:

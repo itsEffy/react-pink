@@ -16,7 +16,7 @@ const Menu = (props: {}) => (
 					to={{ pathname: route.path }}
 					className="main-nav__link"
 					activeClassName="main-nav__link--active"
-					title={`${route.title}`}
+					aria-label={`${route.title}`}
 				>
 					<span>{route.title}</span>
 				</NavLink>
@@ -28,7 +28,7 @@ const Menu = (props: {}) => (
 				to={{ pathname: "/some_not_existing_page" }}
 				className="main-nav__link"
 				activeClassName="main-nav__link--active"
-				title="тут еще"
+				aria-label="тут еще"
 			>
 				<span>Тут еще</span>
 			</NavLink>

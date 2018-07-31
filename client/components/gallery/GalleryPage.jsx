@@ -60,9 +60,3 @@ const loadData = async ({ dispatch }) => {
 };
 
 export default { component: GalleryPage, loadData };
-
-/*
-
-
-
-*/

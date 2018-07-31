@@ -24,8 +24,8 @@ type State = {
 
 class DailyPanoram extends PureComponent<Props, State> {
 	componentDidMount() {
-		// проверка даным на сущетвование и корректность
-		if (!this.props.aboutData.id) {
+		// проверка данных на сущетвование и корректность
+		if (!this.props.aboutData || !this.props.aboutData.id) {
 			this.props.fetchPanoramData();
 		}
 	}

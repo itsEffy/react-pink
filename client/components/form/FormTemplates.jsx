@@ -94,9 +94,9 @@ const InputIcon = (props: { type: InputType, className: string }) => {
 
 type FieldsetProps = {
 	legend: string,
-	required?: boolean,
+	required: boolean,
 	children: Node,
-	specStyles?: string
+	specStyles: string
 };
 
 const calculateLegendWidth = (legend: string, hasStar: boolean) => {
@@ -109,7 +109,7 @@ const calculateLegendWidth = (legend: string, hasStar: boolean) => {
 };
 
 class Fieldset extends PureComponent<FieldsetProps> {
-	defaultProps = {
+	static defaultProps = {
 		required: false,
 		specStyles: ""
 	};

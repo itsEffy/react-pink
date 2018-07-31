@@ -10,7 +10,7 @@ import LinkButton from "./LinkButton.jsx";
 type PopupProps = {
 	title: string,
 	text: string,
-	specStyles?: string,
+	specStyles: string,
 	buttonType?: "link" | "close",
 	closePopup?: Function | null,
 	fullPage?: boolean

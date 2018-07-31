@@ -7,17 +7,55 @@
 	margin: 0;
 }
 
-@media ($desktop-version) {
-	.about__inner {
-		max-width: $big-desktop-breakpoint;
-		margin: 0 auto;
-	}
-}
-
 // контентные стили
 
 .about {
 	& h3 {
 		margin-left: 20px;
+	}
+
+	& a {
+		color: $pink;
+		text-decoration: none;
+
+		&:hover,
+		&:active {
+			text-decoration: underline;
+		}
+	}
+}
+
+.about__abbr {
+	text-decoration: underline;
+}
+
+.about__attention {
+	margin: 0 0 30px;
+	padding: 20px;
+
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: 400;
+
+	background-color: $light-gray;
+}
+
+.about__offline-link {
+	font-size: 18px;
+}
+
+.about__yes {
+	margin-right: 10px;
+}
+
+@media ($desktop-version) {
+	.about__inner {
+		max-width: $big-desktop-breakpoint;
+		margin: 0 auto;
+	}
+
+	.about__attention {
+		font-size: 18px;
+		line-height: 24px;
 	}
 }

@@ -108,7 +108,8 @@ class Gallery extends PureComponent<Props, State> {
         };
       });
     } catch (err) {
-      if (err.response.data) {
+      if (err.response && err.response.data) {
+        console.log(err.response);
         const res = err.response;
         this.setState(prevState => {
           let { loadedSection } = prevState;
@@ -208,7 +209,10 @@ class Gallery extends PureComponent<Props, State> {
       case "failed":
         loadingTemplate = (
           <div className="gallery__loading-failed">
-            <span>Не удалось загрузить фотографии.</span>
+            <span>
+              Не удалось загрузить фотографии. Проверьте соединение и повторите
+              попытку позже
+            </span>
           </div>
         );
         break;

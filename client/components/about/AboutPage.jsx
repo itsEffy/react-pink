@@ -18,7 +18,16 @@ const AboutPage = ({ route: { pageTitle } }: Props) => (
 	<PageTemplate pageTitle={pageTitle}>
 		<Description>
 			<p>
-				{`Небольшой проект Pink создан с помощью React, использует Redux в качестве хранилища и главное - он полностью рендерится на сервере (проверьте поведение и фолбэки, отключив JS)`}
+				Небольшой проект Pink создан с помощью React, использует Redux в
+				качестве хранилища и главное - он{" "}
+				<abbr
+					title="за исключением reviews слайдера"
+					className="about__abbr"
+				>
+					полностью
+				</abbr>{" "}
+				рендерится на сервере (проверьте поведение и фолбэки, отключив
+				JS)
 			</p>
 			{null}
 		</Description>
