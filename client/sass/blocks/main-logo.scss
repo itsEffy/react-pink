@@ -38,6 +38,24 @@
   }
 }
 
+.enable-focus .white-logo:focus {
+  // отключить кривую обводку по умолчанию, оставить только выделение
+  box-shadow: none;
+
+  & svg {
+    fill: $pink;
+
+    & .stars {
+      fill: #fff;
+    }
+  }
+
+  &:active svg {
+    fill: #fff;
+    fill-opacity: 0.3;
+  }
+}
+
 // Логотип темный (для белого фона)
 
 .black-logo {
@@ -69,6 +87,30 @@
 
 .hasHover .black-logo {
   &:hover svg {
+    & .glasses {
+      fill: #000;
+    }
+
+    & .stars {
+      fill: $pink;
+
+      &--text {
+        fill: #000;
+      }
+    }
+  }
+
+  &:active svg {
+    fill-opacity: 0.3;
+  }
+}
+
+.enable-focus .black-logo:focus {
+  box-shadow: none;
+
+  & svg {
+    box-shadow: 0 0 0 3px #fff, 0 0 3px 6px $pink;
+
     & .glasses {
       fill: #000;
     }

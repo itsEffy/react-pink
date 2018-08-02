@@ -8,6 +8,8 @@ import AboutPhoto from "./AboutPhoto.jsx";
 import { URL } from "../other/constants";
 import { fetchPanoram, likePanoram } from "../../actions/galleryActionCreators";
 
+import ieSvgPatching from "../../utils/ieSvgPatching";
+
 // import styles from "../sass/blocks/gallery/daily-panoram.scss";
 
 type Props = {
@@ -24,10 +26,15 @@ type State = {
 
 class DailyPanoram extends PureComponent<Props, State> {
 	componentDidMount() {
-		// проверка данных на сущетвование и корректность
-		if (!this.props.aboutData || !this.props.aboutData.id) {
+		// проверка данных на сущетвование
+		if (!this.props.aboutData) {
 			this.props.fetchPanoramData();
 		}
+		ieSvgPatching();
+	}
+
+	componentDidUpdate() {
+		ieSvgPatching();
 	}
 
 	onLikeHandler = (liked: boolean) => {

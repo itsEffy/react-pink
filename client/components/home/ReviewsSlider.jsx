@@ -16,7 +16,7 @@ type Props = {
 
 class ReviewsSlider extends Component<Props> {
 	componentDidMount() {
-		if (!this.props.reviews) {
+		if (!this.props.reviews || typeof this.props.reviews !== "object") {
 			this.props.getReviews();
 		}
 	}

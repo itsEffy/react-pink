@@ -17,6 +17,7 @@ const panoram = (state = null, action: Action) => {
 	switch (action.type) {
 		case A.FETCH_PANORAM:
 			return { ...action.payload };
+
 		case A.LIKE_PANORAM:
 			return {
 				...state,

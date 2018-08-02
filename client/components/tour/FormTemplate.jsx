@@ -20,6 +20,8 @@ import { resetFormData } from "../../actions/formActionCreators";
 import { checkFormValidity } from "../../utils/checkFormValidity";
 import { postFormData } from "../../utils/postFormData";
 
+import ieSvgPatching from "../../utils/ieSvgPatching";
+
 // не понадобится?
 import { URL } from "../other/constants";
 
@@ -64,6 +66,12 @@ class FormTemplate extends Component<Props, State> {
 		this.setState({
 			preventSubmitting: true
 		});
+
+		ieSvgPatching();
+	}
+
+	componentDidUpdate() {
+		ieSvgPatching();
 	}
 
 	// Данный метод возвращает вычисляет новое состояние валидации,

@@ -9,7 +9,7 @@ import Routes from "../../Routes";
 // to - объект, поскольку иначе не работает переключение активного стиля
 
 const Menu = (props: {}) => (
-	<ul className="main-nav__list">
+	<ul className="main-nav__list" role="navigation">
 		{Routes[0].routes.filter(route => route.inMenu).map(route => (
 			<li className="main-nav__item" key={route.path}>
 				<NavLink

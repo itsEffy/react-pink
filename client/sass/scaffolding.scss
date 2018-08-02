@@ -25,13 +25,17 @@ body {
 	box-sizing: border-box;
 }
 
-// стили для навигации с клавиатуры !баг - включаются даже если ни раз не нажата tab
-/*
-*:focus {
-	outline: 2px solid $pink;
-	// box-shadow: 0 0 4px 3px $pink;
+// стили для навигации с клавиатуры
+
+.disable-focus *:focus {
+	outline: none;
 }
-*/
+
+.enable-focus *:focus {
+	// стиль по умолчанию
+	outline: none;
+	box-shadow: 0 0 4px 3px $pink;
+}
 
 *:before,
 *:after {
@@ -48,11 +52,11 @@ main {
 	margin: 0;
 }
 
-:global .visually-hidden {
-	display: none;
+.visually-hidden {
+	@include visually-hidden;
 }
 
-:global .error-block {
+.error-block {
 	color: $pink;
 	text-align: center;
 	padding: 10px;

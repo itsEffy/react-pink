@@ -118,6 +118,14 @@ export default (req, store, context, isPostMethod) => {
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=cyrillic" rel="stylesheet">
 
       <link rel="preload" href="/client-bundle.js" as="script">
+      <link rel="preload" href="/tabNavigation.js" as="script"> 
+      ${
+        isMicrosoftUA
+          ? `<link rel="preload" href="/picturefill.min.js" as="script">
+             <link rel="preload" href="/pf.mutation.min.js" as="script">`
+          : ""
+      }
+      
 
       <link rel="stylesheet" href="/main.css">
       <link rel="stylesheet" href="/slick.css">
@@ -129,6 +137,13 @@ export default (req, store, context, isPostMethod) => {
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=cyrillic" rel="stylesheet">
 
       <script src="/svgxuse.min.js" defer></script>
+      <script src="/tabNavigation.js" defer></script>
+      ${
+        isMicrosoftUA
+          ? `<script src="/picturefill.min.js" defer></script> 
+             <script src="/pf.mutation.min.js" defer></script>`
+          : ""
+      }
 
     </head>
     <body class="${isMobile ? "noHover" : "hasHover"} ${
@@ -144,6 +159,7 @@ export default (req, store, context, isPostMethod) => {
 
        ${req.path === "/tour" ? formWithLocalStorage : ""}
       </script> 
+
 <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/serviceWorker.js', {

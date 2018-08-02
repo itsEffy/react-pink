@@ -468,3 +468,14 @@
 		}
 	}
 }
+
+// фокусные стили
+.enable-focus {
+	& .radio__element:focus ~ .radio__indicator {
+		border-color: $pink;
+	}
+
+	& .checkbox__element:focus ~ .checkbox__indicator {
+		border-color: $pink;
+	}
+}

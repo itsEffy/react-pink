@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import Slick from 'react-slick';
+import React from "react";
+import Slick from "react-slick";
 
 // import slickStyles from "../sass/blocks/home/slick-slider.scss";
 // import styles from '../sass/blocks/home/reviews.scss';
@@ -30,16 +30,20 @@ const ReviewsSlick = (props: { data: Array<Review> }) => {
 		]
 	};
 
-	const template = props.data.map(item => (
-		<blockquote className="reviews__item" key={item.id}>
-			<cite className="reviews__author-name--top">{item.authorName}</cite>
-			<p className="reviews__text">{item.text}</p>
-			<cite className="reviews__author-name--bottom">
-				{item.authorName}
-			</cite>
-			<p className="reviews__author-about">{item.authorAbout}</p>
-		</blockquote>
-	));
+	const template = props.data.map
+		? props.data.map(item => (
+				<blockquote className="reviews__item" key={item.id}>
+					<cite className="reviews__author-name--top">
+						{item.authorName}
+					</cite>
+					<p className="reviews__text">{item.text}</p>
+					<cite className="reviews__author-name--bottom">
+						{item.authorName}
+					</cite>
+					<p className="reviews__author-about">{item.authorAbout}</p>
+				</blockquote>
+		  ))
+		: null;
 
 	return <Slick {...settings}>{template}</Slick>;
 };

@@ -1,17 +1,17 @@
 // @flow
 
-import React from 'react';
+import React from "react";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker
-} from 'react-google-maps';
-import { compose, withProps } from 'recompose';
+} from "react-google-maps";
+import { compose, withProps } from "recompose";
 
 // import styles from "../sass/blocks/home/map.scss";
 
-const GOOGLE_KEY = 'AIzaSyBV-L0mWf9biL-iuHzs7GDq5TY2tzd0I7Q';
+const GOOGLE_KEY = "AIzaSyBV-L0mWf9biL-iuHzs7GDq5TY2tzd0I7Q";
 
 const AdressGoogleMap = compose(
   withProps({

@@ -18,6 +18,22 @@
   color: #fff;
 }
 
+// фокусные стили
+.enable-focus {
+  & .download__button:focus {
+    background-color: #fff;
+    color: $pink;
+  }
+
+  & .download__market:focus {
+    box-shadow: none;
+
+    & svg {
+      box-shadow: 0 0 4px 3px $pink;
+    }
+  }
+}
+
 @media ($mobile-version) {
   .download {
     padding: 28px 20px 29px; //нижнее неточно!
@@ -50,13 +66,6 @@
     margin: 0 auto 0px;
 
     font-weight: bold;
-
-    /*
-    &:hover {
-      background-color: #fff;
-      color: $pink;
-    }
-    */
   }
 
   // Hover для mouse, active для touch

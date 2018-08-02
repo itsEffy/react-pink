@@ -26,6 +26,7 @@ type State = {};
 
 class GalleryPage extends Component<Props, State> {
 	state = {};
+
 	componentDidMount() {}
 
 	render() {

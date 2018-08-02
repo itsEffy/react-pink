@@ -59,6 +59,9 @@
 		top: 0;
 		bottom: 0;
 
+		// разрешает кликать, будто этого слоя нет
+		pointer-events: none;
+
 		width: $big-desktop-breakpoint;
 		margin-left: -($big-desktop-breakpoint / 2);
 	}

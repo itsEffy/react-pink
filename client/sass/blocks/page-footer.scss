@@ -1,4 +1,4 @@
-@import '../variables.scss';
+@import "../variables.scss";
 
 // На флексах, посему универсальный
 
@@ -65,7 +65,8 @@
 }
 
 .noHover .page-footer__social-item:active,
-.hasHover .page-footer__social-item:hover {
+.hasHover .page-footer__social-item:hover,
+.enable-focus .page-footer__social-item:focus {
 	border-color: #000;
 }
 
@@ -97,6 +98,13 @@
 .noHover .page-footer__copyright:active svg,
 .hasHover .page-footer__copyright:hover svg {
 	fill: #000;
+}
+
+.enable-focus .page-footer__copyright-link:focus {
+	box-shadow: none;
+	& svg {
+		box-shadow: 0 0 0 3px #fff, 0 0 4px 6px $pink;
+	}
 }
 
 .hasHover .page-footer__copyright:active svg {

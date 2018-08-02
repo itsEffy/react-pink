@@ -6,7 +6,8 @@
 	fill: #000;
 }
 
-.github-corner:hover svg {
+.github-corner:hover svg,
+.enable-focus .github-corner:focus svg {
 	fill: $pink;
 }
 
@@ -24,17 +25,6 @@
 		transform: rotate(10deg);
 	}
 }
-
-/*
-@media (max-width: 500px) {
-	.github-corner:hover .octo-arm {
-		animation: none;
-	}
-	.github-corner .octo-arm {
-		animation: octocat-wave 560ms ease-in-out;
-	}
-}
-*/
 
 .github-corner {
 	display: none;

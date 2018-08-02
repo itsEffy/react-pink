@@ -11,9 +11,10 @@ type ButtonProps = {
 	specStyles: string,
 	id: string,
 	label: string,
-	type: "button" | "submit" | "link",
+	type: "button" | "submit",
 	onClick: Function,
-	light: boolean
+	light: boolean,
+	autofocus?: boolean
 };
 
 class Button extends PureComponent<ButtonProps> {
@@ -22,7 +23,8 @@ class Button extends PureComponent<ButtonProps> {
 		id: "",
 		disabled: false,
 		type: "button",
-		light: false
+		light: false,
+		autofocus: false
 	};
 
 	render() {
@@ -33,6 +35,7 @@ class Button extends PureComponent<ButtonProps> {
 			label,
 			type,
 			light,
+			autofocus,
 			onClick
 		} = this.props;
 
@@ -46,6 +49,7 @@ class Button extends PureComponent<ButtonProps> {
 				id={id}
 				onClick={onClick}
 				draggable
+				autoFocus={autofocus}
 			>
 				{label}
 			</button>

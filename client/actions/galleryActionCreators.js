@@ -62,7 +62,8 @@ export const fetchPanoram = () => async (dispatch, getState, api) => {
 		});
 	} catch (err) {
 		console.log(err);
-		if (err.response.data) {
+		// проверка на корректность
+		if (err.response.data && err.response.data.id) {
 			return dispatch({
 				type: A.FETCH_PANORAM,
 				payload: err.response.data

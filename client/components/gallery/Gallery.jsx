@@ -16,6 +16,8 @@ import Button from "../form/Button.jsx";
 
 import { fetchPhotos, likePhoto } from "../../actions/galleryActionCreators";
 
+import ieSvgPatching from "../../utils/ieSvgPatching";
+
 // import styles from '../sass/blocks/gallery/gallery.scss';
 
 type Props = {
@@ -60,6 +62,11 @@ class Gallery extends PureComponent<Props, State> {
 
   componentDidMount() {
     this.showFirstSection();
+    ieSvgPatching();
+  }
+
+  componentDidUpdate() {
+    ieSvgPatching();
   }
 
   onLikeHandler = (id: string, liked: boolean) => {

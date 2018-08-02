@@ -71,11 +71,12 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     &:checked ~ .main-nav__toggler-label .main-nav__toggler-indicator {
       // индикатор в виде крестика
       display: block;
-      visibility: hidden;
+      //visibility: hidden;
       position: absolute;
       background-color: #fff;
 
-      border: 1px solid green;
+      // для ie
+      overflow: visible;
 
       &::before,
       &::after {
@@ -105,6 +106,11 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
       background-color: $open-menu-color;
     }
 
+    // разрешить попадание в фокус
+    &:checked ~ .main-nav__list .main-nav__link {
+      display: block;
+    }
+
     // меняет цвет панели при открытом меню
     &:checked ~ .main-nav__panel {
       background-color: $open-menu-color;
@@ -127,7 +133,52 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
     }
   }
 
+  // стили для кнопки, когда кнопка меню в фокусе
+
+  .enable-focus {
+    & .main-nav__toggler-element:focus {
+      & ~ .main-nav__toggler-label {
+        box-shadow: inset 0 0 4px 3px $pink;
+
+        // + выделение как при ховере
+        & .main-nav__toggler-indicator {
+          background-color: $pink;
+          box-shadow: 0 10px 0 0 $pink, 0 -10px 0 0 $pink;
+
+          &::before,
+          &::after {
+            background-color: $pink;
+          }
+        }
+      }
+
+      // при нажатии выделение как при active
+      &:active ~ .main-nav__toggler-label .main-nav__toggler-indicator {
+        background-color: #fff;
+        box-shadow: 0 10px 0 0 #fff, 0 -10px 0 0 #fff;
+        opacity: 0.3;
+
+        &::before,
+        &::after {
+          background-color: #fff;
+          opacity: 0.3;
+        }
+      }
+    }
+
+    & .main-nav__link:focus {
+      box-shadow: inset 0 0 4px 3px $pink;
+
+      color: $pink;
+
+      &:active {
+        color: $pink-muted;
+      }
+    }
+  }
+
   // стили взаимодействия для устройств с мышью и для сенсорных
+
   .noHover .main-nav__toggler-label:active .main-nav__toggler-indicator,
   .hasHover .main-nav__toggler-label:hover .main-nav__toggler-indicator {
     background-color: $pink;
@@ -154,7 +205,6 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
   // active .main-nav__toggle устройств с сенсорным экраном
   // и hover для курсорных
 
-  // удалить кнопку
   .noHover .main-nav__toggle:active span,
   .hasHover .main-nav__toggle:hover span {
     background-color: $pink;
@@ -167,8 +217,6 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
   }
 
   // active .main-nav__toggle для устройств с курсором
-
-  // удалить кнопку
 
   .main-nav__list {
     display: block;
@@ -193,7 +241,9 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
   }
 
   .main-nav__link {
-    display: block;
+    // запретить попадание в фокус вообще
+    display: none;
+
     text-align: center;
     width: 100%;
 
@@ -256,7 +306,7 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
 
   .main-nav__toggler-label {
     height: 68px;
-    width: 90px;
+    width: 100px;
   }
 
   .main-nav__toggler-indicator {
@@ -295,7 +345,7 @@ $main-nav-desktop: "min-width: " + $tablet-desktop-breakpoint--nav;
 
   .main-nav__toggler-label {
     height: 110px;
-    width: 130px;
+    width: 140px;
   }
 
   .main-nav__toggler-indicator {

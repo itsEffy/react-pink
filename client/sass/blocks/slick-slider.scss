@@ -7,11 +7,24 @@
     bottom: -40px;
 }
 
+.enable-focus #root {
+    & .slick-dots button:focus {
+        box-shadow: none;
+        &::before {
+            box-shadow: 0 0 3px 3px $pink;
+        }
+    }
+    & .slick-prev:focus::before,
+    & .slick-next:focus::before {
+        border-color: $pink;
+    }
+}
+
 #root .slick-slide {
     height: auto;
 }
 
-#root .slick-dots li button:before {
+#root .slick-dots li button::before {
     width: 5px;
     height: 5px;
 
@@ -26,11 +39,13 @@
     border: 3px solid transparent;
 }
 
-#root .slick-dots li.slick-active button:before {
+#root .slick-dots li.slick-active button::before {
     opacity: 1;
     background-color: transparent;
     border: 3px solid black;
 }
+
+// улучшение фида при фокусе
 
 // Стрелки
 // width и height не правятся стилями, а устанавливаются из кода slick в зависимости от размера шрифта
@@ -48,6 +63,7 @@
 
 #root .slick-prev {
     left: -40px;
+    // вращать только псевдоэлементы нельзя
     transform: rotate(-45deg);
 }
 
@@ -56,13 +72,15 @@
     transform: rotate(135deg);
 }
 
+/*
 #root .slick-prev:hover,
 #root .slick-next:hover {
-    outline: none;
 }
+*/
 
-#root .slick-prev:before,
-#root .slick-next:before {
+#root .slick-prev::before,
+#root .slick-next::before {
+    outline: none;
     // Отвечает за размер стрелки
     font-size: 30px;
 

@@ -28,6 +28,7 @@ const Popup = ({
 		className={`popup ${
 			fullPage ? "popup--fullpage" : "popup--window"
 		} ${specStyles}`}
+		role="alert"
 	>
 		<div className="popup__inner">
 			<div className="popup__message">
@@ -43,6 +44,7 @@ const Popup = ({
 						type="button"
 						onClick={closePopup}
 						specStyles="popup__btn"
+						autofocus
 					/>
 				)}
 			</div>
