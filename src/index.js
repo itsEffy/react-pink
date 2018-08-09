@@ -41,7 +41,6 @@ app.post("/tour/post", (req, res) => {
 
 // роут для проверки соединения
 app.get("/echoapi", (req, res) => {
-	console.log("я тебя слышу");
 	res.send("online");
 });
 

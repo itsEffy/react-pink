@@ -1,4 +1,4 @@
-const CACHE_NAME = "base19";
+const CACHE_NAME = "base21";
 const CACHED_URLS = [
 	// фолбэк-страница и главная
 	"/offline",
@@ -26,14 +26,12 @@ const CACHED_URLS = [
 
 self.addEventListener("install", event => {
 	console.log("installed");
-	debugger;
 	event.waitUntil(
 		caches.open(CACHE_NAME).then(cache => cache.addAll(CACHED_URLS))
 	);
 });
 
 self.addEventListener("activate", event => {
-	debugger;
 	console.log("activated");
 	event.waitUntil(
 		// чистим старые кэши

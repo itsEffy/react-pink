@@ -19,8 +19,11 @@ const config = {
 				// лодер-модуль для вебпака, запускающий бабель
 				loader: "babel-loader",
 				// исключаем файлы в определенной директории, понятное дело - сторонние модули (это RegExp)
-				exclude: /node_modules/
+				exclude: /node_modules/,
 				// опции для бабель-лодера
+				options: {
+					presets: ["react", "node8", "stage-0"]
+				}
 			}
 		]
 	}
@@ -30,12 +33,3 @@ const config = {
 };
 
 module.exports = config;
-
-/*
-
-options: {
-					// какие пресеты мы хотим использовать: react - для JSX, stage-0 - для async-code
-					presets: ['react', 'node8', 'stage-0']
-				}
-
-*/

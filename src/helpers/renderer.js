@@ -53,7 +53,8 @@ export default (req, store, context, isPostMethod) => {
     // из планшетов понимает только iPad - очень трудно
     if (UAheader.search(/iPad/gi) >= 0) {
       return "tablet";
-    } else if (UAheader.search(/Mobile|Android|Opera Mini/g) >= 0) {
+    }
+    if (UAheader.search(/Mobile|Android|Opera Mini/g) >= 0) {
       return "mobile";
     }
     return "desktop";

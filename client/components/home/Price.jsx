@@ -7,9 +7,17 @@ import PriceSlider from "./PriceSlider.jsx";
 import PriceStatic from "./PriceStatic.jsx";
 import data from "./priceData.json";
 
+import ieSvgPatching from "../../utils/ieSvgPatching";
+
 // import styles from '../sass/blocks/home/price.scss';
 
-class Price extends Component {
+type Props = {};
+
+type State = {
+	showSlider: boolean
+};
+
+class Price extends Component<Props, State> {
 	state = {
 		showSlider: false
 	};
@@ -18,6 +26,11 @@ class Price extends Component {
 		this.setState({
 			showSlider: true
 		});
+		ieSvgPatching();
+	}
+
+	componentDidUpdate() {
+		ieSvgPatching();
 	}
 
 	render() {
