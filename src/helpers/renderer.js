@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import serialize from "serialize-javascript";
 import Routes from "../../client/Routes";
 import SpecialRoutes from "../../client/SpecialRoutes";
+import defineImagePreloadLink from "./defineImagePreloadLink";
 
 import formWithLocalStorage from "./formWithLocalStorage.string";
 
@@ -34,69 +35,14 @@ export default (req, store, context, isPostMethod) => {
     );
   }
 
-  // console.log(req.get("User-Agent"));
-
-  // предварительный код
   const isMobile =
     req.get("User-Agent").search(/Mobile|Android|Opera Mini/g) >= 0;
-  // console.log("mobile: ", isMobile);
 
   const isMicrosoftUA = req.get("User-Agent").search(/Trident|Edge/g) >= 0;
-  // console.log("isMSUA: ", isMicrosoftUA);
 
   const helmet = Helmet.renderStatic();
 
   const initialState = JSON.stringify(store.getState());
-
-  // возвращает строку, описывающую тип девайса
-  const defineProbableDevice = UAheader => {
-    // из планшетов понимает только iPad - очень трудно
-    if (UAheader.search(/iPad/gi) >= 0) {
-      return "tablet";
-    }
-    if (UAheader.search(/Mobile|Android|Opera Mini/g) >= 0) {
-      return "mobile";
-    }
-    return "desktop";
-  };
-
-  // возвращает true, если экран с наибольшей вероятностью - retina
-  const defineRetina = UAheader => UAheader.search(/Mac/g) >= 0;
-
-  // возвращает true, если браузер скорее всего поддерживает WebP
-  const defineWebpSupport = UAheader =>
-    UAheader.search(/Chrome|Opera Mini|UCBrowser|Samsung/g) >= 0;
-
-  // даннная функция пытается определить изображения, которые с наибольшей веростноятью понадобятся странице.
-  // Оптимизация скорости загрузки
-  const defineImagePreloadLink = (route, UAheader) => {
-    const probableDevice = defineProbableDevice(UAheader);
-    const isRetina = defineRetina(UAheader);
-    const supportsWebp = defineWebpSupport(UAheader);
-
-    /*
-    console.log(
-      "probableDevice: ",
-      probableDevice,
-      "isRetina: ",
-      isRetina,
-      "supportsWebp: ",
-      supportsWebp
-    );
-    */
-
-    const imageVersion = `${probableDevice}${isRetina ? "@2x" : ""}`;
-    const jpegOrWebp = supportsWebp ? "jpg" : "jpg";
-    const pngOrWebp = supportsWebp ? "webp" : "png";
-
-    switch (route) {
-      case "/":
-        return `<link rel="preload" href="/img/index/bg-back-${imageVersion}.${jpegOrWebp}" as="image">
-      <link rel="preload" href="/img/index/iphone-hand-${imageVersion}.${pngOrWebp}" as="image">`;
-      default:
-        return "";
-    }
-  };
 
   const imagePreloads = defineImagePreloadLink(req.path, req.get("User-Agent"));
 
@@ -180,12 +126,3 @@ export default (req, store, context, isPostMethod) => {
   </html> 
   `;
 };
-
-/*
-
-
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
-
-
-  */

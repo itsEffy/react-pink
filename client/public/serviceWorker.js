@@ -1,4 +1,4 @@
-const CACHE_NAME = "base21";
+const CACHE_NAME = "base22";
 const CACHED_URLS = [
 	// фолбэк-страница и главная
 	"/offline",

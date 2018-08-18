@@ -21,7 +21,13 @@ class Reviews extends Component {
 		let template;
 		if (this.state.showSlider) {
 			template = <ReviewsSlider start={0} amount={3} />;
-		} else template = null;
+		} else
+			template = (
+				<noscript>
+					Здесь должен быть блок отзывов какого-нибудь альтернативного
+					вида
+				</noscript>
+			);
 		return (
 			<section className="reviews  reviews">
 				<div className="reviews__inner">{template}</div>

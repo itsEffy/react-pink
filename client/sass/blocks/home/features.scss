@@ -1,4 +1,4 @@
-@import "../../mixins.scss", "../../variables.scss";
+// @import "../../mixins.scss", "../../variables.scss";
 
 // Из-за фона, выходящего за пределы центровщика и привязанного к контенту, в мобильной и планшетной версиях отступы от края вьюпорта вместо inner реализованы тремя outer с паддингами
 
@@ -81,10 +81,11 @@
 
   @media (min-resolution: 1.5dppx) {
     .features__list::after {
-      background: url("/img/index/features/80-iphone-screen-mobile.jpg") center
+      background: url("/img/index/features/iphone-screen-mobile@2x.webp") center
         0 no-repeat;
       background-size: contain;
-      background-image: url("/img/index/features/iphone-screen-mobile@2x.webp");
+      background: url("/img/index/features/80-iphone-screen-mobile.jpg") center
+        0 no-repeat;
     }
   }
 
@@ -97,13 +98,13 @@
     padding: 0;
     margin: 0 0 10px;
 
-    font-size: 20px; //5.5
-    line-height: 22px; //7.5
+    font-size: 20px;
+    line-height: 22px;
   }
 
   .features__item-description {
-    font-size: 16px; //4.5vw
-    line-height: 24px; //7.5vw
+    font-size: 16px;
+    line-height: 24px;
   }
 
   // Описание эффекта отсутствует в мобильной версии
@@ -406,18 +407,14 @@
     display: block;
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 20px 0;
 
     background-color: $light-gray;
-
-    //border: 1px dashed red;
   }
 
   .features__effect {
     width: $tablet-desktop-breakpoint;
     margin: 0 auto;
-
-    //border: 1px dashed blue;
   }
 }
 
@@ -426,48 +423,10 @@
     width: auto;
     margin: 0 #{$stretch-margin};
   }
-  /*
-  .features__effect-outer {
-
-  }*/
 
   .features__effect {
     width: auto;
     margin: 0 #{$stretch-margin};
-  }
-
-  // Для снижения количества перерасчетов оставлены 3 размера
-
-  @media ($big-desktop-1) {
-    .features__effect-outer {
-      // padding-top: 70px;
-      // zoom: 115%;
-    }
-
-    .features__effect {
-      zoom: 115%;
-
-      -moz-transform: scale(1.15);
-      -ms-zoom: 0;
-
-      backface-visibility: hidden;
-
-      transform-origin: center 80%;
-    }
-  }
-
-  @media ($big-desktop-2) {
-    .features__effect-outer {
-      // zoom: 130%;
-    }
-
-    .features__effect {
-      zoom: 125%;
-      -ms-zoom: 0;
-
-      -moz-transform: scale(1.25);
-      transform-origin: center 80%;
-    }
   }
 }
 

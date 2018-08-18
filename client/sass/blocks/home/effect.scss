@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+// @import "../../variables.scss";
 
 // За ширины отвечает селектор features__effect
 // Водопадное переопределение из-за минимальных различий
@@ -12,7 +12,7 @@
   text-align: left;
 
   background-color: #fff;
-  background-image: url("/img/svg/clock.svg"); // Уточнить
+  background-image: url("/img/svg/clock.svg");
   background-position: 0 60px;
   background-repeat: no-repeat;
   background-size: 240px;
@@ -73,6 +73,10 @@
     padding: 30px 0 0;
 
     background: none;
+    background-image: url("/img/svg/clock.svg");
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position-x: 17%;
   }
 
   .effect__inner {
@@ -81,10 +85,6 @@
     // отступ с местом для фона
     padding: 30px 0 90px 33%;
     margin: 0 auto;
-
-    background-image: url("/img/svg/clock.svg");
-    background-repeat: no-repeat;
-    background-size: 300px;
   }
 
   .effect__description {
@@ -93,5 +93,36 @@
 
     font-size: 16px;
     line-height: 28px;
+  }
+}
+
+@media ($big-desktop-1) {
+  .effect__inner {
+    zoom: 115%;
+
+    -moz-transform: scale(1.15);
+    -ms-zoom: 0;
+
+    backface-visibility: hidden;
+
+    transform-origin: center 80%;
+  }
+
+  .effect {
+    background-size: 340px;
+  }
+}
+
+@media ($big-desktop-2) {
+  .effect__inner {
+    zoom: 125%;
+    -ms-zoom: 0;
+
+    -moz-transform: scale(1.25);
+    transform-origin: center 80%;
+  }
+
+  .effect {
+    background-size: 360px;
   }
 }
