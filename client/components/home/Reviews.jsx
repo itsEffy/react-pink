@@ -23,7 +23,7 @@ class Reviews extends Component {
 			template = <ReviewsSlider start={0} amount={3} />;
 		} else
 			template = (
-				<noscript>
+				<noscript className="reviews__noscript">
 					Здесь должен быть блок отзывов какого-нибудь альтернативного
 					вида
 				</noscript>

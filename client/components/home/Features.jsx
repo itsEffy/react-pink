@@ -1,8 +1,8 @@
 // @flow
 
-import React from 'react';
+import React from "react";
 // import styles from "../sass/blocks/home/features.scss";
-import Effect from './Effect.jsx';
+import Effect from "./Effect.jsx";
 
 const Features = (props: {}) => (
 	<section className="features">
@@ -14,7 +14,7 @@ const Features = (props: {}) => (
 				<p className="promo-title">Нам есть, что вам предложить!</p>
 			</div>
 			<div className="features__main-outer">
-				<h1 className="visually-hidden" style={{ display: 'none' }}>
+				<h1 className="visually-hidden" style={{ display: "none" }}>
 					Почему pink?
 				</h1>
 				<ul className="features__list">
