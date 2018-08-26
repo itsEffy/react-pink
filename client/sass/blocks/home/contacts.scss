@@ -116,6 +116,10 @@
       content: "";
     }
   }
+
+  .contacts__abbr {
+    text-decoration: none;
+  }
 }
 
 // TABLET
@@ -227,6 +231,10 @@
     color: $pink;
     text-decoration: none;
   }
+
+  .contacts__abbr {
+    text-decoration: none;
+  }
 }
 
 @media ($desktop-version) {
@@ -336,6 +344,10 @@
     font-weight: 300;
 
     color: $pink;
+    text-decoration: none;
+  }
+
+  .contacts__abbr {
     text-decoration: none;
   }
 }

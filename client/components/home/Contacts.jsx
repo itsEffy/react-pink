@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React from "react";
 
 // import styles from '../sass/blocks/home/contacts.scss';
 
@@ -13,22 +13,24 @@ const Contacts = (props: {}) => (
 		<div className="contacts__inner">
 			<div className="contacts__item">
 				<p className="contacts__item-header">Звоните:</p>
-				<a href="tel:+79082757131" className="contacts__item-text">
-					+7 908 2757131
+				<a href="tel:+79055035350" className="contacts__item-text">
+					+7 905 5035350
 				</a>
 			</div>
 			<div className="contacts__item">
 				<p className="contacts__item-header">Пишите:</p>
 				<a
-					href="mailto:bydlo.vezde@gmail.com"
+					href="mailto:elizaveta.piht@gmail.com"
 					className="contacts__item-text"
 				>
-					bydlo.vezde@gmail.com
+					elizaveta.piht@gmail.com
 				</a>
 			</div>
 			<div className="contacts__item">
 				<p className="contacts__item-header">
-					Приезжайте в гости:<sup>*</sup>
+					<abbr title="ненастоящий адрес" className="contacts__abbr">
+						Приезжайте в гости:<sup>*</sup>
+					</abbr>
 				</p>
 				<p className="contacts__item-text">
 					Шмитовский проезд, д. 15/5
